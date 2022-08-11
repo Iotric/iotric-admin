@@ -1,5 +1,7 @@
-import Home from "./pages/home/Home";
+import Home from "./pages/dashboard/Home";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Reset from "./pages/resetpassword/Reset";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -8,6 +10,7 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -19,6 +22,8 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={ <Register />} />
+            <Route path="reset" element={ <Reset />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />

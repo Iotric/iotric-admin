@@ -4,6 +4,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
+import KeyIcon from "@mui/icons-material/Key";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -35,8 +36,8 @@ const Sidebar = () => {
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+              <KeyIcon className="icon" />
+              <span>Credentials</span>
             </li>
           </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>

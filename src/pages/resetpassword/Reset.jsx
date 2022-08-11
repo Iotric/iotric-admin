@@ -1,36 +1,27 @@
-import "./login.scss";
+import "./reset.scss";
 import logoImg from "../../assets/images/logo.png";
 import { Paper, TextField, Button, Typography } from "@mui/material";
 
-const Login = () => {
+const Reset = () => {
   return (
     <div className="main">
       <Paper className="paper">
         <img className="logo" src={logoImg} alt="company_logo" />
         <Typography my={4} component="h1" variant="h4" className="title">
-          Sign in to your account
+          Forgot Password
         </Typography>
         <div className="signDetails">
           <TextField required label="Email" variant="outlined" />
-          <TextField
-            required
-            label="Password"
-            type="password"
-            variant="outlined"
-          />
-          <Button variant="contained">Sign In</Button>
         </div>
         <div className="bottom">
           <Typography component="div" variant="h8">
-            forgot password ?
+            back to login
           </Typography>
-          <Typography component="div" variant="h8">
-            Don't have an Account? Signup
-          </Typography>
+          <Button variant="contained">Sign In</Button>
         </div>
       </Paper>
     </div>
   );
 };
 
-export default Login;
+export default Reset;

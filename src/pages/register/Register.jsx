@@ -1,16 +1,17 @@
-import "./login.scss";
+import "./register.scss";
 import logoImg from "../../assets/images/logo.png";
 import { Paper, TextField, Button, Typography } from "@mui/material";
 
-const Login = () => {
+const Register = () => {
   return (
     <div className="main">
       <Paper className="paper">
         <img className="logo" src={logoImg} alt="company_logo" />
         <Typography my={4} component="h1" variant="h4" className="title">
-          Sign in to your account
+          Create your account
         </Typography>
         <div className="signDetails">
+          <TextField required label="Full Name" variant="outlined" />
           <TextField required label="Email" variant="outlined" />
           <TextField
             required
@@ -18,14 +19,17 @@ const Login = () => {
             type="password"
             variant="outlined"
           />
-          <Button variant="contained">Sign In</Button>
+          <TextField
+            required
+            label="Confirm Password"
+            type="password"
+            variant="outlined"
+          />
+          <Button variant="contained">Continue</Button>
         </div>
         <div className="bottom">
           <Typography component="div" variant="h8">
-            forgot password ?
-          </Typography>
-          <Typography component="div" variant="h8">
-            Don't have an Account? Signup
+            Already have an account? Login
           </Typography>
         </div>
       </Paper>
@@ -33,4 +37,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
