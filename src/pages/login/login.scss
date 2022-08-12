@@ -3,15 +3,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  background-color: #f1f1f1;
   .paper {
+    width: 500px;
     padding: 20px;
     .logo {
       height: 70px;
       width: 200px;
     }
     .title {
-      text-align: right;
+      text-align: left;
     }
     .signDetails {
       display: flex;

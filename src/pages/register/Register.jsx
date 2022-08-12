@@ -1,12 +1,15 @@
 import "./register.scss";
 import logoImg from "../../assets/images/logo.png";
 import { Paper, TextField, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
     <div className="main">
       <Paper className="paper">
-        <img className="logo" src={logoImg} alt="company_logo" />
+        <Link to="/">
+          <img className="logo" src={logoImg} alt="company_logo" />
+        </Link>
         <Typography my={4} component="h1" variant="h4" className="title">
           Create your account
         </Typography>
@@ -28,9 +31,11 @@ const Register = () => {
           <Button variant="contained">Continue</Button>
         </div>
         <div className="bottom">
-          <Typography component="div" variant="h8">
-            Already have an account? Login
-          </Typography>
+          <Link to="/login">
+            <Typography component="div" variant="h8">
+              Already have an account? Login
+            </Typography>
+          </Link>
         </div>
       </Paper>
     </div>

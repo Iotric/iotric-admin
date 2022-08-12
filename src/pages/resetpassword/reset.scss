@@ -5,13 +5,14 @@
   align-items: center;
 
   .paper {
+    width: 500px;
     padding: 20px;
     .logo {
       height: 70px;
       width: 200px;
     }
     .title {
-      text-align: right;
+      text-align: left;
     }
     .signDetails {
       display: flex;

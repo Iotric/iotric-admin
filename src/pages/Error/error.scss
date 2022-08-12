@@ -1,0 +1,20 @@
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  .error-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      .error-type {
+          font-weight: 700;
+          color: #cacedb;
+      }
+      .error-flash {
+          font-weight: 500;
+          color: #3d5170;
+      }
+  }
+}
