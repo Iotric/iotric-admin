@@ -1,44 +1,101 @@
+import React, { useState } from "react";
 import "./register.scss";
-import logoImg from "../../assets/images/logo.png";
-import { Paper, TextField, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import logoImg from "../../assets/images/logo.png";
+import { Paper, TextField, Button, Typography, Box } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(0);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(0);
+
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const handleShowConfirmPassword = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
   return (
-    <div className="main">
-      <Paper className="paper">
+    <Box className="main">
+      <Box className="cross-card">
         <Link to="/">
-          <img className="logo" src={logoImg} alt="company_logo" />
+          <CloseIcon fontSize="large" />
         </Link>
-        <Typography my={4} component="h1" variant="h4" className="title">
-          Create your account
-        </Typography>
-        <div className="signDetails">
-          <TextField required label="Full Name" variant="outlined" />
-          <TextField required label="Email" variant="outlined" />
-          <TextField
-            required
-            label="Password"
-            type="password"
-            variant="outlined"
-          />
-          <TextField
-            required
-            label="Confirm Password"
-            type="password"
-            variant="outlined"
-          />
-          <Button variant="contained">Continue</Button>
-        </div>
-        <div className="bottom">
-          <Link to="/login">
-            <Typography component="div" variant="h8">
-              Already have an account? Login
-            </Typography>
+      </Box>
+      <Box className="register-card">
+        <Paper className="paper">
+          <Link to="/">
+            <img className="logo" src={logoImg} alt="company_logo" />
           </Link>
-        </div>
-      </Paper>
-    </div>
+          <Typography
+            ml={1}
+            mt={1}
+            mb={3}
+            component="h2"
+            variant="h5"
+            className="title"
+          >
+            Create your account
+          </Typography>
+          <Box className="signDetails">
+            <TextField required label="Full Name" variant="outlined" />
+            <TextField required label="Email" variant="outlined" />
+            <TextField
+              required
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword}>
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              required
+              label="Confirm Password"
+              type={showConfirmPassword ? "text" : "password"}
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowConfirmPassword}>
+                      {showConfirmPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Button variant="contained">Continue</Button>
+          </Box>
+          <Box className="bottom">
+            <Link to="/login">
+              <Typography component="div" variant="h8">
+                Already have an account? Login
+              </Typography>
+            </Link>
+          </Box>
+        </Paper>
+      </Box>
+    </Box>
   );
 };
 

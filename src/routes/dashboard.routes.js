@@ -5,6 +5,6 @@ const Dashboard = React.lazy(() => import("../pages/dashboard/dashboard"));
 export default [
   {
     element: <Dashboard />,
-    path: "/",
+    path: "/dashboard",
   },
 ];
