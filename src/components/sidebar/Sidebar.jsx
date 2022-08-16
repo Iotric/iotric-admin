@@ -40,6 +40,12 @@ const Sidebar = () => {
               <span>Credentials</span>
             </li>
           </Link>
+          <Link to="/credentials" style={{ textDecoration: "none" }}>
+            <li>
+              <KeyIcon className="icon" />
+              <span>Api Keys</span>
+            </li>
+          </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
