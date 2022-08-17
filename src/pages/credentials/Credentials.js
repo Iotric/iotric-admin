@@ -1,15 +1,18 @@
-import React from 'react'
-import './credentials.scss'
+import React from "react";
+import "./credentials.scss";
 
-import { Box, Typography, Paper, Switch } from "@mui/material"
-import Sidebar from '../../components/sidebar/Sidebar'
-import KeysTable from './KeysTable'
+import { Box, Typography, Paper, Switch } from "@mui/material";
+import Sidebar from "../../components/sidebar/Sidebar";
+import KeysTable from "./KeysTable";
+import Navbar from "../../components/navbar/Navbar";
 
 const Credentials = () => {
-    return (
-      <Box className="credentials">
-        <Sidebar />
-        <Box className="credentials-container">
+  return (
+    <Box className="credentials">
+      <Sidebar />
+      <Box className="credentials-container">
+        <Navbar />
+        <Box className="credentials-main">
           <Typography component="h2" variant="h4">
             API KEYS
           </Typography>
@@ -22,7 +25,8 @@ const Credentials = () => {
           <KeysTable />
         </Box>
       </Box>
-    );
-}
+    </Box>
+  );
+};
 
-export default Credentials
+export default Credentials;
