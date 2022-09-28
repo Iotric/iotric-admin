@@ -44,8 +44,19 @@ const Register = () => {
             Create your account
           </Typography>
           <Box className="signDetails">
-            <TextField required label="Full Name" variant="outlined" />
-            <TextField required label="Email" variant="outlined" />
+            <TextField required label="Organization Name" variant="outlined" />
+            <Box display="flex" gap={5}>
+              <TextField required label="First Name" variant="outlined" />
+              <TextField required label="Last Name" variant="outlined" />
+            </Box>
+            <TextField required label="Email" type="email" variant="outlined" />
+            <Box display="flex" gap={5}>
+              <TextField required label="Brand Text" variant="outlined" />
+              <Button size="small" variant="contained" component="label">
+                Upload Brand Logo
+                <input hidden accept="image/*" multiple type="file" />
+              </Button>
+            </Box>
             <TextField
               required
               label="Password"

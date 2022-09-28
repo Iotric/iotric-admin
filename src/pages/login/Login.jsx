@@ -32,7 +32,7 @@ const Login = () => {
           <Typography
             ml={1}
             mt={1}
-            mb={3}
+            mb={5}
             component="h2"
             variant="h5"
             className="title"

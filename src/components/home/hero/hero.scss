@@ -1,0 +1,16 @@
+.main {
+    background-color: rgb(10, 25, 41);
+    .main-hero {
+        display: flex;
+        gap: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-hero img {
+        height: 400px;
+        width: 800px;
+        .text-white {
+            font-style: inherit;
+        }
+    }
+}
