@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./credentials.scss";
 
 import { Box, Typography, Paper, Switch } from "@mui/material";
@@ -7,6 +7,12 @@ import KeysTable from "./KeysTable";
 import Navbar from "../../components/navbar/Navbar";
 
 const Credentials = () => {
+  const [isTestMode, setIsTestMode] = useState(false);
+
+  const handleToggle = () => {
+    setIsTestMode((prev) => !prev);
+  };
+
   return (
     <Box className="credentials">
       <Sidebar />
@@ -18,11 +24,23 @@ const Credentials = () => {
           </Typography>
           <Paper className="switch-paper">
             <Typography>
-              Viewing Test API keys. Toogle to view live keys
+              {isTestMode
+                ? "Viewing test API keys. Toggle to   view Live keys."
+                : "Viewing Live API keys. Toggle to view test keys."}
             </Typography>
-            <Switch></Switch>
+            <Box
+              style={{
+                marginRight: "25px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              display="flex"
+            >
+              <Switch checked={isTestMode} onChange={handleToggle}></Switch>
+              <Typography>Test Mode</Typography>
+            </Box>
           </Paper>
-          <KeysTable />
+          <KeysTable isTestMode={isTestMode} />
         </Box>
       </Box>
     </Box>

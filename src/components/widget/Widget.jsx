@@ -29,11 +29,11 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
+    case "domain":
       data = {
-        title: "ORDERS",
+        title: "DOMAINS BOOKED",
         isMoney: false,
-        link: "View all orders",
+        link: "View all domains",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -45,9 +45,9 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "revenue":
       data = {
-        title: "EARNINGS",
+        title: "REVENUE",
         isMoney: true,
         link: "View net earnings",
         icon: (
@@ -58,10 +58,10 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "balance":
+    case "premium":
       data = {
-        title: "BALANCE",
-        isMoney: true,
+        title: "PREMIUM DOMAIN",
+        isMoney: false,
         link: "See details",
         icon: (
           <AccountBalanceWalletOutlinedIcon

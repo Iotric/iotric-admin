@@ -10,24 +10,59 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import CircularProgress from "@mui/material/CircularProgress";
+import Tooltip from "@mui/material/Tooltip";
 import { Box, Button, Typography } from "@mui/material";
 
 import "./keystable.scss";
 
-const rows = [
-  {
-    name: "SECRET KEY",
-    token: "surgfgeuyygt87y398r8y3utygfhkugherufwgrwofh",
-  },
-  {
-    name: "SECRET KEY",
-    token: "jshdfyshygfwreiuwfjwbfgujfehwegfbwrjgb",
-  },
-];
-
-const KeysTable = () => {
+const KeysTable = ({ isTestMode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const [showCredentials, setShowCredentials] = useState(false);
+  const [isKeyLoading, setIsKeyLoading] = useState(false);
+  const [user, setUser] = useState({
+    testApplicationKey: null,
+    liveApplicationKey: null,
+  });
+
   const open = Boolean(anchorEl);
+
+  const toggleCredentials = () => {
+    setShowCredentials((prev) => !prev);
+    setIsKeyLoading(true);
+
+    setTimeout(() => {
+      setIsKeyLoading(false);
+    }, 1000);
+  };
+
+  const copyToClipBoard = async (copyMe) => {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const generateAndRegenerateKeys = () => {
+    setIsKeyLoading(true);
+    setTimeout(() => {
+      setIsKeyLoading(false);
+      if (isTestMode) {
+        setUser((prev) => ({
+          ...prev,
+          testApplicationKey: "sfvbjsbvfuysbgf875ty87354y38",
+        }));
+      } else {
+        setUser((prev) => ({
+          ...prev,
+          liveApplicationKey: "uhsgbsjgreruigb48745yt84y7thjebej",
+        }));
+      }
+    }, 2000);
+    setShowCredentials(false);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -44,10 +79,10 @@ const KeysTable = () => {
         </Typography>
         <Typography
           className="table-head-para"
-          component="paragraph"
+          component="p"
           variant="subtitle1"
         >
-          These Keys will allow you to authenticate API requests.{" "}
+          These Keys will allow you to authenticate API requests.
           <span>Learn more</span>
         </Typography>
       </Box>
@@ -57,38 +92,121 @@ const KeysTable = () => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align="left">Token</TableCell>
+            <TableCell align="left">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {isKeyLoading ? (
+            <TableRow>
+              <TableCell colSpan="3" style={{ textAlign: "center" }}>
+                <CircularProgress disableShrink size={40} value={100} />
+              </TableCell>
+            </TableRow>
+          ) : (
             <TableRow
-              key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                Secret Key
               </TableCell>
               <TableCell align="left">
                 <Box className="token-col">
-                  <Box>
-                    <Box>{row.token}</Box>
-                    <Button variant="contained" size="small" color="error">
-                      Hide Test key
+                  {isTestMode ? (
+                    user.testApplicationKey === null ? (
+                      <Button
+                        onClick={generateAndRegenerateKeys}
+                        variant="contained"
+                        size="small"
+                        color="success"
+                      >
+                        Generate Test Key
+                      </Button>
+                    ) : showCredentials ? (
+                      <Tooltip title="Click to copy">
+                        <Box>
+                          <Box
+                            onCick={copyToClipBoard(user.testApplicationKey)}
+                          >
+                            {user.testApplicationKey}
+                          </Box>
+                          <Button
+                            variant="contained"
+                            size="small"
+                            color="error"
+                            onClick={toggleCredentials}
+                          >
+                            Hide Test key
+                          </Button>
+                        </Box>
+                      </Tooltip>
+                    ) : (
+                      <div className="bg-blur">
+                        <div className="bg-blur-btn">
+                          <Button
+                            onClick={toggleCredentials}
+                            size="small"
+                            variant="contained"
+                            color="error"
+                          >
+                            Reveal test key
+                          </Button>
+                        </div>
+                      </div>
+                    )
+                  ) : user.liveApplicationKey === null ? (
+                    <Button
+                      onClick={generateAndRegenerateKeys}
+                      variant="contained"
+                      size="small"
+                      color="success"
+                    >
+                      Generate Live Key
                     </Button>
-                  </Box>
-                  <Box className="token-menu">
-                    <IconButton onClick={handleClick}>
-                      <MoreHorizIcon />
-                    </IconButton>
-                    <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                      <MenuItem>Regenerate</MenuItem>
-                      <MenuItem>View Logs</MenuItem>
-                    </Menu>
-                  </Box>
+                  ) : showCredentials ? (
+                    <Tooltip title="Click to copy">
+                      <Box>
+                        <Box>{user.liveApplicationKey}</Box>
+                        <Button
+                          onClick={toggleCredentials}
+                          variant="contained"
+                          size="small"
+                          color="error"
+                        >
+                          Hide Live key
+                        </Button>
+                      </Box>
+                    </Tooltip>
+                  ) : (
+                    <div className="bg-blur">
+                      <div className="bg-blur-btn">
+                        <Button
+                          onClick={toggleCredentials}
+                          size="small"
+                          variant="contained"
+                          color="error"
+                        >
+                          Reveal Live key
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </Box>
+              </TableCell>
+              <TableCell align="left">
+                <Box className="token-menu">
+                  <IconButton onClick={handleClick}>
+                    <MoreHorizIcon />
+                  </IconButton>
+                  <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                    <MenuItem onClick={generateAndRegenerateKeys}>
+                      Regenerate
+                    </MenuItem>
+                    <MenuItem>View Logs</MenuItem>
+                  </Menu>
                 </Box>
               </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </TableContainer>

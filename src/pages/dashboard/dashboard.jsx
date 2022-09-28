@@ -14,9 +14,9 @@ const Dashboard = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+          <Widget type="domain" />
+          <Widget type="revenue" />
+          <Widget type="premium" />
         </div>
         <div className="charts">
           <Featured />
