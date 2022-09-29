@@ -1,16 +1,21 @@
 .main {
-    background-color: rgb(10, 25, 41);
-    .main-hero {
-        display: flex;
-        gap: 50px;
-        justify-content: center;
-        align-items: center;
+  background: rgb(88, 66, 247);
+  background: linear-gradient(
+    180deg,
+    rgba(88, 66, 247, 1) 0%,
+    rgba(9, 9, 121, 1) 100%
+  );
+  .main-hero {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+  .main-hero img {
+    height: 400px;
+    width: 800px;
+    .text-white {
+      font-style: inherit;
     }
-    .main-hero img {
-        height: 400px;
-        width: 800px;
-        .text-white {
-            font-style: inherit;
-        }
-    }
+  }
 }
