@@ -10,14 +10,26 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
+import { useSelector, useDispatch } from 'react-redux'
+import { LoginAction } from "../../redux/actions/auth-actions"
+
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(0);
+
+  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn)
+  const dispatch = useDispatch()
+  
+  const handleLogin = () => {
+    dispatch(LoginAction())
+  }
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
   return (
     <Box className="main">
+      {isLoggedIn ? "yes" : "no"}
       <Box className="cross-card">
         <Link to="/">
           <CloseIcon fontSize="large" />
@@ -60,7 +72,7 @@ const Login = () => {
                 ),
               }}
             />
-            <Button variant="contained">Sign In</Button>
+            <Button variant="contained" onClick={handleLogin}>Sign In</Button>
           </Box>
           <Box className="bottom">
             <Link to="/reset">
