@@ -26,9 +26,9 @@ const Hero = () => {
             Access to APIs, Documentation, SDK implemenation and API key
             generation in one place.
           </Typography>
-          <Button color="error">Get Started</Button>
+          <Button variant="contained" color="error">Get Started</Button>
         </Box>
-        <img src={heroImg}></img>
+        <img src={heroImg} alt="hero"></img>
       </Box>
     </Container>
   );

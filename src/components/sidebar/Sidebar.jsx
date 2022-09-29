@@ -12,16 +12,16 @@ import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
-import nexBlocLogo from '../../assets/images/logo.png'
+import nexBlocLogo from "../../assets/images/logo.png";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
       <div className="top">
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <img className="logo" src={nexBlocLogo} alt="company_logo" />
-          </Link>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <img className="logo" src={nexBlocLogo} alt="company_logo" />
+        </Link>
       </div>
       <hr />
       <div className="center">
@@ -65,10 +65,12 @@ const Sidebar = () => {
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </Link>
           <li>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>

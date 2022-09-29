@@ -1,0 +1,23 @@
+.profile {
+  display: flex;
+  .profileContainer {
+    flex: 6;
+    .main {
+      .login-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        .paper {
+          width: 500px;
+          padding: 20px;
+          .profileDetails {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+          }
+        }
+      }
+    }
+  }
+}
