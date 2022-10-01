@@ -11,7 +11,7 @@ const Profile = () => {
       <Sidebar />
       <div className="profileContainer">
         <Navbar />
-        <Box className="main">
+        <Box className="main-profile">
           <Box className="login-card">
             <Paper className="paper">
               <Typography

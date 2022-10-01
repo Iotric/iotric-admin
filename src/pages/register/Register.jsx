@@ -22,10 +22,10 @@ const Register = () => {
     setShowConfirmPassword((prev) => !prev);
   };
   return (
-    <Box className="main">
-      <Box className="cross-card">
+    <Box className="register">
+      <Box py={2} px={5} className="cross-card">
         <Link to="/">
-          <CloseIcon fontSize="large" />
+          <CloseIcon style={{ color: "white" }} fontSize="large" />
         </Link>
       </Box>
       <Box className="register-card">

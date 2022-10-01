@@ -28,11 +28,14 @@ const Login = () => {
     setShowPassword((prev) => !prev);
   };
   return (
-    <Box className="main">
+    <Box className="login">
       {isLoggedIn ? "yes" : "no"}
-      <Box className="cross-card">
+      <Box px={5} className="cross-card">
         <Link to="/">
-          <CloseIcon fontSize="large" />
+          <CloseIcon
+            style={{ color: "white" }}
+            fontSize="large"
+          />
         </Link>
       </Box>
       <Box className="login-card">
@@ -72,7 +75,9 @@ const Login = () => {
                 ),
               }}
             />
-            <Button variant="contained" onClick={handleLogin}>Sign In</Button>
+            <Button variant="contained" onClick={handleLogin}>
+              Sign In
+            </Button>
           </Box>
           <Box className="bottom">
             <Link to="/reset">

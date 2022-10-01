@@ -12,17 +12,19 @@ import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
+import { Box } from "@mui/material"
+
 import nexBlocLogo from "../../assets/images/logo.png";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
-      <div className="top">
+      <Box p={2} className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <img className="logo" src={nexBlocLogo} alt="company_logo" />
         </Link>
-      </div>
+      </Box>
       <hr />
       <div className="center">
         <ul>

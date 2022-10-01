@@ -65,7 +65,7 @@ const Footer = () => {
         <Grid container spacing={4} justifyContent="space-evenly">
           {footers.map((footer) => (
             <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
+              <Typography mx={3} variant="h6" color="text.primary" gutterBottom>
                 {footer.title}
               </Typography>
               <ul>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./navbar.scss";
+import "./navbar.module.scss";
 
 import companyLogo from "../../../assets/images/logo.png";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
@@ -23,19 +23,19 @@ const Navbar = () => {
           <Button color="primary" href="#" sx={{ my: 1, mx: 1.5 }}>
             Features
           </Button>
-          <Link to="/enterprise">
+          <Link style={{ textDecoration: "none" }} to="/enterprise">
             <Button color="primary" href="#" sx={{ my: 1, mx: 1.5 }}>
               Enterprise
             </Button>
           </Link>
 
-          <Link to="/register">
+          <Link style={{ textDecoration: "none" }} to="/register">
             <Button color="primary" href="#" sx={{ my: 1, mx: 1.5 }}>
               Register
             </Button>
           </Link>
 
-          <Link to="/login">
+          <Link style={{ textDecoration: "none" }} to="/login">
             <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Login
             </Button>
