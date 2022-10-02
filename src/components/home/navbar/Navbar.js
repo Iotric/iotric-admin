@@ -2,7 +2,7 @@ import React from "react";
 import "./navbar.module.scss";
 
 import companyLogo from "../../../assets/images/logo.png";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -20,23 +20,23 @@ const Navbar = () => {
         </Link>
 
         <nav>
-          <Button color="primary" href="#" sx={{ my: 1, mx: 1.5 }}>
+          <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
             Features
           </Button>
           <Link style={{ textDecoration: "none" }} to="/enterprise">
-            <Button color="primary" href="#" sx={{ my: 1, mx: 1.5 }}>
+            <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
               Enterprise
             </Button>
           </Link>
 
           <Link style={{ textDecoration: "none" }} to="/register">
-            <Button color="primary" href="#" sx={{ my: 1, mx: 1.5 }}>
+            <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
               Register
             </Button>
           </Link>
 
           <Link style={{ textDecoration: "none" }} to="/login">
-            <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+            <Button variant="outlined" sx={{ my: 1, mx: 1.5 }}>
               Login
             </Button>
           </Link>

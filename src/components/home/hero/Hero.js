@@ -4,6 +4,7 @@ import "./hero.scss";
 import heroImg from "../../../assets/images/img1.png";
 
 import { Container, Typography, Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -27,9 +28,12 @@ const Hero = () => {
             Access to APIs, Documentation, SDK implemenation and API key
             generation in one place.
           </Typography>
-          <Button variant="contained" color="error">
-            Get Started
-          </Button>
+
+          <Link style={{ textDecoration: "none" }} to="/login">
+            <Button variant="contained" color="error">
+              Get Started
+            </Button>
+          </Link>
         </Box>
         <img src={heroImg} alt="hero"></img>
       </Box>

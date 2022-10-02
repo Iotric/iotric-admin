@@ -29,7 +29,6 @@ const Login = () => {
   };
   return (
     <Box className="login">
-      {isLoggedIn ? "yes" : "no"}
       <Box px={5} className="cross-card">
         <Link to="/">
           <CloseIcon
