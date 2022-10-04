@@ -3,9 +3,20 @@ import "./navbar.module.scss";
 
 import companyLogo from "../../../assets/images/logo.png";
 import { AppBar, Toolbar, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from '../../../redux/slice/auth-slice'
 
 const Navbar = () => {
+  const token = localStorage.getItem('user-token')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    dispatch(authActions.logout())
+    navigate('/')
+  }
+
   return (
     <AppBar
       position="static"
@@ -16,7 +27,7 @@ const Navbar = () => {
     >
       <Toolbar sx={{ justifyContent: "space-between", flexWrap: "wrap" }}>
         <Link to="/dashboard">
-          <img height="60px" width="150px" src={companyLogo} />
+          <img height="60px" width="150px" src={companyLogo} alt="company" />
         </Link>
 
         <nav>
@@ -35,11 +46,17 @@ const Navbar = () => {
             </Button>
           </Link>
 
-          <Link style={{ textDecoration: "none" }} to="/login">
-            <Button variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-              Login
+          {token ? (
+            <Button onClick={handleLogout} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              Logout
             </Button>
-          </Link>
+          ) : (
+            <Link style={{ textDecoration: "none" }} to="/login">
+              <Button variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                Login
+              </Button>
+            </Link>
+          )}
         </nav>
       </Toolbar>
     </AppBar>

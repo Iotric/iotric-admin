@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/logo.png";
 
 import { Paper, TextField, Button, Typography, Box } from "@mui/material";
@@ -9,90 +9,124 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Spinner from "../../components/Spinner/Spinner";
 
-import { useSelector, useDispatch } from 'react-redux'
-import { LoginAction } from "../../redux/actions/auth-actions"
-
+import { useSelector, useDispatch } from "react-redux";
+import { LoginAction } from "../../redux/actions/auth-actions";
+import { authActions } from "../../redux/slice/auth-slice";
 
 const Login = () => {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(0);
 
-  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn)
-  const dispatch = useDispatch()
-  
+  const isLoading = useSelector((store) => store.auth.isLoading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
   const handleLogin = () => {
-    dispatch(LoginAction())
-  }
+    dispatch(LoginAction());
+    setTimeout(() => {
+      navigate("/dashboard");
+      dispatch(authActions.setLoadingFalse());
+    }, 2000);
+  };
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
   return (
-    <Box className="login">
-      <Box px={5} className="cross-card">
-        <Link to="/">
-          <CloseIcon
-            style={{ color: "white" }}
-            fontSize="large"
-          />
-        </Link>
-      </Box>
-      <Box className="login-card">
-        <Paper className="paper">
-          <Link to="/">
-            <img className="logo" src={logoImg} alt="company_logo" />
-          </Link>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Box className="login">
+          {/* {JSON.stringify(data)} */}
+          <Box py={2} px={5} className="cross-card">
+            <Link to="/">
+              <CloseIcon style={{ color: "white" }} fontSize="large" />
+            </Link>
+          </Box>
+          <Box className="login-card">
+            <Paper className="paper">
+              <Link to="/">
+                <img className="logo" src={logoImg} alt="company_logo" />
+              </Link>
 
-          <Typography
-            ml={1}
-            mt={1}
-            mb={5}
-            component="h2"
-            variant="h5"
-            className="title"
-          >
-            Sign in to your account
-          </Typography>
-          <Box className="signDetails">
-            <TextField required label="Email" variant="outlined" />
-            <TextField
-              required
-              label="Password"
-              type={showPassword ? "text" : "password"}
-              variant="outlined"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowPassword}>
-                      {showPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <Button variant="contained" onClick={handleLogin}>
-              Sign In
-            </Button>
-          </Box>
-          <Box className="bottom">
-            <Link to="/reset">
-              <Typography component="div" variant="h8">
-                forgot password ?
+              <Typography
+                ml={1}
+                mt={1}
+                mb={5}
+                component="h2"
+                variant="h5"
+                className="title"
+              >
+                Sign in to your account
               </Typography>
-            </Link>
-            <Link to="/register">
-              <Typography component="div" variant="h8">
-                Don't have an Account? Signup
-              </Typography>
-            </Link>
+              <Box className="signDetails">
+                <TextField
+                  value={data.email}
+                  name="email"
+                  onChange={handleChange}
+                  required
+                  label="Email"
+                  variant="outlined"
+                />
+                <TextField
+                  value={data.password}
+                  name="password"
+                  onChange={handleChange}
+                  required
+                  label="Password"
+                  type={showPassword ? "text" : "password"}
+                  variant="outlined"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleShowPassword}>
+                          {showPassword ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <Button variant="contained" onClick={handleLogin}>
+                  Sign In
+                </Button>
+              </Box>
+              <Box className="bottom">
+                <Link to="/reset">
+                  <Typography component="div" variant="h8">
+                    forgot password ?
+                  </Typography>
+                </Link>
+                <Link to="/register">
+                  <Typography component="div" variant="h8">
+                    Don't have an Account? Signup
+                  </Typography>
+                </Link>
+              </Box>
+            </Paper>
           </Box>
-        </Paper>
-      </Box>
-    </Box>
+        </Box>
+      )}
+    </>
   );
 };
 
