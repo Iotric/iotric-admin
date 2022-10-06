@@ -16,25 +16,29 @@ import { Box, Button, Typography } from "@mui/material";
 
 import "./keystable.scss";
 
-const KeysTable = ({ isTestMode }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { keyActions } from "../../redux/slice/key-slice.js";
+import { generateAndRegenerateKeysAction } from "../../redux/actions/key-actions.js";
+
+const KeysTable = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-
-  const [showCredentials, setShowCredentials] = useState(false);
-  const [isKeyLoading, setIsKeyLoading] = useState(false);
-  const [user, setUser] = useState({
-    testApplicationKey: null,
-    liveApplicationKey: null,
-  });
-
   const open = Boolean(anchorEl);
 
-  const toggleCredentials = () => {
-    setShowCredentials((prev) => !prev);
-    setIsKeyLoading(true);
+  const dispatch = useDispatch();
+  const isTestMode = useSelector((store) => store.key.isTestMode);
+  const isKeyLoading = useSelector((store) => store.key.isKeyLoading);
+  const user = useSelector((store) => store.key.user);
+  const showCredentials = useSelector((store) => store.key.showCredentials);
 
+  const toggleCredentials = () => {
+    dispatch(keyActions.toggleCredentials());
     setTimeout(() => {
-      setIsKeyLoading(false);
+      dispatch(keyActions.setKeyLoadingFalse());
     }, 1000);
+  };
+
+  const generateAndRegenerateKeys = () => {
+    dispatch(generateAndRegenerateKeysAction());
   };
 
   const copyToClipBoard = async (copyMe) => {
@@ -43,25 +47,6 @@ const KeysTable = ({ isTestMode }) => {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const generateAndRegenerateKeys = () => {
-    setIsKeyLoading(true);
-    setTimeout(() => {
-      setIsKeyLoading(false);
-      if (isTestMode) {
-        setUser((prev) => ({
-          ...prev,
-          testApplicationKey: "sfvbjsbvfuysbgf875ty87354y38",
-        }));
-      } else {
-        setUser((prev) => ({
-          ...prev,
-          liveApplicationKey: "uhsgbsjgreruigb48745yt84y7thjebej",
-        }));
-      }
-    }, 2000);
-    setShowCredentials(false);
   };
 
   const handleClick = (event) => {
