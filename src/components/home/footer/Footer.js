@@ -1,7 +1,11 @@
 import React from "react";
 import "./footer.scss";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-import { Container, Grid, Typography, Link } from "@mui/material";
+import { Container, Grid, Typography, Link, Box } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -21,70 +25,81 @@ function Copyright(props) {
   );
 }
 
-const footers = [
-  {
-    title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
-  },
-  {
-    title: "Features",
-    description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
-    ],
-  },
-  {
-    title: "Resources",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
-    ],
-  },
-  {
-    title: "Legal",
-    description: ["Privacy policy", "Terms of use"],
-  },
-];
-
 const Footer = () => {
   return (
     <Container
       className="footer"
-      maxWidth="md"
+      maxWidth="lg"
       component="footer"
       sx={{
         borderTop: (theme) => `1px solid ${theme.palette.divider}`,
         mt: 8,
-        py: [3, 6],
+        py: [4, 6],
       }}
     >
-      <Grid container spacing={4} justifyContent="space-evenly">
-        {footers.map((footer) => (
-          <Grid item xs={6} sm={3} key={footer.title}>
-            <Typography mx={3} variant="h6" color="text.primary" gutterBottom>
-              {footer.title}
-            </Typography>
+      <Grid py={5} container spacing={4} justifyContent="space-evenly">
+        <Grid item xs={6} sm={4}>
+          <Typography mx={3} variant="h5" color="text.primary" gutterBottom>
+            About NexBloC
+          </Typography>
+          <Typography mt={3} mx={3} variant="body1" color="text.primary" gutterBottom>
+            NexBloc is building the next generation of the internet with
+            blockchain DNS at the core. Blockchain digital entities tied to the
+            decentralized web is the future of personal data protection and use.
+          </Typography>
+        </Grid>
+        <Grid item xs={6} sm={4}>
+          <Typography mx={3} variant="h5" color="text.primary" gutterBottom>
+            Resources
+          </Typography>
+          <Box mt={3}>
             <ul>
-              {footer.description.map((item) => (
-                <li key={item}>
-                  <Link
-                    className="footer-items"
-                    href="#"
-                    variant="subtitle1"
-                    color="text.secondary"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  className="footer-items"
+                  href="#"
+                  variant="subtitle1"
+                  color="text.primary"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="footer-items"
+                  href="#"
+                  variant="subtitle1"
+                  color="text.primary"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
             </ul>
-          </Grid>
-        ))}
+          </Box>
+        </Grid>
+        <Grid item xs={6} sm={4}>
+          <Typography mx={3} variant="h5" color="text.primary" gutterBottom>
+            We’d love to hear from you
+          </Typography>
+          <Box mt={3} mx={3} gap={1} display="flex">
+            <TwitterIcon />
+            <TelegramIcon />
+            <InstagramIcon />
+            <LinkedInIcon />
+          </Box>
+          <Typography
+            my={2}
+            mx={3}
+            variant="body1"
+            color="text.primary"
+            gutterBottom
+          >
+            contact@nexbloc.com
+          </Typography>
+          <Typography mx={3} variant="body1" color="text.primary" gutterBottom>
+            (+1) 888-639-9321
+          </Typography>
+        </Grid>
       </Grid>
       <Copyright sx={{ mt: 5 }} />
     </Container>
