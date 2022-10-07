@@ -1,8 +1,14 @@
-.main {
+.reset {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgb(88, 66, 247);
+  background: linear-gradient(
+    180deg,
+    rgba(88, 66, 247, 1) 0%,
+    rgba(9, 9, 121, 1) 100%
+  );
 
   .paper {
     width: 500px;

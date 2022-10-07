@@ -6,7 +6,11 @@ import AuthRoutes from "./auth.routes";
 import DashboardRoutes from "./dashboard.routes";
 import UsersRoutes from "./users.routes";
 
+// import { useSelector } from "react-redux";
+
 const Routing = () => {
+  // const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
+
   const routes = useRoutes([
     ...AuthRoutes,
     ...DashboardRoutes,

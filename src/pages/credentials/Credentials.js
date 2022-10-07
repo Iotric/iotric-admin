@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./credentials.scss";
 
 import { Box, Typography, Paper, Switch } from "@mui/material";
@@ -6,11 +6,15 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import KeysTable from "./KeysTable";
 import Navbar from "../../components/navbar/Navbar";
 
+import { useDispatch, useSelector } from 'react-redux'
+import { keyActions } from '../../redux/slice/key-slice.js'
+
 const Credentials = () => {
-  const [isTestMode, setIsTestMode] = useState(false);
+  const dispatch = useDispatch()
+  const isTestMode = useSelector(store => store.key.isTestMode)
 
   const handleToggle = () => {
-    setIsTestMode((prev) => !prev);
+    dispatch(keyActions.setTestMode());
   };
 
   return (
@@ -40,7 +44,7 @@ const Credentials = () => {
               <Typography>Test Mode</Typography>
             </Box>
           </Paper>
-          <KeysTable isTestMode={isTestMode} />
+          <KeysTable />
         </Box>
       </Box>
     </Box>

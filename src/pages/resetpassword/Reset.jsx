@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Reset = () => {
   return (
-    <Box className="main">
+    <Box className="reset">
       <Paper className="paper">
         <Link to="/">
           <img className="logo" src={logoImg} alt="company_logo" />
