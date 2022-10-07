@@ -14,7 +14,7 @@ import { Box, Typography } from "@mui/material";
 const Customers = () => {
   return (
     <>
-      <Box className="customers">
+      <Box id="customers" className="customers">
         <Typography align="center" variant="h3">
           Our Customers
         </Typography>

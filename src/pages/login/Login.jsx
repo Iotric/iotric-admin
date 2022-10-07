@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/logo.png";
+import Navbar from "../../components/home/navbar/Navbar";
 
 import { Paper, TextField, Button, Typography, Box } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import loginImg from "../../assets/images/about1.png"
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -53,76 +54,77 @@ const Login = () => {
         <Spinner />
       ) : (
         <Box className="login">
+          <Navbar />
           {/* {JSON.stringify(data)} */}
-          <Box py={2} px={5} className="cross-card">
-            <Link to="/">
-              <CloseIcon style={{ color: "white" }} fontSize="large" />
-            </Link>
-          </Box>
-          <Box className="login-card">
-            <Paper className="paper">
-              <Link to="/">
-                <img className="logo" src={logoImg} alt="company_logo" />
-              </Link>
+          <Box className="login-container">
+            <Box className="login-img">
+              <img src={loginImg} alt="brand"/>
+            </Box>
+            <Box className="login-card">
+              <Paper className="paper">
+                <Link to="/">
+                  <img className="logo" src={logoImg} alt="company_logo" />
+                </Link>
 
-              <Typography
-                ml={1}
-                mt={1}
-                mb={5}
-                component="h2"
-                variant="h5"
-                className="title"
-              >
-                Sign in to your account
-              </Typography>
-              <Box className="signDetails">
-                <TextField
-                  value={data.email}
-                  name="email"
-                  onChange={handleChange}
-                  required
-                  label="Email"
-                  variant="outlined"
-                />
-                <TextField
-                  value={data.password}
-                  name="password"
-                  onChange={handleChange}
-                  required
-                  label="Password"
-                  type={showPassword ? "text" : "password"}
-                  variant="outlined"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={handleShowPassword}>
-                          {showPassword ? (
-                            <VisibilityIcon />
-                          ) : (
-                            <VisibilityOffIcon />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <Button variant="contained" onClick={handleLogin}>
-                  Sign In
-                </Button>
-              </Box>
-              <Box className="bottom">
-                <Link to="/reset">
-                  <Typography component="div" variant="h8">
-                    forgot password ?
-                  </Typography>
-                </Link>
-                <Link to="/register">
-                  <Typography component="div" variant="h8">
-                    Don't have an Account? Signup
-                  </Typography>
-                </Link>
-              </Box>
-            </Paper>
+                <Typography
+                  ml={1}
+                  mt={1}
+                  mb={5}
+                  component="h2"
+                  variant="h5"
+                  className="title"
+                >
+                  Sign in to your account
+                </Typography>
+                <Box className="signDetails">
+                  <TextField
+                    value={data.email}
+                    name="email"
+                    onChange={handleChange}
+                    required
+                    label="Email"
+                    variant="outlined"
+                  />
+                  <TextField
+                    value={data.password}
+                    name="password"
+                    onChange={handleChange}
+                    required
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    variant="outlined"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleShowPassword}>
+                            {showPassword ? (
+                              <VisibilityIcon />
+                            ) : (
+                              <VisibilityOffIcon />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button variant="contained" onClick={handleLogin}>
+                    Sign In
+                  </Button>
+                </Box>
+                <Box className="bottom">
+                  <Link to="/reset">
+                    <Typography component="div" variant="h8">
+                      forgot password ?
+                    </Typography>
+                  </Link>
+                  <Link to="/register">
+                    <Typography component="div" variant="h8">
+                      Don't have an Account? Signup
+                    </Typography>
+                  </Link>
+                </Box>
+              </Paper>
+            </Box>
           </Box>
         </Box>
       )}

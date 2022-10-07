@@ -1,43 +1,49 @@
 .login {
-  background: rgb(88, 66, 247);
-  background: linear-gradient(
-    180deg,
-    rgba(88, 66, 247, 1) 0%,
-    rgba(9, 9, 121, 1) 100%
-  );
-  height: 100vh;
-  .cross-card {
+   height: 100vh;
+  .login-container {
     display: flex;
-    justify-content: flex-end;
-  }
-  .login-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-
-    .paper {
-      width: 500px;
-      padding: 20px;
-      .logo {
-        height: 70px;
-        width: 200px;
+    padding: 40px;
+    background: rgb(88, 66, 247);
+    background: linear-gradient(
+      180deg,
+      rgba(88, 66, 247, 1) 0%,
+      rgba(9, 9, 121, 1) 100%
+    );
+    .login-img {
+      margin-top: 30px;
+      & img {
+        height: 100%;
+        width: 80%;
       }
-      .title {
-        text-align: left;
-        font-weight: 500;
-        color: #100086;
-      }
-      .signDetails {
-        display: flex;
-        flex-direction: column;
-        gap: 50px;
-      }
-      .bottom {
-        margin-top: 40px;
-        display: flex;
-        justify-content: space-between;
-        text-decoration: underline;
+    }
+    .login-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .paper {
+        width: 450px;
+        padding: 20px;
+        border-radius: 16px;
+        .logo {
+          height: 70px;
+          width: 200px;
+        }
+        .title {
+          text-align: left;
+          font-weight: 500;
+          color: #100086;
+        }
+        .signDetails {
+          display: flex;
+          flex-direction: column;
+          gap: 50px;
+        }
+        .bottom {
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          text-decoration: underline;
+        }
       }
     }
   }

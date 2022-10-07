@@ -15,7 +15,7 @@ const Error = () => {
           </Typography>
           <p>There was a problem on our end. Please try again later.</p>
           <Link to="/login">
-            <Button>&larr; Dashboard</Button>
+            <Button variant="outlined">&larr; Dashboard</Button>
           </Link>
         </div>
       </div>
