@@ -1,0 +1,21 @@
+.customers {
+  margin-top: 30px;
+  .customers-container {
+      display: flex;
+      justify-content: center;
+    .customers-flexbox {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      width: 900px;
+      .customer-item {
+        flex: 0 0 calc(33.3%);
+        & img {
+            height: auto;
+            width: 100%;
+        }
+      }
+    }
+  }
+}
