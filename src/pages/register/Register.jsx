@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./register.scss";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/home/navbar/Navbar";
+import Footer from "../../components/home/footer/Footer";
 
 import logoImg from "../../assets/images/logo.png";
 import { Paper, TextField, Button, Typography, Box } from "@mui/material";
@@ -128,6 +129,7 @@ const Register = () => {
           </Paper>
         </Box>
       </Box>
+      <Footer />
     </Box>
   );
 };

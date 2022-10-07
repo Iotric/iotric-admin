@@ -3,6 +3,7 @@ import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/logo.png";
 import Navbar from "../../components/home/navbar/Navbar";
+import Footer from "../../components/home/footer/Footer";
 
 import { Paper, TextField, Button, Typography, Box } from "@mui/material";
 import loginImg from "../../assets/images/about1.png"
@@ -126,6 +127,7 @@ const Login = () => {
               </Paper>
             </Box>
           </Box>
+          <Footer />
         </Box>
       )}
     </>
