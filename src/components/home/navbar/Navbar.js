@@ -32,22 +32,23 @@ const Navbar = () => {
 
         <nav>
           <Link style={{ textDecoration: "none" }} to="/">
-            <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
               Home
             </Button>
           </Link>
-
-          <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
+          <Button color="primary" sx={{ my: 1, mx: 1 }}>
             Features
           </Button>
-          {/* <Link style={{ textDecoration: "none" }} to="customers"> */}
-            <Button href="#customers" color="primary" sx={{ my: 1, mx: 1.5 }}>
-              Customers
+          <Button href="#customers" color="primary" sx={{ my: 1, mx: 1 }}>
+            Customers
+          </Button>
+          <Link style={{ textDecoration: "none" }} to="/contact-us">
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
+              Contact Us
             </Button>
-          {/* </Link> */}
-
+          </Link>
           <Link style={{ textDecoration: "none" }} to="/register">
-            <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
               Register
             </Button>
           </Link>
@@ -56,7 +57,7 @@ const Navbar = () => {
             <Button
               onClick={handleLogout}
               variant="outlined"
-              sx={{ my: 1, mx: 1.5 }}
+              sx={{ my: 1, mx: 1 }}
             >
               Logout
             </Button>
