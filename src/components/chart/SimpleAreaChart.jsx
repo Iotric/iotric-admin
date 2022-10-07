@@ -1,4 +1,4 @@
-import "./chart.scss";
+import "./simpleChart.scss";
 import {
   AreaChart,
   Area,

@@ -21,7 +21,6 @@ const Register = () => {
     brandText: "",
   });
   const [showPassword, setShowPassword] = useState(0);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,10 +35,7 @@ const Register = () => {
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
-
-  const handleShowConfirmPassword = () => {
-    setShowConfirmPassword((prev) => !prev);
-  };
+  
   return (
     <Box className="register">
       {/* { JSON.stringify(data)} */}

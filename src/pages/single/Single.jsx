@@ -1,7 +1,7 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
+import SimpleAreaChart from "../../components/chart/SimpleAreaChart";
 import List from "../../components/table/Table";
 
 const Single = () => {
@@ -44,7 +44,7 @@ const Single = () => {
             </div>
           </div>
           <div className="right">
-            <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
+            <SimpleAreaChart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
           </div>
         </div>
         <div className="bottom">

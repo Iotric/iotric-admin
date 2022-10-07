@@ -114,7 +114,7 @@ const Login = () => {
                 <Box className="bottom">
                   <Link to="/reset">
                     <Typography component="div" variant="h8">
-                      forgot password ?
+                      Forgot password ?
                     </Typography>
                   </Link>
                   <Link to="/register">
