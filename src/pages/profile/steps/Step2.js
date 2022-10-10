@@ -67,7 +67,7 @@ const Step2 = () => {
             checked={data.RestrictedSignup}
             onChange={handleChange}
           />
-          <Typography component="body1" variant="body1">
+          <Typography component="p" variant="body1">
             Restricted Signup
           </Typography>
         </Box>

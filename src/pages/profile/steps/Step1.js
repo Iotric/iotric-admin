@@ -91,7 +91,7 @@ const Step1 = () => {
           checked={data.PrimaryAdmin}
           onChange={handleChange}
         />
-        <Typography component="body1" variant="body1">
+        <Typography component="p" variant="body1">
           Primary Admin
         </Typography>
       </Box>
