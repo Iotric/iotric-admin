@@ -39,16 +39,22 @@ export const registerSchema = yup.object({
 });
 
 export const compeleteProfileScheme = yup.object({
-  BrandText: "",
-  BrandLogo: "",
-  Favicon: "",
-  ThemeColor: "",
+  BrandText: yup
+    .string()
+    .max(15, "Must be 15 character or less")
+    .required("Required!"),
+  BrandLogo: yup.string(),
+  Favicon: yup.string(),
+  ThemeColor: yup.string(),
   PrimaryAdmin: yup.boolean(),
-  HomePageH1: "",
-  SocialMedia: "",
-  Tlds: "",
-  RestrictedSignup: false,
-  AllowedEmailType: "",
+  HomePageH1: yup
+    .string()
+    .max(15, "Must be 15 character or less")
+    .required("Required!"),
+  SocialMedia: yup.array(),
+  Tlds: yup.array(),
+  RestrictedSignup: yup.boolean(),
+  AllowedEmailType: yup.array(),
   DomainLimit: yup.number().required().positive().integer(),
-  Deafult2Fa: false,
+  Deafult2Fa: yup.boolean(),
 });

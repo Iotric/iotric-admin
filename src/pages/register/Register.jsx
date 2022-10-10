@@ -12,31 +12,41 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-const Register = () => {
-  const [data, setData] = useState({
-    organizationName: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    brandText: "",
-  });
-  const [showPassword, setShowPassword] = useState(0);
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "../../utils/validations/";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
+import { useNavigate } from "react-router-dom";
+
+const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      organizationName: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      brandText: "",
+    },
+    resolver: yupResolver(registerSchema),
+  });
+
+  const [showPassword, setShowPassword] = useState(0);
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
-  
+
+  const handleRegister = (data) => {
+    console.log(data);
+    navigate("/login");
+  };
+
   return (
     <Box className="register">
       {/* { JSON.stringify(data)} */}
@@ -60,46 +70,52 @@ const Register = () => {
             >
               Create your account
             </Typography>
-            <Box className="signDetails">
+            <Box
+              component="form"
+              onSubmit={handleSubmit(handleRegister)}
+              className="registerDetails"
+            >
               <TextField
-                value={data.organizationName}
                 name="organizationName"
-                onChange={handleChange}
-                required
+                {...register("organizationName")}
                 label="Organization Name"
                 variant="outlined"
               />
+              <Typography variant="body2" color="primary">
+                {errors.organizationName?.message}
+              </Typography>
 
               <TextField
-                value={data.firstName}
                 name="firstName"
-                onChange={handleChange}
-                required
+                {...register("firstName")}
                 label="First Name"
                 variant="outlined"
               />
+              <Typography variant="body2" color="primary">
+                {errors.firstName?.message}
+              </Typography>
               <TextField
-                value={data.lastName}
                 name="lastName"
-                onChange={handleChange}
-                required
+                {...register("lastName")}
                 label="Last Name"
                 variant="outlined"
               />
+              <Typography variant="body2" color="primary">
+                {errors.lastName?.message}
+              </Typography>
               <TextField
-                value={data.email}
                 name="email"
-                onChange={handleChange}
-                required
+                {...register("email")}
                 label="Email"
                 type="email"
                 variant="outlined"
               />
+              <Typography variant="body2" color="primary">
+                {errors.email?.message}
+              </Typography>
               <TextField
-                value={data.password}
                 name="password"
-                onChange={handleChange}
-                required
+                {...register("password")}
                 label="Password"
                 type={showPassword ? "text" : "password"}
                 variant="outlined"
@@ -117,7 +133,12 @@ const Register = () => {
                   ),
                 }}
               />
-              <Button variant="contained">Continue</Button>
+              <Typography variant="body2" color="primary">
+                {errors.password?.message}
+              </Typography>
+              <Button type="submit" variant="contained">
+                Continue
+              </Button>
             </Box>
             <Box className="bottom">
               <Link to="/login">
