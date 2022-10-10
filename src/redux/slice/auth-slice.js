@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { isLoggedIn: false, isLoading: false },
+    initialState: { isLoggedIn: false, isLoading: false, isProfileComplete: false },
     reducers: {
         loginStart(state){
           
@@ -15,6 +15,9 @@ const authSlice = createSlice({
         },
         registerSuccess(state){
             state.isLoggedIn = false;
+        },
+        profileCompleteSuccess(state){
+            state.isProfileComplete = true
         },
         logout(state){
             state.isLoggedIn = false

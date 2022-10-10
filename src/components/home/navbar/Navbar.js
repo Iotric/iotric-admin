@@ -5,17 +5,17 @@ import companyLogo from "../../../assets/images/logo.png";
 import { AppBar, Toolbar, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from '../../../redux/slice/auth-slice'
+import { authActions } from "../../../redux/slice/auth-slice";
 
 const Navbar = () => {
-  const token = localStorage.getItem('user-token')
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const token = localStorage.getItem("user-token");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(authActions.logout())
-    navigate('/')
-  }
+    dispatch(authActions.logout());
+    navigate("/");
+  };
 
   return (
     <AppBar
@@ -31,23 +31,34 @@ const Navbar = () => {
         </Link>
 
         <nav>
-          <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
-            Features
-          </Button>
-          <Link style={{ textDecoration: "none" }} to="/enterprise">
-            <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
-              Enterprise
+          <Link style={{ textDecoration: "none" }} to="/">
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
+              Home
             </Button>
           </Link>
-
+          <Button color="primary" sx={{ my: 1, mx: 1 }}>
+            Features
+          </Button>
+          <Button href="#customers" color="primary" sx={{ my: 1, mx: 1 }}>
+            Customers
+          </Button>
+          <Link style={{ textDecoration: "none" }} to="/contact-us">
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
+              Contact Us
+            </Button>
+          </Link>
           <Link style={{ textDecoration: "none" }} to="/register">
-            <Button color="primary" sx={{ my: 1, mx: 1.5 }}>
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
               Register
             </Button>
           </Link>
 
           {token ? (
-            <Button onClick={handleLogout} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+            <Button
+              onClick={handleLogout}
+              variant="outlined"
+              sx={{ my: 1, mx: 1 }}
+            >
               Logout
             </Button>
           ) : (

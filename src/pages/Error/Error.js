@@ -14,8 +14,8 @@ const Error = () => {
             Ohh Snap!!!
           </Typography>
           <p>There was a problem on our end. Please try again later.</p>
-          <Link to="/login">
-            <Button>&larr; Dashboard</Button>
+          <Link style={{ textDecoration: "none"}} to="/login">
+            <Button variant="contained">&larr; Dashboard</Button>
           </Link>
         </div>
       </div>

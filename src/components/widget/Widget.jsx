@@ -45,11 +45,11 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "revenue":
+    case "total-api-request":
       data = {
-        title: "REVENUE",
-        isMoney: true,
-        link: "View net earnings",
+        title: "Total API Request",
+        isMoney: false,
+        link: "View details",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"

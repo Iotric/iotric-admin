@@ -11,9 +11,10 @@ const Home = React.lazy(() => import("./pages/home/Home"));
 const Login = React.lazy(() => import("./pages/login/Login"));
 const Register = React.lazy(() => import("./pages/register/Register"));
 const Reset = React.lazy(() => import("./pages/resetpassword/Reset"));
+const Contactus = React.lazy(() => import("./pages/contactus/Contactus"));
 
 const Dashboard = React.lazy(() => import("./pages/dashboard/dashboard"));
-const Profile = React.lazy(() => import("./pages/profile/Profile"));
+const ProfileStepper = React.lazy(() => import("./pages/profile/"));
 const Credentials = React.lazy(() => import("./pages/credentials/Credentials"));
 
 const List = React.lazy(() => import("./pages/list/List"));
@@ -38,17 +39,18 @@ function AppNew() {
 
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<ProfileStepper />} />
             <Route path="credentials" element={<Credentials />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={<New inputs={userInputs} title="Add New Admin" />}
               />
             </Route>
           </Route>
+          <Route path="/contact-us" element={<Contactus />} />
 
           <Route path="*" element={<Error />} />
         </Routes>
