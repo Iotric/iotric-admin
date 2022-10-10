@@ -17,6 +17,10 @@ import Navbar from "../../components/home/navbar/Navbar";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authActions } from "../../redux/slice/auth-slice.js";
+
 const steps = ["Step 1", "Step 2"];
 
 function getStepContent(step) {
@@ -31,10 +35,20 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+  };
+
+  const handleClickDashboard = () => {
+    dispatch(authActions.profileCompleteSuccess());
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 2000);
   };
 
   const handleBack = () => {
@@ -87,6 +101,9 @@ export default function Checkout() {
                     confirmation, and will send you an update when your order
                     has shipped.
                   </Typography> */}
+                  <Button onClick={handleClickDashboard} variant="contained">
+                    go to dashboard
+                  </Button>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
