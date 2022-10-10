@@ -14,7 +14,7 @@ const Reset = React.lazy(() => import("./pages/resetpassword/Reset"));
 const Contactus = React.lazy(() => import("./pages/contactus/Contactus"));
 
 const Dashboard = React.lazy(() => import("./pages/dashboard/dashboard"));
-const Profile = React.lazy(() => import("./pages/profile/Profile"));
+const ProfileStepper = React.lazy(() => import("./pages/profile/"));
 const Credentials = React.lazy(() => import("./pages/credentials/Credentials"));
 
 const List = React.lazy(() => import("./pages/list/List"));
@@ -39,7 +39,7 @@ function AppNew() {
 
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<ProfileStepper />} />
             <Route path="credentials" element={<Credentials />} />
             <Route path="users">
               <Route index element={<List />} />

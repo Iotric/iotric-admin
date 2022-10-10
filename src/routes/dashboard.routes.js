@@ -1,7 +1,7 @@
 import React from "react";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/dashboard"));
-const Profile = React.lazy(() => import("../pages/profile/Profile"));
+const ProfileStepper = React.lazy(() => import("../pages/profile/"));
 const Credentials = React.lazy(() =>
   import("../pages/credentials/Credentials")
 );
@@ -16,7 +16,7 @@ export default [
     path: "/credentials",
   },
   {
-    element: <Profile />,
+    element: <ProfileStepper />,
     path: "/profile",
   },
 ];
