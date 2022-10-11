@@ -74,11 +74,21 @@ const Step2 = () => {
         )}
       />
 
-      {errors.Tlds?.map((message, index) => (
-        <Typography key={`TLD_ERROR_${index}`} variant="body2" color="primary">
-          {message.message}
+      {Array.isArray(errors.Tlds) ? (
+        errors.Tlds?.map((message, index) => (
+          <Typography
+            key={`TLD_ERROR_${index}`}
+            variant="body2"
+            color="primary"
+          >
+            In Tag {index+1}, {message.message}
+          </Typography>
+        ))
+      ) : (
+        <Typography variant="body2" color="primary">
+          {errors.Tlds?.message}
         </Typography>
-      ))}
+      )}
 
       <Controller
         name="SocialMedia"
@@ -105,9 +115,21 @@ const Step2 = () => {
           />
         )}
       />
-      <Typography variant="body2" color="primary">
-        {errors.SocialMedia?.message}
-      </Typography>
+      {Array.isArray(errors.SocialMedia) ? (
+        errors.SocialMedia?.map((message, index) => (
+          <Typography
+            key={`SOCIALMEDIA_ERROR_${index}`}
+            variant="body2"
+            color="primary"
+          >
+            Tag {index+1}, {message.message}
+          </Typography>
+        ))
+      ) : (
+        <Typography variant="body2" color="primary">
+       {errors.SocialMedia?.message}
+        </Typography>
+      )}
 
       <Controller
         name="AllowedEmailType"
