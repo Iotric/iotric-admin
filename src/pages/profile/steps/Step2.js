@@ -73,9 +73,12 @@ const Step2 = () => {
           />
         )}
       />
-      <Typography variant="body2" color="primary">
-        {errors.Tlds?.message}
-      </Typography>
+
+      {errors.Tlds?.map((message, index) => (
+        <Typography key={`TLD_ERROR_${index}`} variant="body2" color="primary">
+          {message.message}
+        </Typography>
+      ))}
 
       <Controller
         name="SocialMedia"

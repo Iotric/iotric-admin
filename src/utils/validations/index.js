@@ -56,10 +56,16 @@ export const profileStep1Schema = yup.object().shape({
 });
 
 export const profileStep2Schema = yup.object().shape({
-  SocialMedia: yup.array().required(),
-  Tlds: yup.array().required(),
+  SocialMedia: yup
+    .array()
+    .of(yup.string().url())
+    .min(3, "minimum three tags of social media url is required!"),
+  Tlds: yup
+    .array()
+    .of(yup.string().min(2, "minimum 2 characters are required!"))
+    .min(1, "required"),
   RestrictedSignup: yup.boolean(),
-  AllowedEmailType: yup.array().required(),
+  AllowedEmailType: yup.array().min(1, "minimun one email type is required!"),
   DomainLimit: yup.number().required().positive().integer(),
   Deafult2Fa: yup.boolean(),
 });
