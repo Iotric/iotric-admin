@@ -17,7 +17,7 @@ import Navbar from "../../components/home/navbar/Navbar";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../redux/slice/auth-slice.js";
 
@@ -38,21 +38,13 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [activeStep, setActiveStep] = useState(0);
-
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
+  const activeStep = useSelector((store) => store.auth.activeStep);
 
   const handleClickDashboard = () => {
     dispatch(authActions.profileCompleteSuccess());
     setTimeout(() => {
       navigate("/dashboard");
     }, 2000);
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
   };
 
   return (
@@ -101,29 +93,17 @@ export default function Checkout() {
                     confirmation, and will send you an update when your order
                     has shipped.
                   </Typography> */}
-                  <Button onClick={handleClickDashboard} variant="contained">
-                    go to dashboard
-                  </Button>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  {getStepContent(activeStep)}
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                        Back
-                      </Button>
-                    )}
-
-                    <Button
-                      variant="contained"
-                      onClick={handleNext}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                  <Box display="flex" mt={3} gap={2}>
+                    <Button variant="outlined" onClick={() => dispatch(authActions.handleBack())} >
+                      back
+                    </Button>
+                    <Button onClick={handleClickDashboard} variant="contained">
+                      go to dashboard
                     </Button>
                   </Box>
                 </React.Fragment>
+              ) : (
+                <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
               )}
             </React.Fragment>
           </Paper>

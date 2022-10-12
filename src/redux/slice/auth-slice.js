@@ -1,37 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState: { isLoggedIn: false, isLoading: false, isProfileComplete: false },
-    reducers: {
-        loginStart(state){
-          
-        },
-        loginSuccess(state){
-            state.isLoggedIn = true
-        },
-        registerStart(state){
-            state.isLoggedIn = true;
-        },
-        registerSuccess(state){
-            state.isLoggedIn = false;
-        },
-        profileCompleteSuccess(state){
-            state.isProfileComplete = true
-        },
-        logout(state){
-            state.isLoggedIn = false
-            localStorage.removeItem('user-token')
-        },
-        setLoadingTrue(state){
-            state.isLoading = true
-        },
-        setLoadingFalse(state){
-            state.isLoading = false
-        }
-    }
-})
+  name: "auth",
+  initialState: {
+    isLoggedIn: false,
+    isLoading: false,
+    isProfileComplete: false,
+    activeStep: 0,
+  },
+  reducers: {
+    loginStart(state) {},
+    loginSuccess(state) {
+      state.isLoggedIn = true;
+    },
+    registerStart(state) {
+      state.isLoggedIn = true;
+    },
+    registerSuccess(state) {
+      state.isLoggedIn = false;
+    },
+    handleNext(state){
+        state.activeStep = state.activeStep + 1
+    },
+    handleBack(state){
+        state.activeStep = state.activeStep - 1
+    },
+    profileCompleteSuccess(state) {
+      state.isProfileComplete = true;
+    },
+    logout(state) {
+      state.isLoggedIn = false;
+      localStorage.removeItem("user-token");
+    },
+    setLoadingTrue(state) {
+      state.isLoading = true;
+    },
+    setLoadingFalse(state) {
+      state.isLoading = false;
+    },
+  },
+});
 
-export const authActions = authSlice.actions
+export const authActions = authSlice.actions;
 
-export default authSlice
+export default authSlice;

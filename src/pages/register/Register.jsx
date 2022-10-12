@@ -78,7 +78,7 @@ const Register = () => {
               <TextField
                 name="organizationName"
                 {...register("organizationName")}
-                label="Organization Name"
+                label="Organization Name *"
                 variant="outlined"
               />
               <Typography variant="body2" color="primary">
@@ -88,7 +88,7 @@ const Register = () => {
               <TextField
                 name="firstName"
                 {...register("firstName")}
-                label="First Name"
+                label="First Name *"
                 variant="outlined"
               />
               <Typography variant="body2" color="primary">
@@ -97,7 +97,7 @@ const Register = () => {
               <TextField
                 name="lastName"
                 {...register("lastName")}
-                label="Last Name"
+                label="Last Name *"
                 variant="outlined"
               />
               <Typography variant="body2" color="primary">
@@ -106,7 +106,7 @@ const Register = () => {
               <TextField
                 name="email"
                 {...register("email")}
-                label="Email"
+                label="Email *"
                 type="email"
                 variant="outlined"
               />
@@ -116,7 +116,7 @@ const Register = () => {
               <TextField
                 name="password"
                 {...register("password")}
-                label="Password"
+                label="Password *"
                 type={showPassword ? "text" : "password"}
                 variant="outlined"
                 InputProps={{

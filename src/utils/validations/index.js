@@ -18,24 +18,25 @@ export const registerSchema = yup.object().shape({
   organizationName: yup
     .string()
     .max(15, "Must be 15 character or less")
-    .required("Required!"),
+    .required()
+    .label("Organization Name"),
   firstName: yup
     .string()
     .max(15, "Must be 15 character or less")
-    .required("Required!"),
+    .required()
+    .label("First Name"),
   lastName: yup
     .string()
     .max(15, "Must be 15 character or less")
-    .required("Required!"),
+    .required()
+    .label("Last Name"),
   email: yup.string().email().required("Email is Required!").label("email"),
   password: yup
     .string()
-    .min(8, "at least 8 chars")
-    .matches(/[a-z]/, "at least one lowercase char")
-    .matches(/[A-Z]/, "at least one uppercase char")
+    .required()
     .matches(
-      /[a-zA-Z]+[^a-zA-Z\s]+/,
-      "at least 1 number or special char (@,!,#, etc)."
+      PASSWORD_PATTERN,
+      "Password should contain least 8 characters,minimum of 1 uppercase character [A-Z] , minimum of 1 numeric character [0-9],minimum of 1 special character: ~!@#$%"
     )
     .label("password"),
 });
@@ -44,27 +45,29 @@ export const profileStep1Schema = yup.object().shape({
   BrandText: yup
     .string()
     .max(15, "Must be 15 character or less")
-    .required("Required!"),
+    .required()
+    .label("Brand Text"),
   BrandLogo: yup.string().required(),
   Favicon: yup.string().required(),
   ThemeColor: yup.string(),
   PrimaryAdmin: yup.boolean(),
   HomePageH1: yup
     .string()
-    .max(15, "Must be 15 character or less")
-    .required("Required!"),
+    .max(30, "Must be 30 character or less")
+    .required()
+    .label("Home Page Title"),
 });
 
 export const profileStep2Schema = yup.object().shape({
   SocialMedia: yup
     .array()
     .of(yup.string().url("URL is invalid!"))
-    .min(3, "minimum three tags of social media url is required!"),
+    .min(3, "min three tags of social media url is required!"),
   Tlds: yup
     .array()
-    .of(yup.string().min(2, "minimum 2 characters are required!"))
-    .min(1, "required"),
-  AllowedEmailType: yup.array().min(1, "minimun one email type is required!"),
+    .of(yup.string().min(2, "min 2 characters are required!"))
+    .min(1, "min one tld is required!"),
+  AllowedEmailType: yup.array().min(1, "min one email type is required!"),
   RestrictedSignup: yup.boolean(),
   DomainLimit: yup.number().required().positive().integer(),
   Deafult2Fa: yup.boolean(),
