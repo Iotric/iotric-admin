@@ -19,11 +19,14 @@ const authSlice = createSlice({
     registerSuccess(state) {
       state.isLoggedIn = false;
     },
-    handleNext(state){
-        state.activeStep = state.activeStep + 1
+    handleReset(state) {
+      state.activeStep = 0;
     },
-    handleBack(state){
-        state.activeStep = state.activeStep - 1
+    handleNext(state) {
+      state.activeStep = state.activeStep + 1;
+    },
+    handleBack(state) {
+      state.activeStep = state.activeStep - 1;
     },
     profileCompleteSuccess(state) {
       state.isProfileComplete = true;

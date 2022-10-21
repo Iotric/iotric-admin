@@ -45,10 +45,10 @@ const Sidebar = () => {
               <span>Api Keys</span>
             </li>
           </Link>
-          <Link to="/dashboard/users" style={{ textDecoration: "none" }}>
+          <Link to="/dashboard/admins" style={{ textDecoration: "none" }}>
             <li>
               <PeopleIcon className="icon" />
-              <span>Users</span>
+              <span>Admins</span>
             </li>
           </Link>
           <li>
@@ -56,7 +56,7 @@ const Sidebar = () => {
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
-          <Link to="/dashboard/profile" style={{ textDecoration: "none" }}>
+          <Link to="/dashboard/edit-profile" style={{ textDecoration: "none" }}>
             <li>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>

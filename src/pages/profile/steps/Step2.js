@@ -207,7 +207,7 @@ const Step2 = () => {
           Back
         </Button>
         <Button sx={{ mt: 1, ml: 1 }} type="submit">
-          Next
+          Submit
         </Button>
       </Box>
     </Box>

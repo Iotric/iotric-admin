@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.scss";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,13 +12,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/home/navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { authActions } from "../../redux/slice/auth-slice.js";
 
 const steps = ["Step 1", "Step 2"];
@@ -34,24 +34,40 @@ function getStepContent(step) {
   }
 }
 
-export default function Checkout() {
+export default function Profile() {
+  const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isProfileEdit = () => {
+    const text = "edit-profile";
+    setIsEdit(location.pathname.includes(text));
+    console.log(isEdit);
+  };
+
+  useEffect(() => {
+    isProfileEdit();
+  }, []);
 
   const activeStep = useSelector((store) => store.auth.activeStep);
 
   const handleClickDashboard = () => {
     dispatch(authActions.profileCompleteSuccess());
+    dispatch(authActions.setLoadingTrue());
     setTimeout(() => {
       navigate("/dashboard");
+      dispatch(authActions.handleReset());
+      dispatch(authActions.setLoadingFalse());
     }, 2000);
   };
 
   return (
     <Box className="profile-stepper">
-      {/* <Sidebar /> */}
+      {isEdit && <Sidebar />}
       <Box className="profile-stepper-container">
-        {/* <Navbar /> */}
+        {isEdit && <Navbar />}
+
         <AppBar
           position="absolute"
           color="default"
@@ -61,20 +77,29 @@ export default function Checkout() {
             borderBottom: (t) => `1px solid ${t.palette.divider}`,
           }}
         >
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Complete your Profile
-            </Typography>
-          </Toolbar>
+          {!isEdit && (
+            <Toolbar>
+              <Typography variant="h6" color="inherit" noWrap>
+                Complete your Profile
+              </Typography>
+            </Toolbar>
+          )}
         </AppBar>
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
           <Paper
             variant="outlined"
             sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
           >
-            <Typography component="h1" variant="h4" align="center">
-              Complete your Profile
-            </Typography>
+            {isEdit ? (
+              <Typography component="h1" variant="h4" align="center">
+                Edit your Profile
+              </Typography>
+            ) : (
+              <Typography component="h1" variant="h4" align="center">
+                Complete your Profile
+              </Typography>
+            )}
+
             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
               {steps.map((label) => (
                 <Step key={label}>
@@ -94,7 +119,10 @@ export default function Checkout() {
                     has shipped.
                   </Typography> */}
                   <Box display="flex" mt={3} gap={2}>
-                    <Button variant="outlined" onClick={() => dispatch(authActions.handleBack())} >
+                    <Button
+                      variant="outlined"
+                      onClick={() => dispatch(authActions.handleBack())}
+                    >
                       back
                     </Button>
                     <Button onClick={handleClickDashboard} variant="contained">

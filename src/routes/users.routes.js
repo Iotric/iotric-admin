@@ -7,7 +7,7 @@ const New = React.lazy(() => import("../pages/new/New"));
 
 export default [
   {
-    path: "users",
+    path: "admins",
     children: [
       {
         element: <List />,
