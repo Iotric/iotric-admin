@@ -39,9 +39,9 @@ function AppNew() {
 
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
-            <Route path="profile" element={<ProfileStepper />} />
+            <Route path="edit-profile" element={<ProfileStepper />} />
             <Route path="credentials" element={<Credentials />} />
-            <Route path="users">
+            <Route path="admins">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
               <Route
@@ -50,6 +50,10 @@ function AppNew() {
               />
             </Route>
           </Route>
+          {/* <Route path="/" element={<PrivateRoute />}> */}
+            <Route path="/complete-profile" element={<ProfileStepper />} />
+          {/* </Route> */}
+
           <Route path="/contact-us" element={<Contactus />} />
 
           <Route path="*" element={<Error />} />

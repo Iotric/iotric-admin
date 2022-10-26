@@ -26,7 +26,7 @@ const PrivateRoute = () => {
         isProfileComplete ? (
           <Outlet />
         ) : (
-          <Profile />
+          <Navigate to="/complete-profile" />
         )
       ) : (
         <Navigate to="/login" />

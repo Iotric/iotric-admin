@@ -1,4 +1,4 @@
-export const userColumns = [
+export const adminColumns = [
   { field: "id", headerName: "ID", width: 70 },
   {
     field: "admin",
@@ -39,7 +39,7 @@ export const userColumns = [
 ];
 
 //temporary data
-export const userRows = [
+export const adminRows = [
   {
     id: 1,
     username: "Snow",

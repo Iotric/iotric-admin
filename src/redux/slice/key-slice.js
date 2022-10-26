@@ -4,7 +4,7 @@ const initialState = {
   user: { testApplicationKey: null, liveApplicationKey: null },
   isKeyLoading: false,
   isTestMode: false,
-  showCredentials: false
+  showCredentials: false,
 };
 
 const keySlice = createSlice({
@@ -13,13 +13,13 @@ const keySlice = createSlice({
   reducers: {
     toggleCredentials(state) {
       state.showCredentials = !state.showCredentials;
-      state.isKeyLoading = true
+      state.isKeyLoading = true;
     },
-    setShowCredentials(state, val){
-      state.showCredentials = val.payload 
+    setShowCredentials(state, val) {
+      state.showCredentials = val.payload;
     },
-    setUser(state, val){
-      state.user = val.payload
+    setUser(state, val) {
+      state.user = val.payload;
     },
     setTestMode(state) {
       state.isTestMode = !state.isTestMode;
