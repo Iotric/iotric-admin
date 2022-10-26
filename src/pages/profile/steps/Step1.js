@@ -98,16 +98,6 @@ const Step1 = () => {
             </Typography>
           </Box>
         </Box>
-
-        <Box display="flex" alignItems="center">
-          <Checkbox name="PrimaryAdmin" {...register("PrimaryAdmin")} />
-          <Typography component="p" variant="body1">
-            Primary Admin
-          </Typography>
-        </Box>
-        <Typography variant="body2" color="primary">
-          {errors.PrimaryAdmin?.message}
-        </Typography>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button sx={{ mt: 1, ml: 1 }} type="submit">

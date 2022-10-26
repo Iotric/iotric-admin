@@ -47,8 +47,8 @@ export const profileStep1Schema = yup.object().shape({
     .max(15, "Must be 15 character or less")
     .required()
     .label("Brand Text"),
-  BrandLogo: yup.string().required(),
-  Favicon: yup.string().required(),
+  BrandLogo: yup.string(),
+  Favicon: yup.string(),
   ThemeColor: yup.string(),
   PrimaryAdmin: yup.boolean(),
   HomePageH1: yup
@@ -59,15 +59,9 @@ export const profileStep1Schema = yup.object().shape({
 });
 
 export const profileStep2Schema = yup.object().shape({
-  SocialMedia: yup
-    .array()
-    .of(yup.string().url("URL is invalid!"))
-    .min(3, "min three tags of social media url is required!"),
-  Tlds: yup
-    .array()
-    .of(yup.string().min(2, "min 2 characters are required!"))
-    .min(1, "min one tld is required!"),
-  AllowedEmailType: yup.array().min(1, "min one email type is required!"),
+  SocialMedia: yup.array().of(yup.string().url("URL is invalid!")),
+  Tlds: yup.array().of(yup.string().min(2, "min 2 characters are required!")),
+  AllowedEmailType: yup.array(),
   RestrictedSignup: yup.boolean(),
   DomainLimit: yup.number().required().positive().integer(),
   Deafult2Fa: yup.boolean(),
