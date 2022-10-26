@@ -7,6 +7,10 @@ import { userInputs } from "./formSource";
 import PublicRoute from "./components/routes/PublicRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";
 
+const Organization = React.lazy(() =>
+  import("./pages/Organization/Organization")
+);
+
 const Home = React.lazy(() => import("./pages/home/Home"));
 const Login = React.lazy(() => import("./pages/login/Login"));
 const Register = React.lazy(() => import("./pages/register/Register"));
@@ -40,6 +44,7 @@ function AppNew() {
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
             <Route path="edit-profile" element={<ProfileStepper />} />
+            <Route path="organization" element={<Organization />} />
             <Route path="credentials" element={<Credentials />} />
             <Route path="admins">
               <Route index element={<List />} />
@@ -51,7 +56,7 @@ function AppNew() {
             </Route>
           </Route>
           {/* <Route path="/" element={<PrivateRoute />}> */}
-            <Route path="/complete-profile" element={<ProfileStepper />} />
+          <Route path="/complete-profile" element={<ProfileStepper />} />
           {/* </Route> */}
 
           <Route path="/contact-us" element={<Contactus />} />

@@ -5,8 +5,14 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
+import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { dashboardActions } from "../../redux/slice/dashboard-slice";
+
 const Navbar = () => {
-  const { dispatch } = useContext(DarkModeContext);
+  // const { dispatch } = useContext(DarkModeContext);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="navbar">
@@ -27,11 +33,13 @@ const Navbar = () => {
             <div className="counter">1</div>
           </div>
           <div className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="avatar"
-            />
+            <Button onClick={() => dispatch(dashboardActions.toggleDrawer())}>
+              <img
+                src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                alt=""
+                className="avatar"
+              />
+            </Button>
           </div>
         </div>
       </div>

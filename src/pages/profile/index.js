@@ -64,9 +64,9 @@ export default function Profile() {
 
   return (
     <Box className="profile-stepper">
-      {isEdit && <Sidebar />}
+      {/* {isEdit && <Sidebar />} */}
       <Box className="profile-stepper-container">
-        {isEdit && <Navbar />}
+        {/* {isEdit && <Navbar />} */}
 
         <AppBar
           position="absolute"
