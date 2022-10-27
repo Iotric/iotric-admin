@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Divider } from "@mui/material";
+import { Box, Button, Typography, Divider, IconButton } from "@mui/material";
 import React from "react";
 import "./organization.scss";
 
@@ -17,10 +17,17 @@ const Organization = () => {
     <Box className="organization">
       <Box className="org-nav">
         <Link to="/dashboard">
-          <ArrowBackIcon />
+          <IconButton>
+            <ArrowBackIcon />
+          </IconButton>
         </Link>
 
-        <Button variant="outlined" onClick={() => dispatch(authActions.logout())}>Log Out</Button>
+        <Button
+          variant="outlined"
+          onClick={() => dispatch(authActions.logout())}
+        >
+          Log Out
+        </Button>
       </Box>
       <Box className="org-hero">
         <Typography variant="h6"> Hi! Yash Patwa</Typography>
@@ -51,7 +58,9 @@ const Organization = () => {
             </Box>
             <Box className="org-edit">
               <Link to="/dashboard/edit-profile">
-                <EditIcon />
+                <IconButton>
+                  <EditIcon />
+                </IconButton>
               </Link>
             </Box>
           </li>
