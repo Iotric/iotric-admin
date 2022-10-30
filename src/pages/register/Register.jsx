@@ -18,6 +18,9 @@ import { registerSchema } from "../../utils/validations/";
 
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux"
+import { registerAction } from "../../redux/actions/auth-actions"
+
 const Register = () => {
   const {
     register,
@@ -30,20 +33,20 @@ const Register = () => {
       lastName: "",
       email: "",
       password: "",
-      brandText: "",
     },
     resolver: yupResolver(registerSchema),
   });
 
   const [showPassword, setShowPassword] = useState(0);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
   const handleRegister = (data) => {
-    console.log(data);
+    dispatch(registerAction(data))
     navigate("/login");
   };
 
