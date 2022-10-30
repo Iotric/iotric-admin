@@ -5,6 +5,7 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Table from "../../components/table/Table";
 import SameDataComposedChart from "../../components/chart/SameDataComposedChart";
+import CustomDrawer from "../../components/Drawer/CustomDrawer";
 
 const Dashboard = () => {
   return (
@@ -12,6 +13,7 @@ const Dashboard = () => {
       <Sidebar />
       <div className="dashboardContainer">
         <Navbar />
+        <CustomDrawer />
         <div className="widgets">
           <Widget type="user" />
           <Widget type="domain" />

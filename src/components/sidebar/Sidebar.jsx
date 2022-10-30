@@ -56,12 +56,11 @@ const Sidebar = () => {
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
-          <Link to="/dashboard/edit-profile" style={{ textDecoration: "none" }}>
-            <li>
-              <AccountCircleOutlinedIcon className="icon" />
-              <span>Profile</span>
-            </li>
-          </Link>
+
+          <li>
+            <AccountCircleOutlinedIcon className="icon" />
+            <span>Profile</span>
+          </li>
         </ul>
       </div>
     </div>

@@ -1,0 +1,41 @@
+.organization {
+  .org-nav {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9fafc;
+  }
+  .org-hero {
+    padding: 10px;
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+  .org-details {
+    padding: 10px;
+    margin-top: 30px;
+    .org-list {
+      list-style: none;
+      .org-list-item {
+        display: flex;
+        justify-content: centre;
+        align-items: center;
+        width: 800px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        .org-icon {
+          flex: 1;
+          & img {
+            height: 100px;
+            width: 200px;
+          }
+        }
+        .org-data {
+          flex: 1;
+        }
+        .org-icon {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

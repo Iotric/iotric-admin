@@ -1,13 +1,14 @@
 import React from "react";
 import "./credentials.scss";
 
-import { Box, Typography, Paper, Switch } from "@mui/material";
+import { Box, Typography, Paper, Switch, Drawer } from "@mui/material";
 import Sidebar from "../../components/sidebar/Sidebar";
 import KeysTable from "./KeysTable";
 import Navbar from "../../components/navbar/Navbar";
 
 import { useDispatch, useSelector } from 'react-redux'
 import { keyActions } from '../../redux/slice/key-slice.js'
+import CustomDrawer from "../../components/Drawer/CustomDrawer";
 
 const Credentials = () => {
   const dispatch = useDispatch()
@@ -22,6 +23,7 @@ const Credentials = () => {
       <Sidebar />
       <Box className="credentials-container">
         <Navbar />
+        <CustomDrawer/>
         <Box className="credentials-main">
           <Typography component="h2" variant="h4">
             API KEYS
