@@ -30,6 +30,7 @@ import { authActions } from "../../../redux/slice/auth-slice";
 import {
   fetchMetaData,
   createMetaData,
+  updateMetaData,
 } from "../../../redux/actions/auth-actions";
 
 const Step2 = () => {
@@ -237,6 +238,7 @@ const Step2 = () => {
           <Box mt={2}>
             {fields.map((item, item_index) => (
               <Accordion
+                key={`KEY_${item_index}`}
                 expanded={expanded === `Key_${item_index}`}
                 onChange={handleChange(`Key_${item_index}`)}
               >
@@ -383,6 +385,12 @@ const Step2 = () => {
           onClick={() => dispatch(authActions.handleBack())}
         >
           Back
+        </Button>
+        <Button
+          sx={{ mt: 1, ml: 1 }}
+          onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
+        >
+          Update
         </Button>
         <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit

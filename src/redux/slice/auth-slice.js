@@ -78,7 +78,7 @@ const authSlice = createSlice({
       state.domainLimit = response.payload.domainLimit;
       state.restrictedSignup = response.payload.restrictedSignup;
       state.allowedEmailType = response.payload.allowedEmailType;
-      state.additionalInfo = response.payload.additionalInfo
+      state.additionalInfo = response.payload.additionalInfo;
     },
     setActiveStep(state, step) {
       state.activeStep = step.payload;

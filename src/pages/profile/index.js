@@ -10,6 +10,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Step1 from "./enterprise-steps/ProfileForm";
 import Step2 from "./enterprise-steps/MetadataForm";
@@ -136,11 +137,31 @@ export default function Profile() {
                   <Typography variant="h5" gutterBottom>
                     Congratulations Your Profile is Complete
                   </Typography>
-                  {/* <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order
-                    confirmation, and will send you an update when your order
-                    has shipped.
-                  </Typography> */}
+                  <div
+                    style={{
+                      height: "80px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CircularProgress color="success" disableShrink size={40} value={100} />
+                  </div>
+                  <ul>
+                    <li>
+                      <Typography variant="subtitle1">
+                        We have emailed your order confirmation, and will send
+                        you an update when your order has shipped.
+                      </Typography>
+                    </li>
+                    <li>
+                      <Typography variant="subtitle1">
+                        Till we mint your transaction, you can checkout to
+                        dashboard.
+                      </Typography>
+                    </li>
+                  </ul>
+
                   <Box display="flex" mt={3} gap={2}>
                     <Button
                       variant="outlined"

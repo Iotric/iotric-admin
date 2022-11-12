@@ -50,6 +50,8 @@ export const registerAction = (data) => {
   };
 };
 
+// Enterprise-Profile
+
 export const fetchEnterprise = () => {
   return async (dispatch) => {
     const id = localStorage.getItem("enterpriseId");
@@ -72,6 +74,45 @@ export const fetchEnterprise = () => {
   };
 };
 
+export const updateProfileData = (data) => {
+  return async (dispatch) => {
+    const id = localStorage.getItem("enterpriseId");
+    const token = localStorage.getItem("user-token");
+
+    try {
+      let formData = new FormData();
+      formData.append("brandText", data.brandText);
+      formData.append("logo", data.brandLogo[0]);
+      formData.append("favicon", data.favicon[0]);
+      formData.append("themeColor", data.themeColor);
+      formData.append("homepageH1Title", data.homepageH1Title);
+
+      const response = await axiosinstance.put(
+        `enterprise/${id}/profile`,
+        formData,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(authActions.setProfileData(response.data.result));
+      toast.success("Profile Updated !!!");
+      dispatch(authActions.handleNext());
+    } catch (err) {
+      if (err.response?.data.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Something unusual happened profile !!!");
+      }
+      console.log(err);
+    }
+  };
+};
+
+// Meta-Data
+
 export const fetchMetaData = () => {
   return async (dispatch) => {
     const id = localStorage.getItem("enterpriseId");
@@ -85,46 +126,6 @@ export const fetchMetaData = () => {
       dispatch(authActions.setMetaData(response.data.result));
     } catch (err) {
       if (err.response.data.error) {
-        toast.error(err.response.data.error);
-      } else {
-        toast.error("Something unusual happened profile !!!");
-      }
-      console.log(err);
-    }
-  };
-};
-
-export const updateProfileData = (data) => {
-  return async (dispatch) => {
-    const id = localStorage.getItem("enterpriseId");
-    const token = localStorage.getItem("user-token");
-
-    try {
-      // let formData = new FormData();
-      // formData.append("brandText", data.brandText);
-      // formData.append("logo", data.brandLogo[0]);
-      // formData.append("favicon", data.favicon[0]);
-      // formData.append("themeColor", data.themeColor);
-      // formData.append("homepageH1Title", data.homepageH1Title);
-
-      // console.log("formData", { ...formData });
-
-      const response = await axiosinstance.put(
-        `enterprise/${id}/profile`,
-        { ...data },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            "content-type": "multipart/form-data",
-          },
-        }
-      );
-
-      dispatch(authActions.setProfileData(response.data.result));
-      toast.success("Profile Updated !!!");
-      dispatch(authActions.handleNext());
-    } catch (err) {
-      if (err.response?.data.error) {
         toast.error(err.response.data.error);
       } else {
         toast.error("Something unusual happened profile !!!");
@@ -183,6 +184,34 @@ export const updateMetaData = (data) => {
       dispatch(authActions.setMetaData(response.data.result));
       toast.success("Metadata Updated !!!");
       dispatch(authActions.handleNext());
+    } catch (err) {
+      if (err.response.data.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Something unusual happened !!!");
+      }
+      console.log(err);
+    }
+  };
+};
+
+export const isEnterpriseMinted = () => {
+  return async (dispatch) => {
+    const id = localStorage.getItem("enterpriseId");
+    const token = localStorage.getItem("user-token");
+
+    try {
+      const response = await axiosinstance.put(
+        `enterprise/meta-data/${id}/mint`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(authActions.setIsEnterpriseMinted(response.data.result));
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error);
