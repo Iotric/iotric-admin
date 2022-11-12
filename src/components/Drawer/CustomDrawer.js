@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./customDrawer.scss";
 
 import { Link } from "react-router-dom";
@@ -22,6 +22,8 @@ const CustomDrawer = () => {
   const navigate = useNavigate();
   const isDrawerOpen = useSelector((store) => store.dashboard.isDrawerOpen);
 
+  useEffect(() => {}, []);
+
   const handleSetting = () => {
     dispatch(dashboardActions.toggleDrawer());
     navigate("/dashboard/organization");
@@ -35,10 +37,8 @@ const CustomDrawer = () => {
     >
       <Box className="custom-drawer">
         <Box className="drawer-data">
-          <IconButton>
-            <CancelIcon
-              onClick={() => dispatch(dashboardActions.toggleDrawer())}
-            />
+          <IconButton onClick={() => dispatch(dashboardActions.toggleDrawer())}>
+            <CancelIcon />
           </IconButton>
 
           <Box className="drawer-details">
@@ -48,18 +48,23 @@ const CustomDrawer = () => {
               className="avatar"
             />
 
-            <Typography variant="body2">IOTPY16 - Patwa</Typography>
+            <Typography variant="body2">Yash - Patwa</Typography>
 
             <Typography variant="body2">yashdeep.patwa@iotric.com</Typography>
 
-            <Typography variant="body2">Software Engineer</Typography>
+            <Typography variant="body2">Primary Admin</Typography>
 
-            <Button variant="outlined">Log Out</Button>
+            <Box mt={2}>
+              <Button mx={2} variant="contained">
+                My Account
+              </Button>
+              <Button variant="text">Log Out</Button>
+            </Box>
           </Box>
         </Box>
 
         <Box className="drawer-edit">
-          <Typography variant="body1">PDRP Technology Pvt. Ltd.</Typography>
+          <Typography variant="body1">nexbloc</Typography>
           <IconButton>
             <SettingsIcon sx={{ color: "#00b0ff" }} onClick={handleSetting} />
           </IconButton>

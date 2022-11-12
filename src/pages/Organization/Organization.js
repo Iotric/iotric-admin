@@ -45,15 +45,16 @@ const Organization = () => {
               <img src={nexblocImg} alt="" />
             </Box>
             <Box className="org-data">
-              <Typography variant="subtitle1">
-                PDRP Technology Pvt. Ltd.
+              <Typography variant="subtitle1">Nexbloc</Typography>
+              <Typography variant="body2">
+                Home Page Title - Welcome to Iotric
               </Typography>
               <Typography variant="body2">
-                Organization ID - 60000788481
+                Enterprise ID - 60000788481
               </Typography>
-              <Typography variant="body2">Portal Name - iotric</Typography>
+              <Typography variant="body2">Brand Title - iotric</Typography>
               <Typography variant="body2">
-                Portal Url - https://people.zoho.in/iotric/zp
+                Portal Url - https://iotric.nexbloc.in/
               </Typography>
             </Box>
             <Box className="org-edit">

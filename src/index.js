@@ -7,16 +7,22 @@ import { DarkModeContextProvider } from "./context/darkModeContext";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./utils/extendtheme";
+import "react-toastify/dist/ReactToastify.css";
+
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<Spinner />}>
-      <DarkModeContextProvider>
-        <Provider store={store}>
-          <AppNew />
-          {/* <App/> */}
-        </Provider>
-      </DarkModeContextProvider>
-    </Suspense>
+    <ThemeProvider theme={theme}>
+      <Suspense fallback={<Spinner />}>
+        <DarkModeContextProvider>
+          <Provider store={store}>
+            <AppNew />
+            {/* <App/> */}
+          </Provider>
+        </DarkModeContextProvider>
+      </Suspense>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

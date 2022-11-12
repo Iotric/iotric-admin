@@ -11,15 +11,13 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-
-import Step1 from "./steps/Step1";
-import Step2 from "./steps/Step2";
+import Step1 from "./enterprise-steps/ProfileForm";
+import Step2 from "./enterprise-steps/MetadataForm";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { authActions } from "../../redux/slice/auth-slice.js";
+import { fetchEnterprise } from "../../redux/actions/auth-actions";
 
 const steps = ["Step 1", "Step 2"];
 
@@ -43,14 +41,38 @@ export default function Profile() {
   const isProfileEdit = () => {
     const text = "edit-profile";
     setIsEdit(location.pathname.includes(text));
-    console.log(isEdit);
   };
+
+  const activeStep = useSelector((store) => store.auth.activeStep);
+  const completionIndicator = useSelector(
+    (store) => store.auth.completionIndicator
+  );
 
   useEffect(() => {
     isProfileEdit();
+    dispatch(fetchEnterprise());
   }, []);
 
-  const activeStep = useSelector((store) => store.auth.activeStep);
+  useEffect(() => {
+    mapCompletionWithStep();
+  }, [completionIndicator]);
+
+  const mapCompletionWithStep = () => {
+    let step = 0;
+    if (completionIndicator.registration) {
+      step = 0;
+      if (completionIndicator.profileForm) {
+        step = 1;
+        if (completionIndicator.metaInfoForm) {
+          step = 2;
+          if (completionIndicator.isMinted) {
+            step = 3;
+          }
+        }
+      }
+    }
+    dispatch(authActions.setActiveStep(step));
+  };
 
   const handleClickDashboard = () => {
     dispatch(authActions.profileCompleteSuccess());
@@ -64,6 +86,7 @@ export default function Profile() {
 
   return (
     <Box className="profile-stepper">
+      {/* {JSON.stringify(completionIndicator)} */}
       {/* {isEdit && <Sidebar />} */}
       <Box className="profile-stepper-container">
         {/* {isEdit && <Navbar />} */}

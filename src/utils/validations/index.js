@@ -4,14 +4,7 @@ export const PASSWORD_PATTERN =
 
 export const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is Required!").label("email"),
-  password: yup
-    .string()
-    .required()
-    .matches(
-      PASSWORD_PATTERN,
-      "Password should contain least 8 characters,minimum of 1 uppercase character [A-Z] , minimum of 1 numeric character [0-9],minimum of 1 special character: ~!@#$%"
-    )
-    .label("password"),
+  password: yup.string().required().label("Password"),
 });
 
 export const registerSchema = yup.object().shape({
@@ -38,20 +31,20 @@ export const registerSchema = yup.object().shape({
       PASSWORD_PATTERN,
       "Password should contain least 8 characters,minimum of 1 uppercase character [A-Z] , minimum of 1 numeric character [0-9],minimum of 1 special character: ~!@#$%"
     )
-    .label("password"),
+    .label("Password"),
 });
 
 export const profileStep1Schema = yup.object().shape({
-  BrandText: yup
+  brandText: yup
     .string()
     .max(15, "Must be 15 character or less")
     .required()
     .label("Brand Text"),
-  BrandLogo: yup.string(),
-  Favicon: yup.string(),
-  ThemeColor: yup.string(),
-  PrimaryAdmin: yup.boolean(),
-  HomePageH1: yup
+  // brandLogo: yup.string(),
+  // favicon: yup.string(),
+  themeColor: yup.string(),
+  primaryAdmin: yup.boolean(),
+  homepageH1Title: yup
     .string()
     .max(30, "Must be 30 character or less")
     .required()
@@ -59,10 +52,9 @@ export const profileStep1Schema = yup.object().shape({
 });
 
 export const profileStep2Schema = yup.object().shape({
-  SocialMedia: yup.array().of(yup.string().url("URL is invalid!")),
-  Tlds: yup.array().of(yup.string().min(2, "min 2 characters are required!")),
-  AllowedEmailType: yup.array(),
-  RestrictedSignup: yup.boolean(),
-  DomainLimit: yup.number().required().positive().integer(),
-  Deafult2Fa: yup.boolean(),
+  socialMedia: yup.array().of(yup.string().url("URL is invalid!")),
+  tlds: yup.array().of(yup.string().min(2, "min 2 characters are required!")),
+  allowedEmailType: yup.array(),
+  restrictedSignup: yup.boolean(),
+  domainLimit: yup.number().required().positive().integer(),
 });
