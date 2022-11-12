@@ -37,33 +37,35 @@ const Navbar = () => {
             </Button>
           </Link>
           <Button color="primary" sx={{ my: 1, mx: 1 }}>
-            Features
-          </Button>
-          <Button href="#customers" color="primary" sx={{ my: 1, mx: 1 }}>
-            Customers
+            Docs
           </Button>
           <Link style={{ textDecoration: "none" }} to="/contact-us">
             <Button color="primary" sx={{ my: 1, mx: 1 }}>
               Contact Us
             </Button>
           </Link>
+          <Link style={{ textDecoration: "none" }} to="/">
+            <Button color="primary" sx={{ my: 1, mx: 1 }}>
+              About
+            </Button>
+          </Link>
           <Link style={{ textDecoration: "none" }} to="/register">
             <Button color="primary" sx={{ my: 1, mx: 1 }}>
-              Register
+              Sign Up
             </Button>
           </Link>
 
           {token ? (
             <Button
               onClick={handleLogout}
-              variant="outlined"
+              variant="contained"
               sx={{ my: 1, mx: 1 }}
             >
               Logout
             </Button>
           ) : (
             <Link style={{ textDecoration: "none" }} to="/login">
-              <Button variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+              <Button variant="contained" sx={{ my: 1, mx: 1.5 }}>
                 Login
               </Button>
             </Link>

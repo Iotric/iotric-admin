@@ -1,8 +1,6 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Dashboard from "../../pages/dashboard/dashboard.jsx";
-import Profile from "../../pages/profile/";
 
 const useAuth = () => {
   const token = localStorage.getItem("user-token");
@@ -19,6 +17,7 @@ const PrivateRoute = () => {
   const isProfileComplete = useSelector(
     (store) => store.auth.isProfileComplete
   );
+  const id = localStorage.getItem("enterpriseId");
 
   return (
     <div>
@@ -26,7 +25,7 @@ const PrivateRoute = () => {
         isProfileComplete ? (
           <Outlet />
         ) : (
-          <Navigate to="/complete-profile" />
+          <Navigate to={`/complete-profile/${id}`} />
         )
       ) : (
         <Navigate to="/login" />

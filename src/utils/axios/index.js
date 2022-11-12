@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosinstance = axios.create({
-  baseURL: "https://mocki.io/v1",
+  baseURL: "http://localhost:8000/api",
 });
 
 export default axiosinstance

@@ -7,6 +7,8 @@ import { userInputs } from "./formSource";
 import PublicRoute from "./components/routes/PublicRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";
 
+import { ToastContainer } from "react-toastify";
+
 const Organization = React.lazy(() =>
   import("./pages/Organization/Organization")
 );
@@ -19,6 +21,7 @@ const Contactus = React.lazy(() => import("./pages/contactus/Contactus"));
 
 const Dashboard = React.lazy(() => import("./pages/dashboard/dashboard"));
 const ProfileStepper = React.lazy(() => import("./pages/profile/"));
+const EditProfileStepper = React.lazy(() => import("./pages/editprofile/"));
 const Credentials = React.lazy(() => import("./pages/credentials/Credentials"));
 
 const List = React.lazy(() => import("./pages/list/List"));
@@ -32,6 +35,8 @@ function AppNew() {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+      <ToastContainer position="top-center" />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -43,7 +48,7 @@ function AppNew() {
 
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
-            <Route path="edit-profile" element={<ProfileStepper />} />
+            <Route path="edit-profile" element={<EditProfileStepper />} />
             <Route path="organization" element={<Organization />} />
             <Route path="credentials" element={<Credentials />} />
             <Route path="admins">
@@ -56,7 +61,7 @@ function AppNew() {
             </Route>
           </Route>
           {/* <Route path="/" element={<PrivateRoute />}> */}
-          <Route path="/complete-profile" element={<ProfileStepper />} />
+          <Route path="/complete-profile/:id" element={<ProfileStepper />} />
           {/* </Route> */}
 
           <Route path="/contact-us" element={<Contactus />} />

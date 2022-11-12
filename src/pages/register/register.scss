@@ -1,7 +1,6 @@
 .register {
-  min-height: 130vh;
-  
   .register-container {
+    min-height: 75vh;
     display: flex;
     padding: 40px;
     background: rgb(88, 66, 247);
@@ -11,43 +10,52 @@
       rgba(9, 9, 121, 1) 100%
     );
     .register-img {
+      flex: 1;
+      margin-left: 50px;
       margin-top: 30px;
       & img {
-        height: 80%;
-        width: 80%;
+        height: 84%;
+        width: 90%;
       }
     }
     .register-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    .paper {
-      width: 500px;
-      padding-left: 20px;
-      padding-right: 20px;
-      border-radius: 16px;
-      .logo {
-        height: 70px;
-        width: 200px;
-      }
-      .title {
-        text-align: left;
-        font-weight: 500;
-        color: #100086;
-      }
-      .registerDetails {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-      }
-      .bottom {
-        margin-top: 20px;
-        margin-bottom: 15px;
-        text-align: center;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .paper {
+        width: 500px;
+        min-height: 250px;
+        padding: 25px;
+        border-radius: 16px;
+        .logo {
+          height: 70px;
+          width: 200px;
+        }
+        .title {
+          text-align: left;
+          font-weight: 500;
+          color: #100086;
+        }
+        .registerDetails {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+          width: 100%;
+          > div {
+            width: 100%;
+            > div {
+              width: 100%;
+            }
+          }
+        }
+        .bottom {
+          margin-top: 20px;
+          margin-bottom: 15px;
+          text-align: center;
+        }
       }
     }
   }
-  }
-  
 }
