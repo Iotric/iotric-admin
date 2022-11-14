@@ -11,6 +11,8 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
 
 import Step1 from "./edit-enterprise-steps/ProfileForm";
 import Step2 from "./edit-enterprise-steps/MetadataForm";
@@ -105,13 +107,35 @@ export default function Profile() {
                 {activeStep === steps.length ? (
                   <React.Fragment>
                     <Typography variant="h5" gutterBottom>
-                      Congratulations Your Profile is Complete
+                      Your Profile is Updated
                     </Typography>
-                    {/* <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order
-                    confirmation, and will send you an update when your order
-                    has shipped.
-                  </Typography> */}
+                    <Box my={3}>
+                      <Alert variant="filled" severity="info">
+                        We have emailed your order confirmation, and will send
+                        you an update when your order has shipped.
+                      </Alert>
+                    </Box>
+                    <Box>
+                      <Alert variant="filled" severity="warning">
+                        Till we mint your transaction, you can checkout to
+                        dashboard.
+                      </Alert>
+                    </Box>
+                    <div
+                      style={{
+                        height: "80px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <CircularProgress
+                        color="success"
+                        disableShrink
+                        size={40}
+                        value={100}
+                      />
+                    </div>
                     <Box display="flex" mt={3} gap={2}>
                       <Button
                         variant="outlined"

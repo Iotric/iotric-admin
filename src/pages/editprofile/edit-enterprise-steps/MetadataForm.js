@@ -7,10 +7,11 @@ import {
   Autocomplete,
   Chip,
   Button,
+  IconButton,
 } from "@mui/material";
 import "./metadata.scss";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { profileStep2Schema } from "../../../utils/validations";
 
@@ -18,22 +19,23 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MenuItem from "@mui/material/MenuItem";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
 import {
   fetchMetaData,
+  createMetaData,
   updateMetaData,
+  isEnterpriseMinted,
 } from "../../../redux/actions/auth-actions";
 
 const Step2 = () => {
   const dispatch = useDispatch();
-
-  const [expanded, setExpanded] = useState(true);
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
 
   // authState
   const authState = useSelector((store) => store.auth);
@@ -42,6 +44,7 @@ const Step2 = () => {
   const restrictedSignup = authState.restrictedSignup;
   const allowedEmailType = authState.allowedEmailType;
   const domainLimit = authState.domainLimit;
+  const additionalInfo = authState.additionalInfo;
 
   const {
     register,
@@ -50,6 +53,8 @@ const Step2 = () => {
     control,
     watch,
     reset,
+    getValues,
+    setValue,
   } = useForm({
     defaultValues: {
       socialMedia: [],
@@ -57,9 +62,19 @@ const Step2 = () => {
       restrictedSignup: false,
       allowedEmailType: [],
       domainLimit: 1000,
+      additionalInfo: [],
     },
     resolver: yupResolver(profileStep2Schema),
   });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "additionalInfo",
+  });
+
+  const [expanded, setExpanded] = useState("key_-1");
+
+  const WatchRestrictedSignup = watch("restrictedSignup");
 
   useEffect(() => {
     dispatch(fetchMetaData());
@@ -73,126 +88,249 @@ const Step2 = () => {
       restrictedSignup,
       allowedEmailType,
       domainLimit,
+      additionalInfo,
     });
   }, [authState]);
 
-  const WatchRestrictedSignup = watch("restrictedSignup");
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const handleMetaFormNext = (data) => {
-    dispatch(updateMetaData(data));
+    dispatch(createMetaData(data));
+    dispatch(isEnterpriseMinted());
+  };
+
+  const handleAddKey = () => {
+    const AdditionalInfo = getValues("additionalInfo");
+    const newKey = {
+      label: "",
+      key: "",
+      type: "",
+    };
+    let newAdditionalInfo = [...AdditionalInfo, newKey];
+    dispatch(authActions.setAdditionalInfo(newAdditionalInfo));
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleMetaFormNext)}>
       <Box className="step2Details">
         {/* {JSON.stringify(watch())} */}
-        <Controller
-          name="tlds"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Autocomplete
-              freeSolo
-              multiple
-              options={[]}
-              value={value}
-              onChange={(event, values) => onChange(values)}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    key={`CHIP_${option}_${index}`}
-                    color="primary"
-                    variant="outlined"
-                    value={value}
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField {...params} label="tlds" variant="outlined" />
-              )}
-            />
-          )}
-        />
+        <Box>
+          <Controller
+            name="tlds"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                freeSolo
+                multiple
+                options={[]}
+                value={value}
+                onChange={(event, values) => onChange(values)}
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip
+                      key={`CHIP_${option}_${index}`}
+                      color="primary"
+                      variant="outlined"
+                      value={value}
+                      label={option}
+                      {...getTagProps({ index })}
+                    />
+                  ))
+                }
+                renderInput={(params) => (
+                  <TextField {...params} label="tlds" variant="outlined" />
+                )}
+              />
+            )}
+          />
 
-        {Array.isArray(errors.tlds) ? (
-          errors.tlds?.map((message, index) => (
-            <Typography
-              key={`TLD_ERROR_${index}`}
-              variant="body2"
-              color="primary"
-            >
-              In Tag {index + 1}, {message.message}
+          {Array.isArray(errors.tlds) ? (
+            errors.tlds?.map((message, index) => (
+              <Typography
+                key={`TLD_ERROR_${index}`}
+                mx={1}
+                my={1}
+                variant="body2"
+                color="textPrimary.main"
+              >
+                In Tag {index + 1}, {message.message}
+              </Typography>
+            ))
+          ) : (
+            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+              {errors.tlds?.message}
             </Typography>
-          ))
-        ) : (
-          <Typography variant="body2" color="primary">
-            {errors.tlds?.message}
-          </Typography>
-        )}
+          )}
+        </Box>
 
-        <Controller
-          name="socialMedia"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Autocomplete
-              freeSolo
-              multiple
-              options={[]}
-              value={value}
-              onChange={(event, values) => onChange(values)}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
+        <Box>
+          <Controller
+            name="socialMedia"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                freeSolo
+                multiple
+                options={[]}
+                value={value}
+                onChange={(event, values) => onChange(values)}
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip
+                      variant="outlined"
+                      label={option}
+                      {...getTagProps({ index })}
+                    />
+                  ))
+                }
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Social Media"
                     variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
                   />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Social Media"
-                  variant="outlined"
-                />
-              )}
-            />
-          )}
-        />
-        {Array.isArray(errors.socialMedia) ? (
-          errors.socialMedia?.map((message, index) => (
-            <Typography
-              key={`socialMedia_ERROR_${index}`}
-              variant="body2"
-              color="primary"
-            >
-              Tag {index + 1}, {message.message}
+                )}
+              />
+            )}
+          />
+          {Array.isArray(errors.socialMedia) ? (
+            errors.socialMedia?.map((message, index) => (
+              <Typography
+                key={`socialMedia_ERROR_${index}`}
+                mx={1}
+                my={1}
+                variant="body2"
+                color="textPrimary.main"
+              >
+                Tag {index + 1}, {message.message}
+              </Typography>
+            ))
+          ) : (
+            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+              {errors.socialMedia?.message}
             </Typography>
-          ))
-        ) : (
-          <Typography variant="body2" color="primary">
-            {errors.socialMedia?.message}
-          </Typography>
-        )}
-
-        <Controller
-          name="domainLimit"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              value={value}
-              onChange={onChange}
-              type="number"
-              label="Domain Limit"
-              variant="outlined"
-            />
           )}
-        />
+        </Box>
 
-        <Typography variant="body2" color="primary">
-          {errors.domainLimit?.message}
-        </Typography>
+        <Box>
+          <Controller
+            name="domainLimit"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                value={value}
+                onChange={onChange}
+                type="number"
+                label="Domain Limit"
+                variant="outlined"
+              />
+            )}
+          />
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.domainLimit?.message}
+          </Typography>
+        </Box>
+
+        <Box>
+          <Box display="flex" alignItems="center" gap={1}>
+            <Typography component="h4">Add Key</Typography>
+            <Fab
+              onClick={handleAddKey}
+              variant="extended"
+              size="small"
+              color="primary"
+              aria-label="add"
+            >
+              <AddIcon />
+            </Fab>
+          </Box>
+          <Box mt={2}>
+            {fields.map((item, item_index) => (
+              <Accordion
+                key={`KEY_${item_index}`}
+                expanded={expanded === `Key_${item_index}`}
+                onChange={handleChange(`Key_${item_index}`)}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                    Key {item_index}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box>
+                    <Controller
+                      name={`additionalInfo.${item_index}.label`}
+                      control={control}
+                      render={({ field: { value, onChange } }) => (
+                        <TextField
+                          size="small"
+                          label="Label"
+                          sx={{ width: "100%" }}
+                          onChange={onChange}
+                          value={value}
+                          variant="outlined"
+                          error={errors.label}
+                        />
+                      )}
+                    />
+                  </Box>
+
+                  <Box my={2}>
+                    <Controller
+                      name={`additionalInfo.${item_index}.key`}
+                      control={control}
+                      render={({ field: { value, onChange } }) => (
+                        <TextField
+                          size="small"
+                          sx={{ width: "100%" }}
+                          label="key/symbol"
+                          onChange={onChange}
+                          value={value}
+                          variant="outlined"
+                          error={errors.label}
+                        />
+                      )}
+                    />
+                  </Box>
+
+                  <Box my={2}>
+                    <Controller
+                      name={`additionalInfo.${item_index}.type`}
+                      control={control}
+                      render={({ field: { value, onChange } }) => (
+                        <TextField
+                          size="small"
+                          select
+                          sx={{ width: "100%" }}
+                          value={value}
+                          label="Type"
+                          onChange={onChange}
+                        >
+                          <MenuItem value="url">URL</MenuItem>
+                          <MenuItem value="text">Text</MenuItem>
+                          <MenuItem value="address">Address</MenuItem>
+                          <MenuItem value="folder">Folder</MenuItem>
+                        </TextField>
+                      )}
+                    />
+                  </Box>
+                  <Box>
+                    <IconButton onClick={() => remove(item_index)}>
+                      <DeleteIcon sx={{ color: "#E63946" }} />
+                    </IconButton>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
+        </Box>
+
         <Box display="flex" gap={5}>
           <Box display="flex" alignItems="center">
             <Controller
@@ -206,43 +344,17 @@ const Step2 = () => {
               )}
             />
 
-            <Box>
-              <Accordion
-                expanded={expanded === "panel1"}
-                onChange={handleChange("panel1")}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1bh-content"
-                  id="panel1bh-header"
-                >
-                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    General settings
-                  </Typography>
-                  <Typography sx={{ color: "text.secondary" }}>
-                    I am an accordion
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                    feugiat. Aliquam eget maximus est, id dignissim quam.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
-
             <Typography component="p" variant="body1">
               Restricted Signup
             </Typography>
           </Box>
-          <Typography variant="body2" color="primary">
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
             {errors.restrictedSignup?.message}
           </Typography>
         </Box>
 
         {WatchRestrictedSignup ? (
-          <>
+          <Box>
             <Controller
               name="allowedEmailType"
               control={control}
@@ -272,10 +384,10 @@ const Step2 = () => {
                 />
               )}
             />
-            <Typography variant="body2" color="primary">
+            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
               {errors.allowedEmailType?.message}
             </Typography>
-          </>
+          </Box>
         ) : null}
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -284,6 +396,12 @@ const Step2 = () => {
           onClick={() => dispatch(authActions.handleBack())}
         >
           Back
+        </Button>
+        <Button
+          sx={{ mt: 1, ml: 1 }}
+          onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
+        >
+          Update
         </Button>
         <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit

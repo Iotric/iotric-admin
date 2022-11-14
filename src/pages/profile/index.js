@@ -11,12 +11,13 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
 
 import Step1 from "./enterprise-steps/ProfileForm";
 import Step2 from "./enterprise-steps/MetadataForm";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authActions } from "../../redux/slice/auth-slice.js";
 import { fetchEnterprise } from "../../redux/actions/auth-actions";
 
@@ -28,21 +29,15 @@ function getStepContent(step) {
       return <Step1 />;
     case 1:
       return <Step2 />;
+
     default:
       throw new Error("Unknown step");
   }
 }
 
 export default function Profile() {
-  const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const isProfileEdit = () => {
-    const text = "edit-profile";
-    setIsEdit(location.pathname.includes(text));
-  };
 
   const activeStep = useSelector((store) => store.auth.activeStep);
   const completionIndicator = useSelector(
@@ -50,7 +45,6 @@ export default function Profile() {
   );
 
   useEffect(() => {
-    isProfileEdit();
     dispatch(fetchEnterprise());
   }, []);
 
@@ -67,7 +61,7 @@ export default function Profile() {
         if (completionIndicator.metaInfoForm) {
           step = 2;
           if (completionIndicator.isMinted) {
-            step = 3;
+            step = 2;
           }
         }
       }
@@ -88,10 +82,7 @@ export default function Profile() {
   return (
     <Box className="profile-stepper">
       {/* {JSON.stringify(completionIndicator)} */}
-      {/* {isEdit && <Sidebar />} */}
       <Box className="profile-stepper-container">
-        {/* {isEdit && <Navbar />} */}
-
         <AppBar
           position="absolute"
           color="default"
@@ -101,28 +92,20 @@ export default function Profile() {
             borderBottom: (t) => `1px solid ${t.palette.divider}`,
           }}
         >
-          {!isEdit && (
-            <Toolbar>
-              <Typography variant="h6" color="inherit" noWrap>
-                Complete your Profile
-              </Typography>
-            </Toolbar>
-          )}
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Complete your Profile
+            </Typography>
+          </Toolbar>
         </AppBar>
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
           <Paper
             variant="outlined"
             sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
           >
-            {isEdit ? (
-              <Typography component="h1" variant="h4" align="center">
-                Edit your Profile
-              </Typography>
-            ) : (
-              <Typography component="h1" variant="h4" align="center">
-                Complete your Profile
-              </Typography>
-            )}
+            <Typography component="h1" variant="h4" align="center">
+              Complete your Profile
+            </Typography>
 
             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
               {steps.map((label) => (
@@ -135,8 +118,21 @@ export default function Profile() {
               {activeStep === steps.length ? (
                 <React.Fragment>
                   <Typography variant="h5" gutterBottom>
-                    Congratulations Your Profile is Complete
+                    🥳 Congratulations Your Profile is Complete
                   </Typography>
+
+                  <Box my={3}>
+                    <Alert variant="filled" severity="info">
+                      We have emailed your order confirmation, and will send you
+                      an update when your order has shipped.
+                    </Alert>
+                  </Box>
+                  <Box>
+                    <Alert variant="filled" severity="warning">
+                      Till we mint your transaction, you can checkout to
+                      dashboard.
+                    </Alert>
+                  </Box>
                   <div
                     style={{
                       height: "80px",
@@ -145,22 +141,13 @@ export default function Profile() {
                       alignItems: "center",
                     }}
                   >
-                    <CircularProgress color="success" disableShrink size={40} value={100} />
+                    <CircularProgress
+                      color="success"
+                      disableShrink
+                      size={40}
+                      value={100}
+                    />
                   </div>
-                  <ul>
-                    <li>
-                      <Typography variant="subtitle1">
-                        We have emailed your order confirmation, and will send
-                        you an update when your order has shipped.
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography variant="subtitle1">
-                        Till we mint your transaction, you can checkout to
-                        dashboard.
-                      </Typography>
-                    </li>
-                  </ul>
 
                   <Box display="flex" mt={3} gap={2}>
                     <Button

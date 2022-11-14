@@ -3,6 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
+    firstName: "",
+    lastName: "",
+    role: "",
+    email: "",
+    organizationName: "",
     isLoggedIn: false,
     isLoading: false,
     isProfileComplete: false,
@@ -36,6 +41,12 @@ const authSlice = createSlice({
     registerSuccess(state) {
       state.isLoggedIn = false;
     },
+    setUser(state, response) {
+      state.firstName = response.payload.firstName
+      state.lastName = response.payload.lastName
+      state.role = response.payload.role
+      state.email = response.payload.email
+    },
     handleReset(state) {
       state.activeStep = 0;
     },
@@ -52,6 +63,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.removeItem("user-token");
       localStorage.removeItem("enterpriseId");
+      localStorage.removeItem("metadataId");
     },
     setLoadingTrue(state) {
       state.isLoading = true;
@@ -64,6 +76,7 @@ const authSlice = createSlice({
       state.brandText = response.payload.brandText;
       state.homepageH1Title = response.payload.homepageH1Title;
       state.themeColor = response.payload.themeColor;
+      state.organizationName = response.payload.organizationName
     },
     setProfileData(state, response) {
       state.completionIndicator = response.payload.completionIndicator;
@@ -72,7 +85,6 @@ const authSlice = createSlice({
       state.themeColor = response.payload.themeColor;
     },
     setMetaData(state, response) {
-      console.log(response);
       state.tlds = response.payload.tlds;
       state.socialMedia = response.payload.socialMedia;
       state.domainLimit = response.payload.domainLimit;

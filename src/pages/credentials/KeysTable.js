@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -18,7 +18,10 @@ import "./keystable.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { keyActions } from "../../redux/slice/key-slice.js";
-import { generateAndRegenerateKeysAction } from "../../redux/actions/key-actions.js";
+import {
+  generateAndRegenerateKeysAction,
+  fetchApiKeys,
+} from "../../redux/actions/key-actions.js";
 
 const KeysTable = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -36,6 +39,10 @@ const KeysTable = () => {
       dispatch(keyActions.setKeyLoadingFalse());
     }, 1000);
   };
+
+  useEffect(() => {
+    dispatch(fetchApiKeys());
+  }, []);
 
   const generateAndRegenerateKeys = () => {
     dispatch(generateAndRegenerateKeysAction());
@@ -112,7 +119,7 @@ const KeysTable = () => {
                           <Box
                             onCick={copyToClipBoard(user.testApplicationKey)}
                           >
-                            {user.testApplicationKey}
+                            {user.testApplicationKey.key}
                           </Box>
                           <Button
                             variant="contained"
@@ -150,7 +157,7 @@ const KeysTable = () => {
                   ) : showCredentials ? (
                     <Tooltip title="Click to copy">
                       <Box>
-                        <Box>{user.liveApplicationKey}</Box>
+                        <Box>{user.liveApplicationKey.key}</Box>
                         <Button
                           onClick={toggleCredentials}
                           variant="contained"

@@ -9,5 +9,9 @@ export const theme = createTheme({
       dark: "",
       contrastText: "",
     },
+    textMute: {
+      light: "",
+      main: "#6C757D",
+    },
   },
 });

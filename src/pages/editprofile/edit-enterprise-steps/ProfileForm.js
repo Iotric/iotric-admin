@@ -10,6 +10,7 @@ import { profileStep1Schema } from "../../../utils/validations";
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateProfileData } from "../../../redux/actions/auth-actions";
+import { authActions } from "../../../redux/slice/auth-slice";
 
 const Step1 = () => {
   const dispatch = useDispatch();
@@ -32,9 +33,14 @@ const Step1 = () => {
       brandText: "iotric",
       homepageH1Title: "welcome to iotric",
       themeColor: "",
+      favicon: null,
+      brandLogo: null,
     },
     resolver: yupResolver(profileStep1Schema),
   });
+
+  const watchFavicon = watch("favicon");
+  const watchBrandLogo = watch("brandLogo");
 
   // On Created
   useEffect(() => {
@@ -53,58 +59,64 @@ const Step1 = () => {
     <Box component="form" onSubmit={handleSubmit(handleFormNext)}>
       {/* {JSON.stringify(watch())} */}
       <Box className="step1Details">
-        <Controller
-          name="homepageH1Title"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              label="Home Page Title"
-              onChange={onChange}
-              value={value}
-              variant="outlined"
-              error={errors.homepageH1Title}
-            />
-          )}
-        />
-        <Typography variant="body2" color="primary">
-          {errors.homepageH1Title?.message}
-        </Typography>
+        <Box>
+          <Controller
+            name="homepageH1Title"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                label="Home Page Title"
+                onChange={onChange}
+                value={value}
+                variant="outlined"
+                error={errors.homepageH1Title}
+              />
+            )}
+          />
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.homepageH1Title?.message}
+          </Typography>
+        </Box>
 
-        <Controller
-          name="brandText"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              label="Brand Text"
-              variant="outlined"
-              onChange={onChange}
-              value={value}
-              error={errors.brandText}
-            />
-          )}
-        />
+        <Box>
+          <Controller
+            name="brandText"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                label="Brand Text"
+                variant="outlined"
+                onChange={onChange}
+                value={value}
+                error={errors.brandText}
+              />
+            )}
+          />
 
-        <Typography variant="body2" color="primary">
-          {errors.brandText?.message}
-        </Typography>
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.brandText?.message}
+          </Typography>
+        </Box>
 
-        <Controller
-          name="themeColor"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              label="Theme Color"
-              variant="outlined"
-              onChange={onChange}
-              value={value}
-              error={errors.themeColor}
-            />
-          )}
-        />
+        <Box>
+          <Controller
+            name="themeColor"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                label="Theme Color"
+                variant="outlined"
+                onChange={onChange}
+                value={value}
+                error={errors.themeColor}
+              />
+            )}
+          />
 
-        <Typography variant="body2" color="primary">
-          {errors.themeColor?.message}
-        </Typography>
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.themeColor?.message}
+          </Typography>
+        </Box>
 
         <Box display="flex" gap={5}>
           <Box>
@@ -118,6 +130,11 @@ const Step1 = () => {
                 type="file"
               />
             </Button>
+            <Typography variant="body2" color="primary">
+              {watchFavicon && watchFavicon.length > 0
+                ? watchFavicon[0].name
+                : null}
+            </Typography>
             <Typography variant="body2" color="primary">
               {errors.favicon?.message}
             </Typography>
@@ -134,6 +151,11 @@ const Step1 = () => {
               />
             </Button>
             <Typography variant="body2" color="primary">
+              {watchBrandLogo && watchBrandLogo.length > 0
+                ? watchBrandLogo[0].name
+                : null}
+            </Typography>
+            <Typography variant="body2" color="primary">
               {errors.brandLogo?.message}
             </Typography>
           </Box>
@@ -142,6 +164,12 @@ const Step1 = () => {
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Save & Proceed
+        </Button>
+        <Button
+          onClick={() => dispatch(authActions.handleNext())}
+          sx={{ mt: 1, ml: 1 }}
+        >
+          Skip
         </Button>
       </Box>
     </Box>

@@ -1,6 +1,8 @@
 import * as yup from "yup";
 export const PASSWORD_PATTERN =
   /(?=^.{8,64}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&])(?!.*\s).*$/;
+export const THEMECOLOR_PATTERN = /^#([0-9a-f]{3}){1,2}$/i;
+export const EMPTY_STRING_PATTERN = /^$/;
 
 export const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is Required!").label("email"),
@@ -42,7 +44,11 @@ export const profileStep1Schema = yup.object().shape({
     .label("Brand Text"),
   // brandLogo: yup.string(),
   // favicon: yup.string(),
-  themeColor: yup.string(),
+  themeColor: yup
+    .string()
+    .required()
+    .label("Theme Color")
+    .matches(THEMECOLOR_PATTERN, "Only HexCode color format is allowed"),
   primaryAdmin: yup.boolean(),
   homepageH1Title: yup
     .string()

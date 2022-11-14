@@ -59,58 +59,64 @@ const Step1 = () => {
     <Box component="form" onSubmit={handleSubmit(handleFormNext)}>
       {/* {JSON.stringify(watch())} */}
       <Box className="step1Details">
-        <Controller
-          name="homepageH1Title"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              label="Home Page Title"
-              onChange={onChange}
-              value={value}
-              variant="outlined"
-              error={errors.homepageH1Title}
-            />
-          )}
-        />
-        <Typography variant="body2" color="primary">
-          {errors.homepageH1Title?.message}
-        </Typography>
+        <Box>
+          <Controller
+            name="homepageH1Title"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                label="Home Page Title"
+                onChange={onChange}
+                value={value}
+                variant="outlined"
+                error={errors.homepageH1Title}
+              />
+            )}
+          />
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.homepageH1Title?.message}
+          </Typography>
+        </Box>
 
-        <Controller
-          name="brandText"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              label="Brand Text"
-              variant="outlined"
-              onChange={onChange}
-              value={value}
-              error={errors.brandText}
-            />
-          )}
-        />
+        <Box>
+          <Controller
+            name="brandText"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                label="Brand Text"
+                variant="outlined"
+                onChange={onChange}
+                value={value}
+                error={errors.brandText}
+              />
+            )}
+          />
 
-        <Typography variant="body2" color="primary">
-          {errors.brandText?.message}
-        </Typography>
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.brandText?.message}
+          </Typography>
+        </Box>
 
-        <Controller
-          name="themeColor"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              label="Theme Color"
-              variant="outlined"
-              onChange={onChange}
-              value={value}
-              error={errors.themeColor}
-            />
-          )}
-        />
+        <Box>
+          <Controller
+            name="themeColor"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                label="Theme Color"
+                variant="outlined"
+                onChange={onChange}
+                value={value}
+                error={errors.themeColor}
+              />
+            )}
+          />
 
-        <Typography variant="body2" color="primary">
-          {errors.themeColor?.message}
-        </Typography>
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.themeColor?.message}
+          </Typography>
+        </Box>
 
         <Box display="flex" gap={5}>
           <Box>

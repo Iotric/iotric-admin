@@ -31,6 +31,7 @@ import {
   fetchMetaData,
   createMetaData,
   updateMetaData,
+  isEnterpriseMinted,
 } from "../../../redux/actions/auth-actions";
 
 const Step2 = () => {
@@ -97,6 +98,7 @@ const Step2 = () => {
 
   const handleMetaFormNext = (data) => {
     dispatch(createMetaData(data));
+    dispatch(isEnterpriseMinted());
   };
 
   const handleAddKey = () => {
@@ -114,113 +116,122 @@ const Step2 = () => {
     <Box component="form" onSubmit={handleSubmit(handleMetaFormNext)}>
       <Box className="step2Details">
         {/* {JSON.stringify(watch())} */}
-        <Controller
-          name="tlds"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Autocomplete
-              freeSolo
-              multiple
-              options={[]}
-              value={value}
-              onChange={(event, values) => onChange(values)}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    key={`CHIP_${option}_${index}`}
-                    color="primary"
-                    variant="outlined"
-                    value={value}
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField {...params} label="tlds" variant="outlined" />
-              )}
-            />
-          )}
-        />
+        <Box>
+          <Controller
+            name="tlds"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                freeSolo
+                multiple
+                options={[]}
+                value={value}
+                onChange={(event, values) => onChange(values)}
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip
+                      key={`CHIP_${option}_${index}`}
+                      color="primary"
+                      variant="outlined"
+                      value={value}
+                      label={option}
+                      {...getTagProps({ index })}
+                    />
+                  ))
+                }
+                renderInput={(params) => (
+                  <TextField {...params} label="tlds" variant="outlined" />
+                )}
+              />
+            )}
+          />
 
-        {Array.isArray(errors.tlds) ? (
-          errors.tlds?.map((message, index) => (
-            <Typography
-              key={`TLD_ERROR_${index}`}
-              variant="body2"
-              color="primary"
-            >
-              In Tag {index + 1}, {message.message}
+          {Array.isArray(errors.tlds) ? (
+            errors.tlds?.map((message, index) => (
+              <Typography
+                key={`TLD_ERROR_${index}`}
+                mx={1}
+                my={1}
+                variant="body2"
+                color="textPrimary.main"
+              >
+                In Tag {index + 1}, {message.message}
+              </Typography>
+            ))
+          ) : (
+            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+              {errors.tlds?.message}
             </Typography>
-          ))
-        ) : (
-          <Typography variant="body2" color="primary">
-            {errors.tlds?.message}
-          </Typography>
-        )}
+          )}
+        </Box>
 
-        <Controller
-          name="socialMedia"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Autocomplete
-              freeSolo
-              multiple
-              options={[]}
-              value={value}
-              onChange={(event, values) => onChange(values)}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
+        <Box>
+          <Controller
+            name="socialMedia"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                freeSolo
+                multiple
+                options={[]}
+                value={value}
+                onChange={(event, values) => onChange(values)}
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip
+                      variant="outlined"
+                      label={option}
+                      {...getTagProps({ index })}
+                    />
+                  ))
+                }
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Social Media"
                     variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
                   />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Social Media"
-                  variant="outlined"
-                />
-              )}
-            />
-          )}
-        />
-        {Array.isArray(errors.socialMedia) ? (
-          errors.socialMedia?.map((message, index) => (
-            <Typography
-              key={`socialMedia_ERROR_${index}`}
-              variant="body2"
-              color="primary"
-            >
-              Tag {index + 1}, {message.message}
+                )}
+              />
+            )}
+          />
+          {Array.isArray(errors.socialMedia) ? (
+            errors.socialMedia?.map((message, index) => (
+              <Typography
+                key={`socialMedia_ERROR_${index}`}
+                mx={1}
+                my={1}
+                variant="body2"
+                color="textPrimary.main"
+              >
+                Tag {index + 1}, {message.message}
+              </Typography>
+            ))
+          ) : (
+            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+              {errors.socialMedia?.message}
             </Typography>
-          ))
-        ) : (
-          <Typography variant="body2" color="primary">
-            {errors.socialMedia?.message}
-          </Typography>
-        )}
-
-        <Controller
-          name="domainLimit"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <TextField
-              value={value}
-              onChange={onChange}
-              type="number"
-              label="Domain Limit"
-              variant="outlined"
-            />
           )}
-        />
+        </Box>
 
-        <Typography variant="body2" color="primary">
-          {errors.domainLimit?.message}
-        </Typography>
+        <Box>
+          <Controller
+            name="domainLimit"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TextField
+                value={value}
+                onChange={onChange}
+                type="number"
+                label="Domain Limit"
+                variant="outlined"
+              />
+            )}
+          />
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+            {errors.domainLimit?.message}
+          </Typography>
+        </Box>
 
         <Box>
           <Box display="flex" alignItems="center" gap={1}>
@@ -337,13 +348,13 @@ const Step2 = () => {
               Restricted Signup
             </Typography>
           </Box>
-          <Typography variant="body2" color="primary">
+          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
             {errors.restrictedSignup?.message}
           </Typography>
         </Box>
 
         {WatchRestrictedSignup ? (
-          <>
+          <Box>
             <Controller
               name="allowedEmailType"
               control={control}
@@ -373,10 +384,10 @@ const Step2 = () => {
                 />
               )}
             />
-            <Typography variant="body2" color="primary">
+            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
               {errors.allowedEmailType?.message}
             </Typography>
-          </>
+          </Box>
         ) : null}
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

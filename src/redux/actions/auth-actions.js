@@ -50,6 +50,29 @@ export const registerAction = (data) => {
   };
 };
 
+export const fetchUser = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("user-token");
+
+    try {
+      const response = await axiosinstance.get("/user/me", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(authActions.setUser(response.data.result));
+    } catch (err) {
+      if (err.response.data.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Something unusual happened profile !!!");
+      }
+      console.log(err);
+    }
+  };
+};
+
 // Enterprise-Profile
 
 export const fetchEnterprise = () => {
@@ -82,8 +105,12 @@ export const updateProfileData = (data) => {
     try {
       let formData = new FormData();
       formData.append("brandText", data.brandText);
-      formData.append("logo", data.brandLogo[0]);
-      formData.append("favicon", data.favicon[0]);
+      if (data.brandLogo && data.brandLogo.length > 0) {
+        formData.append("logo", data.brandLogo[0]);
+      }
+      if (data.favicon && data.favicon.length > 0) {
+        formData.append("favicon", data.favicon[0]);
+      }
       formData.append("themeColor", data.themeColor);
       formData.append("homepageH1Title", data.homepageH1Title);
 
@@ -113,28 +140,6 @@ export const updateProfileData = (data) => {
 
 // Meta-Data
 
-export const fetchMetaData = () => {
-  return async (dispatch) => {
-    const id = localStorage.getItem("enterpriseId");
-    const token = localStorage.getItem("user-token");
-    try {
-      const response = await axiosinstance.get(`enterprise/${id}/meta-data`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      dispatch(authActions.setMetaData(response.data.result));
-    } catch (err) {
-      if (err.response.data.error) {
-        toast.error(err.response.data.error);
-      } else {
-        toast.error("Something unusual happened profile !!!");
-      }
-      console.log(err);
-    }
-  };
-};
-
 export const createMetaData = (data) => {
   return async (dispatch) => {
     const id = localStorage.getItem("enterpriseId");
@@ -159,6 +164,29 @@ export const createMetaData = (data) => {
         toast.error(err.response.data.error);
       } else {
         toast.error("Something unusual happened !!!");
+      }
+      console.log(err);
+    }
+  };
+};
+
+export const fetchMetaData = () => {
+  return async (dispatch) => {
+    const id = localStorage.getItem("enterpriseId");
+    const token = localStorage.getItem("user-token");
+    try {
+      const response = await axiosinstance.get(`enterprise/${id}/meta-data`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      await localStorage.setItem("metadataId", response.data.result._id);
+      dispatch(authActions.setMetaData(response.data.result));
+    } catch (err) {
+      if (err.response.data.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Something unusual happened profile !!!");
       }
       console.log(err);
     }
@@ -197,12 +225,12 @@ export const updateMetaData = (data) => {
 
 export const isEnterpriseMinted = () => {
   return async (dispatch) => {
-    const id = localStorage.getItem("enterpriseId");
+    const metadataId = localStorage.getItem("metadataId");
     const token = localStorage.getItem("user-token");
 
     try {
       const response = await axiosinstance.put(
-        `enterprise/meta-data/${id}/mint`,
+        `enterprise/meta-data/${metadataId}/mint`,
         {},
         {
           headers: {
@@ -211,7 +239,7 @@ export const isEnterpriseMinted = () => {
         }
       );
 
-      dispatch(authActions.setIsEnterpriseMinted(response.data.result));
+      toast.info(response.data.message);
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error);

@@ -18,8 +18,8 @@ const keySlice = createSlice({
     setShowCredentials(state, val) {
       state.showCredentials = val.payload;
     },
-    setUser(state, val) {
-      state.user = val.payload;
+    setUser(state, { payload: { type, data } }) {
+      state.user[type] = data;
     },
     setTestMode(state) {
       state.isTestMode = !state.isTestMode;
