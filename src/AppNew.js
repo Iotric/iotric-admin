@@ -4,8 +4,8 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { userInputs } from "./formSource";
-import PublicRoute from "./components/routes/PublicRoute";
-import PrivateRoute from "./components/routes/PrivateRoute";
+import PublicRoute from "./utils/routes/PublicRoute";
+import PrivateRoute from "./utils/routes/PrivateRoute";
 
 import { ToastContainer } from "react-toastify";
 

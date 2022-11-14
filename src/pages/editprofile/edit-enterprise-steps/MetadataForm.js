@@ -97,7 +97,7 @@ const Step2 = () => {
   };
 
   const handleMetaFormNext = (data) => {
-    dispatch(createMetaData(data));
+    dispatch(updateMetaData(data));
     dispatch(isEnterpriseMinted());
   };
 
@@ -397,14 +397,8 @@ const Step2 = () => {
         >
           Back
         </Button>
-        <Button
-          sx={{ mt: 1, ml: 1 }}
-          onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
-        >
+        <Button type="submit" sx={{ mt: 1, ml: 1 }}>
           Update
-        </Button>
-        <Button sx={{ mt: 1, ml: 1 }} type="submit">
-          Submit
         </Button>
       </Box>
     </Box>

@@ -21,6 +21,7 @@ import { keyActions } from "../../redux/slice/key-slice.js";
 import {
   generateAndRegenerateKeysAction,
   fetchApiKeys,
+  softDeleteKey,
 } from "../../redux/actions/key-actions.js";
 
 const KeysTable = () => {
@@ -194,6 +195,9 @@ const KeysTable = () => {
                       Regenerate
                     </MenuItem>
                     <MenuItem>View Logs</MenuItem>
+                    <MenuItem onClick={() => dispatch(softDeleteKey())}>
+                      Delete
+                    </MenuItem>
                   </Menu>
                 </Box>
               </TableCell>

@@ -14,15 +14,15 @@ const useAuth = () => {
 
 const PrivateRoute = () => {
   const auth = useAuth();
-  const isProfileComplete = useSelector(
-    (store) => store.auth.isProfileComplete
-  );
+  // authState
+  const authState = useSelector((store) => store.auth);
+  const { isMinted } = authState.completionIndicator;
   const id = localStorage.getItem("enterpriseId");
 
   return (
     <div>
       {auth ? (
-        isProfileComplete ? (
+        isMinted ? (
           <Outlet />
         ) : (
           <Navigate to={`/complete-profile/${id}`} />
