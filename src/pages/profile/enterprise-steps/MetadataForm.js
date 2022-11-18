@@ -29,6 +29,8 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
+import { errorHandler } from "../error-handler";
+
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
 import {
@@ -190,7 +192,7 @@ const Step2 = () => {
     }
   };
 
-  console.log(errors)
+  console.log(errors);
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleMetaFormNext)}>
@@ -230,24 +232,7 @@ const Step2 = () => {
               />
             )}
           />
-
-          {Array.isArray(errors.tlds) ? (
-            errors.tlds?.map((message, index) => (
-              <Typography
-                key={`TLD_ERROR_${index}`}
-                mx={1}
-                my={1}
-                variant="body2"
-                color="textPrimary.main"
-              >
-                In Tag {index + 1}, {message.message}
-              </Typography>
-            ))
-          ) : (
-            <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
-              {errors.tlds?.message}
-            </Typography>
-          )}
+          {errorHandler(errors, "tlds")}
         </Box>
 
         <Box>
@@ -264,9 +249,7 @@ const Step2 = () => {
               />
             )}
           />
-          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
-            {errors.domainLimit?.message}
-          </Typography>
+          {errorHandler(errors, "domainLimit")}
         </Box>
 
         <Box>
@@ -326,28 +309,7 @@ const Step2 = () => {
                 </Box>
               ))}
             </Box>
-            {Array.isArray(errors.socialMedia) ? (
-              errors.socialMedia?.map((message, index) => (
-                <Typography
-                  key={`SOCIAL_MEDIA_ERROR_${index}`}
-                  mx={1}
-                  my={1}
-                  variant="body2"
-                  color="textPrimary.main"
-                >
-                  In Tag {index + 1}, {message.value.message}
-                </Typography>
-              ))
-            ) : (
-              <Typography
-                mx={1}
-                my={1}
-                variant="body2"
-                color="textPrimary.main"
-              >
-                {errors.socialMedia?.message}
-              </Typography>
-            )}
+            {errorHandler(errors, "socialMedia")}
           </Box>
         </Box>
         {/* 
@@ -469,9 +431,7 @@ const Step2 = () => {
               Restricted Signup
             </Typography>
           </Box>
-          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
-            {errors.restrictedSignup?.message}
-          </Typography>
+          {errorHandler(errors, "restrictedSignup")}
         </Box>
 
         {WatchRestrictedSignup ? (
@@ -507,28 +467,7 @@ const Step2 = () => {
                 />
               )}
             />
-            {Array.isArray(errors.allowedEmailType) ? (
-              errors.allowedEmailType?.map((message, index) => (
-                <Typography
-                  key={`ALLOWED_EMAIL_TYPE_ERROR_${index}`}
-                  mx={1}
-                  my={1}
-                  variant="body2"
-                  color="textPrimary.main"
-                >
-                  In Tag {index + 1}, {message.message}
-                </Typography>
-              ))
-            ) : (
-              <Typography
-                mx={1}
-                my={1}
-                variant="body2"
-                color="textPrimary.main"
-              >
-                {errors.allowedEmailType?.message}
-              </Typography>
-            )}
+            {errorHandler(errors, "allowedEmailType")}
           </Box>
         ) : null}
       </Box>

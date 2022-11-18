@@ -14,6 +14,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Tooltip from "@mui/material/Tooltip";
 import { Box, Button, Typography } from "@mui/material";
 
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 import "./keystable.scss";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -36,9 +39,9 @@ const KeysTable = () => {
 
   const toggleCredentials = () => {
     dispatch(keyActions.toggleCredentials());
-    setTimeout(() => {
-      dispatch(keyActions.setKeyLoadingFalse());
-    }, 1000);
+    // setTimeout(() => {
+    //   dispatch(keyActions.setKeyLoadingFalse());
+    // }, 1000);
   };
 
   useEffect(() => {
@@ -114,37 +117,24 @@ const KeysTable = () => {
                       >
                         Generate Test Key
                       </Button>
-                    ) : showCredentials ? (
-                      <Tooltip title="Click to copy">
-                        <Box>
-                          <Box
-                            onCick={copyToClipBoard(user.testApplicationKey)}
-                          >
-                            {user.testApplicationKey.key}
-                          </Box>
-                          <Button
-                            variant="contained"
-                            size="small"
-                            color="error"
-                            onClick={toggleCredentials}
-                          >
-                            Hide Test key
-                          </Button>
-                        </Box>
-                      </Tooltip>
                     ) : (
-                      <div className="bg-blur">
-                        <div className="bg-blur-btn">
-                          <Button
-                            onClick={toggleCredentials}
-                            size="small"
-                            variant="contained"
-                            color="error"
-                          >
-                            Reveal test key
-                          </Button>
+                      <Box display="flex" gap="7px" alignItems="center">
+                        <div>
+                          {showCredentials ? (
+                            user.testApplicationKey.key
+                          ) : (
+                            <div className="bg-blur"></div>
+                          )}
                         </div>
-                      </div>
+
+                        <IconButton onClick={toggleCredentials}>
+                          {showCredentials ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
+                        </IconButton>
+                      </Box>
                     )
                   ) : user.liveApplicationKey === null ? (
                     <Button
@@ -155,33 +145,24 @@ const KeysTable = () => {
                     >
                       Generate Live Key
                     </Button>
-                  ) : showCredentials ? (
-                    <Tooltip title="Click to copy">
-                      <Box>
-                        <Box>{user.liveApplicationKey.key}</Box>
-                        <Button
-                          onClick={toggleCredentials}
-                          variant="contained"
-                          size="small"
-                          color="error"
-                        >
-                          Hide Live key
-                        </Button>
-                      </Box>
-                    </Tooltip>
                   ) : (
-                    <div className="bg-blur">
-                      <div className="bg-blur-btn">
-                        <Button
-                          onClick={toggleCredentials}
-                          size="small"
-                          variant="contained"
-                          color="error"
-                        >
-                          Reveal Live key
-                        </Button>
+                    <Box display="flex" gap="7px" alignItems="center">
+                      <div>
+                        {showCredentials ? (
+                          user.liveApplicationKey.key
+                        ) : (
+                          <div className="bg-blur"></div>
+                        )}
                       </div>
-                    </div>
+
+                      <IconButton onClick={toggleCredentials}>
+                        {showCredentials ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </Box>
                   )}
                 </Box>
               </TableCell>

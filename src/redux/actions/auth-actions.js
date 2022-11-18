@@ -145,7 +145,16 @@ export const createMetaData = (data) => {
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
 
+    console.log("before", data);
+
     delete data.addLinks;
+    data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
+
+    if (data.restrictedSignup && data.allowedEmailType.length === 0) {
+      data.restrictedSignup = false;
+    }
+
+    console.log("after", data);
 
     try {
       const response = await axiosinstance.post(
@@ -201,6 +210,11 @@ export const updateMetaData = (data) => {
     const token = localStorage.getItem("user-token");
 
     delete data.addLinks;
+    data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
+
+    if (data.restrictedSignup && data.allowedEmailType.length === 0) {
+      data.restrictedSignup = false;
+    }
 
     try {
       const response = await axiosinstance.put(

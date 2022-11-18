@@ -48,7 +48,6 @@ export const profileStep1Schema = yup.object().shape({
   // favicon: yup.string(),
   themeColor: yup
     .string()
-    .required()
     .label("Theme Color")
     .matches(THEMECOLOR_PATTERN, "Only HexCode color format is allowed"),
   primaryAdmin: yup.boolean(),
@@ -72,7 +71,8 @@ export const profileStep2Schema = yup.object().shape({
         .string()
         .matches(TLDS_PATTERN, "Start with a period")
         .min(3, "min 2 characters are required, excluding period!")
-    ),
+    )
+    .min(1, "Atleast one tld is required!"),
   allowedEmailType: yup
     .array()
     .of(
@@ -80,9 +80,14 @@ export const profileStep2Schema = yup.object().shape({
         .string()
         .matches(
           ALLOWED_EMAIL_TYPE_PATTERN,
-          "you should enter for example @iotric.com or @iotric.in"
+          "follow email type format e.g @iotric.com, @iotric.in"
         )
     ),
   restrictedSignup: yup.boolean(),
-  domainLimit: yup.number().required().positive().integer(),
+  domainLimit: yup
+    .number()
+    .required()
+    .positive()
+    .integer()
+    .label("Domain Limit"),
 });

@@ -19,9 +19,9 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
-        backgroundColor: "inherit",
+        backgroundColor: "white",
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
       }}
     >

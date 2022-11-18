@@ -16,13 +16,13 @@ const PrivateRoute = () => {
   const auth = useAuth();
   // authState
   const authState = useSelector((store) => store.auth);
-  const { isMinted } = authState.completionIndicator;
+  const { profileForm } = authState.completionIndicator;
   const id = localStorage.getItem("enterpriseId");
 
   return (
     <div>
       {auth ? (
-        isMinted ? (
+        profileForm ? (
           <Outlet />
         ) : (
           <Navigate to={`/complete-profile/${id}`} />

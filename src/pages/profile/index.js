@@ -107,47 +107,22 @@ export default function Profile() {
               Complete your Profile
             </Typography>
 
-            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
+            <Box>
+              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 4 }}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Box>
+
             <React.Fragment>
               {activeStep === steps.length ? (
                 <React.Fragment>
                   <Typography variant="h5" gutterBottom>
                     🥳 Congratulations Your Profile is Complete
                   </Typography>
-
-                  <Box my={3}>
-                    <Alert variant="filled" severity="info">
-                      We have emailed your order confirmation, and will send you
-                      an update when your order has shipped.
-                    </Alert>
-                  </Box>
-                  <Box>
-                    <Alert variant="filled" severity="warning">
-                      Till we mint your transaction, you can checkout to
-                      dashboard.
-                    </Alert>
-                  </Box>
-                  <div
-                    style={{
-                      height: "80px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <CircularProgress
-                      color="success"
-                      disableShrink
-                      size={40}
-                      value={100}
-                    />
-                  </div>
 
                   <Box display="flex" mt={3} gap={2}>
                     <Button

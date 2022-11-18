@@ -14,7 +14,7 @@ import { authActions } from "../../redux/slice/auth-slice";
 
 const Organization = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // authState
   const authState = useSelector((store) => store.auth);
@@ -22,7 +22,7 @@ const Organization = () => {
   const lastName = authState.lastName;
   const organizationName = authState.organizationName;
   const brandText = authState.brandText;
-  const homePageH1Title = authState.homePageH1Title;
+  const homepageH1Title = authState.homepageH1Title;
   const enterpriseId = localStorage.getItem("enterpriseId");
 
   const handleLogout = () => {
@@ -68,7 +68,7 @@ const Organization = () => {
                 Enterprise ID - {enterpriseId}
               </Typography>
               <Typography variant="body2">
-                Home Page Title - {homePageH1Title}
+                Home Page Title - {homepageH1Title}
               </Typography>
 
               <Typography variant="body2">Brand Title - {brandText}</Typography>

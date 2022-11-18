@@ -13,7 +13,7 @@ const keySlice = createSlice({
   reducers: {
     toggleCredentials(state) {
       state.showCredentials = !state.showCredentials;
-      state.isKeyLoading = true;
+      // state.isKeyLoading = true;
     },
     setShowCredentials(state, val) {
       state.showCredentials = val.payload;

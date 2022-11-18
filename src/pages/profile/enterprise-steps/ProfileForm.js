@@ -13,6 +13,7 @@ import { updateProfileData } from "../../../redux/actions/auth-actions";
 import { authActions } from "../../../redux/slice/auth-slice";
 
 import { MuiColorInput } from "mui-color-input";
+import { errorHandler } from "../error-handler";
 
 const Step1 = () => {
   const dispatch = useDispatch();
@@ -75,9 +76,7 @@ const Step1 = () => {
               />
             )}
           />
-          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
-            {errors.homepageH1Title?.message}
-          </Typography>
+          {errorHandler(errors, "homepageH1Title")}
         </Box>
 
         <Box>
@@ -94,10 +93,7 @@ const Step1 = () => {
               />
             )}
           />
-
-          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
-            {errors.brandText?.message}
-          </Typography>
+          {errorHandler(errors, "brandText")}
         </Box>
 
         <Box>
@@ -114,10 +110,7 @@ const Step1 = () => {
               />
             )}
           />
-
-          <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
-            {errors.themeColor?.message}
-          </Typography>
+          {errorHandler(errors, "themeColor")}
         </Box>
 
         <Box display="flex" gap={5}>
@@ -137,9 +130,7 @@ const Step1 = () => {
                 ? watchFavicon[0].name
                 : null}
             </Typography>
-            <Typography variant="body2" color="primary">
-              {errors.favicon?.message}
-            </Typography>
+            {errorHandler(errors, "favicon")}
           </Box>
           <Box>
             <Button size="small" variant="contained" component="label">
@@ -157,9 +148,7 @@ const Step1 = () => {
                 ? watchBrandLogo[0].name
                 : null}
             </Typography>
-            <Typography variant="body2" color="primary">
-              {errors.brandLogo?.message}
-            </Typography>
+            {errorHandler(errors, "brandLogo")}
           </Box>
         </Box>
       </Box>
