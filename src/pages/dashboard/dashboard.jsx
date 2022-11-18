@@ -14,6 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     toast.dismiss();
   }, []);
+
   return (
     <div className="dashboard">
       <Sidebar />

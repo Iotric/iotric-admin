@@ -320,10 +320,10 @@ const Step2 = () => {
                       )}
                     />
                   </Box>
-                  <Box>
-                    <IconButton onClick={() => remove(item_index)}>
+                  <Box onClick={() => remove(item_index)}>
+                    {/* <IconButton >
                       <DeleteIcon sx={{ color: "#E63946" }} />
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                 </AccordionDetails>
               </Accordion>

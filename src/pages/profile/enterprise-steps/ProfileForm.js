@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfileData } from "../../../redux/actions/auth-actions";
 import { authActions } from "../../../redux/slice/auth-slice";
 
+import { MuiColorInput } from "mui-color-input";
+
 const Step1 = () => {
   const dispatch = useDispatch();
 
@@ -103,9 +105,9 @@ const Step1 = () => {
             name="themeColor"
             control={control}
             render={({ field: { value, onChange } }) => (
-              <TextField
+              <MuiColorInput
+                format="hex"
                 label="Theme Color"
-                variant="outlined"
                 onChange={onChange}
                 value={value}
                 error={errors.themeColor}

@@ -145,6 +145,8 @@ export const createMetaData = (data) => {
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
 
+    delete data.addLinks;
+
     try {
       const response = await axiosinstance.post(
         `enterprise/${id}/meta-data`,
@@ -197,6 +199,8 @@ export const updateMetaData = (data) => {
   return async (dispatch) => {
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
+
+    delete data.addLinks;
 
     try {
       const response = await axiosinstance.put(

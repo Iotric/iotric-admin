@@ -15,6 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { dashboardActions } from "../../redux/slice/dashboard-slice";
+import { authActions } from "../../redux/slice/auth-slice";
 
 import { fetchUser } from "../../redux/actions/auth-actions";
 
@@ -40,6 +41,11 @@ const CustomDrawer = () => {
   const handleSetting = () => {
     dispatch(dashboardActions.toggleDrawer());
     navigate("/dashboard/organization");
+  };
+
+  const handleLogout = () => {
+    dispatch(authActions.logout());
+    navigate("/");
   };
 
   return (
@@ -84,7 +90,9 @@ const CustomDrawer = () => {
               <Button mx={2} variant="contained">
                 My Account
               </Button>
-              <Button variant="text">Log Out</Button>
+              <Button onClick={handleLogout} variant="text">
+                Log Out
+              </Button>
             </Box>
           </Box>
         </Box>

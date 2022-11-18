@@ -42,10 +42,10 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
     setUser(state, response) {
-      state.firstName = response.payload.firstName
-      state.lastName = response.payload.lastName
-      state.role = response.payload.role
-      state.email = response.payload.email
+      state.firstName = response.payload.firstName;
+      state.lastName = response.payload.lastName;
+      state.role = response.payload.role;
+      state.email = response.payload.email;
     },
     handleReset(state) {
       state.activeStep = 0;
@@ -76,7 +76,7 @@ const authSlice = createSlice({
       state.brandText = response.payload.brandText;
       state.homepageH1Title = response.payload.homepageH1Title;
       state.themeColor = response.payload.themeColor;
-      state.organizationName = response.payload.organizationName
+      state.organizationName = response.payload.organizationName;
     },
     setProfileData(state, response) {
       state.completionIndicator = response.payload.completionIndicator;
@@ -94,9 +94,6 @@ const authSlice = createSlice({
     },
     setActiveStep(state, step) {
       state.activeStep = step.payload;
-    },
-    setAdditionalInfo(state, data) {
-      state.additionalInfo = data.payload;
     },
   },
 });

@@ -2,7 +2,7 @@ import { Box, Button, Typography, Divider, IconButton } from "@mui/material";
 import React from "react";
 import "./organization.scss";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Link as MUILink } from "@mui/material/";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -14,6 +14,7 @@ import { authActions } from "../../redux/slice/auth-slice";
 
 const Organization = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   // authState
   const authState = useSelector((store) => store.auth);
@@ -24,6 +25,11 @@ const Organization = () => {
   const homePageH1Title = authState.homePageH1Title;
   const enterpriseId = localStorage.getItem("enterpriseId");
 
+  const handleLogout = () => {
+    dispatch(authActions.logout());
+    navigate("/");
+  };
+
   return (
     <Box className="organization">
       <Box className="org-nav">
@@ -33,10 +39,7 @@ const Organization = () => {
           </IconButton>
         </Link>
 
-        <Button
-          variant="outlined"
-          onClick={() => dispatch(authActions.logout())}
-        >
+        <Button variant="outlined" onClick={handleLogout}>
           Log Out
         </Button>
       </Box>
@@ -65,17 +68,17 @@ const Organization = () => {
                 Enterprise ID - {enterpriseId}
               </Typography>
               <Typography variant="body2">
-                Home Page Title - Welcome to Iotric
+                Home Page Title - {homePageH1Title}
               </Typography>
 
               <Typography variant="body2">Brand Title - {brandText}</Typography>
               <Typography variant="body2">
-                Portal Url - 
-                 <MUILink
+                Portal Url -
+                <MUILink
                   href={`https://${brandText}.nexbloc.in/`}
                   underline="hover"
                 >
-                   https://{brandText}.nexbloc.in/
+                  https://{brandText}.nexbloc.in/
                 </MUILink>
               </Typography>
             </Box>
