@@ -126,7 +126,7 @@ export const updateProfileData = (data) => {
 
       dispatch(authActions.setProfileData(response.data.result));
       toast.success("Profile Updated !!!");
-      dispatch(authActions.handleNext());
+      
     } catch (err) {
       if (err.response?.data.error) {
         toast.error(err.response.data.error);
@@ -145,16 +145,12 @@ export const createMetaData = (data) => {
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
 
-    console.log("before", data);
-
     delete data.addLinks;
     data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
 
     if (data.restrictedSignup && data.allowedEmailType.length === 0) {
       data.restrictedSignup = false;
     }
-
-    console.log("after", data);
 
     try {
       const response = await axiosinstance.post(
@@ -169,7 +165,7 @@ export const createMetaData = (data) => {
 
       dispatch(authActions.setMetaData(response.data.result));
       toast.success("Metadata Updated !!!");
-      dispatch(authActions.handleNext());
+      
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error);

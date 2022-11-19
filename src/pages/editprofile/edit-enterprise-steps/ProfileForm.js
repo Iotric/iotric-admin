@@ -56,6 +56,7 @@ const Step1 = () => {
 
   const handleFormNext = (data) => {
     dispatch(updateProfileData(data));
+    dispatch(authActions.editHandleNext());
   };
 
   return (
@@ -157,7 +158,7 @@ const Step1 = () => {
           Save & Proceed
         </Button>
         <Button
-          onClick={() => dispatch(authActions.handleNext())}
+          onClick={() => dispatch(authActions.editHandleNext())}
           sx={{ mt: 1, ml: 1 }}
         >
           Skip

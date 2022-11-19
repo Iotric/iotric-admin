@@ -60,6 +60,7 @@ export default function Profile() {
         step = 1;
         if (completionIndicator.metaInfoForm) {
           step = 2;
+          navigate("/dashboard");
           if (completionIndicator.isMinted) {
             step = 2;
           }

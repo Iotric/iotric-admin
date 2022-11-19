@@ -33,9 +33,9 @@ const Step1 = () => {
     control,
   } = useForm({
     defaultValues: {
-      brandText: "iotric",
-      homepageH1Title: "welcome to iotric",
-      themeColor: "",
+      brandText: "",
+      homepageH1Title: "",
+      themeColor: "#000000",
       favicon: null,
       brandLogo: null,
     },
@@ -56,6 +56,7 @@ const Step1 = () => {
 
   const handleFormNext = (data) => {
     dispatch(updateProfileData(data));
+    dispatch(authActions.handleNext());
   };
 
   return (

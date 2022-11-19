@@ -99,8 +99,8 @@ const CustomDrawer = () => {
 
         <Box className="drawer-edit">
           <Typography variant="body1">{organizationName}</Typography>
-          <IconButton>
-            <SettingsIcon sx={{ color: "#00b0ff" }} onClick={handleSetting} />
+          <IconButton onClick={handleSetting}>
+            <SettingsIcon sx={{ color: "#00b0ff" }} />
           </IconButton>
         </Box>
       </Box>

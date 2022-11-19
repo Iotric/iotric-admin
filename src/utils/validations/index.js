@@ -42,19 +42,17 @@ export const profileStep1Schema = yup.object().shape({
   brandText: yup
     .string()
     .max(15, "Must be 15 character or less")
-    .required()
     .label("Brand Text"),
   // brandLogo: yup.string(),
   // favicon: yup.string(),
-  themeColor: yup
-    .string()
-    .label("Theme Color")
-    .matches(THEMECOLOR_PATTERN, "Only HexCode color format is allowed"),
+  themeColor: yup.string().label("Theme Color").matches(THEMECOLOR_PATTERN, {
+    message: "Only HexCode color format is allowed",
+    excludeEmptyString: true,
+  }),
   primaryAdmin: yup.boolean(),
   homepageH1Title: yup
     .string()
     .max(30, "Must be 30 character or less")
-    .required()
     .label("Home Page Title"),
 });
 

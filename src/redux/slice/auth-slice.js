@@ -12,10 +12,11 @@ const authSlice = createSlice({
     isLoading: false,
     isProfileComplete: false,
     activeStep: 0,
+    editActiveStep: 0,
     brandLogo: "",
     brandText: "",
     favicon: "",
-    themeColor: "",
+    themeColor: "#000000",
     homepageH1Title: "",
     tlds: [],
     socialMedia: [],
@@ -50,11 +51,20 @@ const authSlice = createSlice({
     handleReset(state) {
       state.activeStep = 0;
     },
+    handleEditReset(state) {
+      state.editActiveStep = 0;
+    },
     handleNext(state) {
       state.activeStep = state.activeStep + 1;
     },
     handleBack(state) {
       state.activeStep = state.activeStep - 1;
+    },
+    editHandleNext(state) {
+      state.editActiveStep = state.editActiveStep + 1;
+    },
+    editHandleBack(state) {
+      state.editActiveStep = state.editActiveStep - 1;
     },
     profileCompleteSuccess(state) {
       state.isProfileComplete = true;

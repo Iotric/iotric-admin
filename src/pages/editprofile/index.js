@@ -44,20 +44,17 @@ export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const activeStep = useSelector((store) => store.auth.activeStep);
+  const editActiveStep = useSelector((store) => store.auth.editActiveStep);
 
   useEffect(() => {
     dispatch(fetchEnterprise());
   }, []);
 
   const handleClickDashboard = () => {
-    dispatch(authActions.profileCompleteSuccess());
     dispatch(authActions.setLoadingTrue());
-    setTimeout(() => {
-      navigate("/dashboard");
-      dispatch(authActions.handleReset());
-      dispatch(authActions.setLoadingFalse());
-    }, 2000);
+    navigate("/dashboard");
+    dispatch(authActions.handleEditReset());
+    dispatch(authActions.setLoadingFalse());
   };
 
   return (
@@ -96,7 +93,7 @@ export default function Profile() {
                 Edit your Profile
               </Typography>
 
-              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+              <Stepper activeStep={editActiveStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label) => (
                   <Step key={label}>
                     <StepLabel>{label}</StepLabel>
@@ -104,7 +101,7 @@ export default function Profile() {
                 ))}
               </Stepper>
               <React.Fragment>
-                {activeStep === steps.length ? (
+                {editActiveStep === steps.length ? (
                   <React.Fragment>
                     <Typography variant="h5" gutterBottom>
                       Your Profile is Updated
@@ -152,7 +149,9 @@ export default function Profile() {
                     </Box>
                   </React.Fragment>
                 ) : (
-                  <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
+                  <React.Fragment>
+                    {getStepContent(editActiveStep)}
+                  </React.Fragment>
                 )}
               </React.Fragment>
             </Paper>

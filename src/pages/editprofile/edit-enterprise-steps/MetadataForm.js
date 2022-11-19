@@ -158,8 +158,9 @@ const Step2 = () => {
   };
 
   const handleMetaFormNext = (data) => {
-    dispatch(createMetaData(data));
-    dispatch(isEnterpriseMinted());
+    dispatch(updateMetaData(data));
+    dispatch(authActions.editHandleNext());
+    // dispatch(isEnterpriseMinted());
   };
 
   const handleAddKey = () => {
@@ -474,19 +475,20 @@ const Step2 = () => {
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           sx={{ mt: 1, ml: 1 }}
-          onClick={() => dispatch(authActions.handleBack())}
+          onClick={() => dispatch(authActions.editHandleBack())}
         >
           Back
         </Button>
         <Button
+          type="submit"
           sx={{ mt: 1, ml: 1 }}
-          onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
+          // onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
         >
           Update
         </Button>
-        <Button sx={{ mt: 1, ml: 1 }} type="submit">
+        {/* <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit
-        </Button>
+        </Button> */}
       </Box>
     </Box>
   );

@@ -159,7 +159,8 @@ const Step2 = () => {
 
   const handleMetaFormNext = (data) => {
     dispatch(createMetaData(data));
-    dispatch(isEnterpriseMinted());
+    dispatch(authActions.handleNext());
+    // dispatch(isEnterpriseMinted());
   };
 
   const handleAddKey = () => {
@@ -478,12 +479,12 @@ const Step2 = () => {
         >
           Back
         </Button>
-        <Button
+        {/* <Button
           sx={{ mt: 1, ml: 1 }}
           onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
         >
           Update
-        </Button>
+        </Button> */}
         <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit
         </Button>
