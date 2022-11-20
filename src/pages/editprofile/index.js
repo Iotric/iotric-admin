@@ -136,7 +136,7 @@ export default function Profile() {
                     <Box display="flex" mt={3} gap={2}>
                       <Button
                         variant="outlined"
-                        onClick={() => dispatch(authActions.handleBack())}
+                        onClick={() => dispatch(authActions.editHandleBack())}
                       >
                         back
                       </Button>

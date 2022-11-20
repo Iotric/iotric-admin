@@ -74,6 +74,7 @@ const authSlice = createSlice({
       localStorage.removeItem("user-token");
       localStorage.removeItem("enterpriseId");
       localStorage.removeItem("metadataId");
+      localStorage.clear()
     },
     setLoadingTrue(state) {
       state.isLoading = true;

@@ -45,7 +45,7 @@ const Login = () => {
     await dispatch(loginAction(data));
     
     const id = localStorage.getItem("enterpriseId");
-    navigate(`/complete-profile/${id}`);
+    navigate(`/complete-profile/`);
     dispatch(authActions.setLoadingFalse());
   };
 

@@ -25,11 +25,11 @@ export const fetchApiKeys = () => {
         }
       });
     } catch (err) {
-      if (err.response.data.error) {
-        toast.error(err.response.data.error);
-      } else {
-        toast.error("Something unusual happened profile !!!");
-      }
+      // if (err.response.data.error) {
+      //   toast.error(err.response.data.error);
+      // } else {
+      //   toast.error("Something unusual happened profile !!!");
+      // }
       console.log(err);
     }
   };

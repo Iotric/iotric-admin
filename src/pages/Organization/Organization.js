@@ -67,20 +67,29 @@ const Organization = () => {
               <Typography variant="body2">
                 Enterprise ID - {enterpriseId}
               </Typography>
-              <Typography variant="body2">
-                Home Page Title - {homepageH1Title}
-              </Typography>
+              {homepageH1Title && homepageH1Title !== "" ? (
+                <Typography variant="body2">
+                  Home Page Title - {homepageH1Title}
+                </Typography>
+              ) : null}
 
-              <Typography variant="body2">Brand Title - {brandText}</Typography>
-              <Typography variant="body2">
-                Portal Url -
-                <MUILink
-                  href={`https://${brandText}.nexbloc.in/`}
-                  underline="hover"
-                >
-                  https://{brandText}.nexbloc.in/
-                </MUILink>
-              </Typography>
+              {brandText && brandText !== "" ? (
+                <>
+                  <Typography variant="body2">
+                    Brand Title - {brandText}
+                  </Typography>
+
+                  <Typography variant="body2">
+                    Portal Url -
+                    <MUILink
+                      href={`https://${brandText}.nexbloc.in/`}
+                      underline="hover"
+                    >
+                      https://{brandText}.nexbloc.in/
+                    </MUILink>
+                  </Typography>
+                </>
+              ) : null}
             </Box>
             <Box className="org-edit">
               <Link to="/dashboard/edit-profile">

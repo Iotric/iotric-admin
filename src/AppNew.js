@@ -61,7 +61,7 @@ function AppNew() {
             </Route>
           </Route>
           {/* <Route path="/" element={<PrivateRoute />}> */}
-          <Route path="/complete-profile/:id" element={<ProfileStepper />} />
+          <Route path="/complete-profile/" element={<ProfileStepper />} />
           {/* </Route> */}
 
           <Route path="/contact-us" element={<Contactus />} />

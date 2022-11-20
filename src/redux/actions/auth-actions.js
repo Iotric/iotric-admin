@@ -104,7 +104,9 @@ export const updateProfileData = (data) => {
 
     try {
       let formData = new FormData();
-      formData.append("brandText", data.brandText);
+      if (data.brandText !== "") {
+        formData.append("brandText", data.brandText);
+      }
       if (data.brandLogo && data.brandLogo.length > 0) {
         formData.append("logo", data.brandLogo[0]);
       }
@@ -112,7 +114,9 @@ export const updateProfileData = (data) => {
         formData.append("favicon", data.favicon[0]);
       }
       formData.append("themeColor", data.themeColor);
-      formData.append("homepageH1Title", data.homepageH1Title);
+      if (data.homepageH1Title !== "") {
+        formData.append("homepageH1Title", data.homepageH1Title);
+      }
 
       const response = await axiosinstance.put(
         `enterprise/${id}/profile`,
@@ -126,7 +130,6 @@ export const updateProfileData = (data) => {
 
       dispatch(authActions.setProfileData(response.data.result));
       toast.success("Profile Updated !!!");
-      
     } catch (err) {
       if (err.response?.data.error) {
         toast.error(err.response.data.error);
@@ -165,7 +168,6 @@ export const createMetaData = (data) => {
 
       dispatch(authActions.setMetaData(response.data.result));
       toast.success("Metadata Updated !!!");
-      
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error);
@@ -190,11 +192,11 @@ export const fetchMetaData = () => {
       await localStorage.setItem("metadataId", response.data.result._id);
       dispatch(authActions.setMetaData(response.data.result));
     } catch (err) {
-      if (err.response.data.error) {
-        toast.error(err.response.data.error);
-      } else {
-        toast.error("Something unusual happened profile !!!");
-      }
+      // if (err.response.data.error) {
+      //   toast.error(err.response.data.error);
+      // } else {
+      //   toast.error("Something unusual happened profile !!!");
+      // }
       console.log(err);
     }
   };

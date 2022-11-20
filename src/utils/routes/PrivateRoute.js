@@ -18,7 +18,7 @@ const PrivateRoute = () => {
   const authState = useSelector((store) => store.auth);
   const { metaInfoForm } = authState.completionIndicator;
   
-  const id = localStorage.getItem("enterpriseId");
+  // const id = localStorage.getItem("enterpriseId");
 
   return (
     <div>
@@ -26,7 +26,7 @@ const PrivateRoute = () => {
         metaInfoForm ? (
           <Outlet />
         ) : (
-          <Navigate to={`/complete-profile/${id}`} />
+          <Navigate to={`/complete-profile/`} />
         )
       ) : (
         <Navigate to="/login" />
