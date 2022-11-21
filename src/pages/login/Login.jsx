@@ -43,9 +43,11 @@ const Login = () => {
 
   const handleLogin = async (data) => {
     await dispatch(loginAction(data));
-    
-    const id = localStorage.getItem("enterpriseId");
-    navigate(`/complete-profile/`);
+
+    const token = localStorage.getItem("user-token");
+    if (token) {
+      navigate(`/complete-profile/`);
+    }
     dispatch(authActions.setLoadingFalse());
   };
 

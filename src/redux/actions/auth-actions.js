@@ -227,7 +227,7 @@ export const updateMetaData = (data) => {
 
       dispatch(authActions.setMetaData(response.data.result));
       toast.success("Metadata Updated !!!");
-      dispatch(authActions.handleNext());
+      // dispatch(authActions.handleNext());
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error);
