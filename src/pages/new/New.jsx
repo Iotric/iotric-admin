@@ -1,14 +1,39 @@
+import { useState } from "react";
 import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { registerAdmin } from "../../redux/actions/admin-actions";
+
+import { useDispatch } from "react-redux";
 
 const New = ({ inputs, title }) => {
+  const dispatch = useDispatch();
+
   const [file, setFile] = useState("");
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(registerAdmin(data));
+  };
 
   return (
     <div className="new">
+      {/* {JSON.stringify(data)} */}
       <Sidebar />
       <div className="newContainer">
         <Navbar />
@@ -43,10 +68,16 @@ const New = ({ inputs, title }) => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                  <input
+                    name={input.name}
+                    value={data[input.name]}
+                    onChange={handleChange}
+                    type={input.type}
+                    placeholder={input.placeholder}
+                  />
                 </div>
               ))}
-              <button>Send</button>
+              <button onClick={handleSubmit}>Send</button>
             </form>
           </div>
         </div>

@@ -77,7 +77,7 @@ export default function Profile() {
       navigate("/dashboard");
       dispatch(authActions.handleReset());
       dispatch(authActions.setLoadingFalse());
-    }, 2000);
+    }, 1000);
   };
 
   return (

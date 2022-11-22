@@ -56,7 +56,7 @@ const Register = () => {
     setTimeout(() => {
       navigate("/login");
       dispatch(authActions.setLoadingFalse());
-    }, 1000);
+    }, 3000);
   };
 
   return (
