@@ -6,6 +6,7 @@ import { adminColumns } from "../../datatablesource";
 
 import { useSelector, useDispatch } from "react-redux";
 import { adminActions } from "../../redux/slice/admin-slice";
+import { deleteAdmin } from "../../redux/actions/admin-actions";
 
 const Datatable = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,15 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/dashboard/admins/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={`/dashboard/admins/${params.row.userId}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">View</div>
             </Link>
             <div
               className="deleteButton"
-              onClick={() => dispatch(adminActions.handleDelete(params.row.id))}
+              onClick={() => dispatch(deleteAdmin(params.row.userId))}
             >
               Delete
             </div>

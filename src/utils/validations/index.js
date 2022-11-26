@@ -1,6 +1,10 @@
 import * as yup from "yup";
 export const PASSWORD_PATTERN =
   /(?=^.{8,64}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&])(?!.*\s).*$/;
+export const THEMECOLOR_PATTERN = /^#([0-9a-f]{3}){1,2}$/i;
+export const EMPTY_STRING_PATTERN = /^$/;
+export const TLDS_PATTERN = /^[.][a-z]+/;
+export const ALLOWED_EMAIL_TYPE_PATTERN = /^[@][a-z]+\.[a-z]+$/;
 
 export const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is Required!").label("email"),
@@ -38,23 +42,50 @@ export const profileStep1Schema = yup.object().shape({
   brandText: yup
     .string()
     .max(15, "Must be 15 character or less")
-    .required()
     .label("Brand Text"),
   // brandLogo: yup.string(),
   // favicon: yup.string(),
-  themeColor: yup.string(),
+  themeColor: yup.string().label("Theme Color").matches(THEMECOLOR_PATTERN, {
+    message: "Only HexCode color format is allowed",
+    excludeEmptyString: true,
+  }),
   primaryAdmin: yup.boolean(),
   homepageH1Title: yup
     .string()
     .max(30, "Must be 30 character or less")
-    .required()
     .label("Home Page Title"),
 });
 
 export const profileStep2Schema = yup.object().shape({
-  socialMedia: yup.array().of(yup.string().url("URL is invalid!")),
-  tlds: yup.array().of(yup.string().min(2, "min 2 characters are required!")),
-  allowedEmailType: yup.array(),
+  socialMedia: yup.array().of(
+    yup.object().shape({
+      value: yup.string().url("URL is invalid!"),
+    })
+  ),
+  tlds: yup
+    .array()
+    .of(
+      yup
+        .string()
+        .matches(TLDS_PATTERN, "Start with a period")
+        .min(3, "min 2 characters are required, excluding period!")
+    )
+    .min(1, "Atleast one tld is required!"),
+  allowedEmailType: yup
+    .array()
+    .of(
+      yup
+        .string()
+        .matches(
+          ALLOWED_EMAIL_TYPE_PATTERN,
+          "follow email type format e.g @iotric.com, @iotric.in"
+        )
+    ),
   restrictedSignup: yup.boolean(),
-  domainLimit: yup.number().required().positive().integer(),
+  domainLimit: yup
+    .number()
+    .required()
+    .positive()
+    .integer()
+    .label("Domain Limit"),
 });

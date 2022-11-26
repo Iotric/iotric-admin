@@ -13,13 +13,13 @@ const keySlice = createSlice({
   reducers: {
     toggleCredentials(state) {
       state.showCredentials = !state.showCredentials;
-      state.isKeyLoading = true;
+      // state.isKeyLoading = true;
     },
     setShowCredentials(state, val) {
       state.showCredentials = val.payload;
     },
-    setUser(state, val) {
-      state.user = val.payload;
+    setUser(state, { payload: { type, data } }) {
+      state.user[type] = data;
     },
     setTestMode(state) {
       state.isTestMode = !state.isTestMode;

@@ -1,10 +1,26 @@
+import { useEffect } from "react";
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import SimpleAreaChart from "../../components/chart/SimpleAreaChart";
 import List from "../../components/table/Table";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchAdmin } from "../../redux/actions/admin-actions";
+
 const Single = () => {
+  const dispatch = useDispatch();
+  const { userId } = useParams();
+
+  // adminState
+  const adminState = useSelector(store => store.admin)
+  const currentAdmin = adminState.currentAdmin
+
+  useEffect(() => {
+    dispatch(fetchAdmin(userId));
+  }, [userId]);
+
   return (
     <div className="single">
       <Sidebar />
@@ -21,10 +37,10 @@ const Single = () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{currentAdmin.username}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemValue">{currentAdmin.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
@@ -44,12 +60,15 @@ const Single = () => {
             </div>
           </div>
           <div className="right">
-            <SimpleAreaChart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
+            <SimpleAreaChart
+              aspect={3 / 1}
+              title="User Spending ( Last 6 Months)"
+            />
           </div>
         </div>
         <div className="bottom">
-        <h1 className="title">Last Transactions</h1>
-          <List/>
+          <h1 className="title">Last Transactions</h1>
+          <List />
         </div>
       </div>
     </div>

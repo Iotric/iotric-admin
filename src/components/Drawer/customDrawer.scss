@@ -1,5 +1,5 @@
 .custom-drawer {
-  width: 300px;
+  width: 335px;
   .drawer-data {
     padding: 15px;
     background-color: #f9fafc;
@@ -8,6 +8,12 @@
       flex-direction: column;
       gap: 7px;
       align-items: center;
+      .user-details {
+        .welcome-text {
+          text-transform: capitalize;
+          font-weight: 700;
+        }
+      }
       .avatar {
         width: 100px;
         height: 100px;

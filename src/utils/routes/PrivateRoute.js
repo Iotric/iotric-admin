@@ -14,18 +14,19 @@ const useAuth = () => {
 
 const PrivateRoute = () => {
   const auth = useAuth();
-  const isProfileComplete = useSelector(
-    (store) => store.auth.isProfileComplete
-  );
-  const id = localStorage.getItem("enterpriseId");
+  // authState
+  const authState = useSelector((store) => store.auth);
+  const { metaInfoForm } = authState.completionIndicator;
+  
+  // const id = localStorage.getItem("enterpriseId");
 
   return (
     <div>
       {auth ? (
-        isProfileComplete ? (
+        metaInfoForm ? (
           <Outlet />
         ) : (
-          <Navigate to={`/complete-profile/${id}`} />
+          <Navigate to={`/complete-profile/`} />
         )
       ) : (
         <Navigate to="/login" />

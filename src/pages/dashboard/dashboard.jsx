@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./dashboard.scss";
@@ -7,7 +8,13 @@ import Table from "../../components/table/Table";
 import SameDataComposedChart from "../../components/chart/SameDataComposedChart";
 import CustomDrawer from "../../components/Drawer/CustomDrawer";
 
+import { toast } from "react-toastify";
+
 const Dashboard = () => {
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
+
   return (
     <div className="dashboard">
       <Sidebar />

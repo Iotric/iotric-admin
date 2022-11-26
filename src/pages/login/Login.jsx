@@ -41,13 +41,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = (data) => {
-    dispatch(loginAction(data));
+  const handleLogin = async (data) => {
+    await dispatch(loginAction(data));
 
-    setTimeout(() => {
-      navigate("/dashboard");
-      dispatch(authActions.setLoadingFalse());
-    }, 2000);
+    const token = localStorage.getItem("user-token");
+    if (token) {
+      navigate(`/complete-profile/`);
+    }
+    dispatch(authActions.setLoadingFalse());
   };
 
   const handleShowPassword = () => {
