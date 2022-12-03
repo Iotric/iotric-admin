@@ -1,35 +1,41 @@
 import React, { useState } from "react";
 import "./register.scss";
-import { Link } from "react-router-dom";
-import Navbar from "../../components/home/navbar/Navbar";
-import Footer from "../../components/home/footer/Footer";
 
-import logoImg from "../../assets/images/logo.png";
-import { Paper, TextField, Button, Typography, Box } from "@mui/material";
-import registerImg from "../../assets/images/about1.png";
+import { TextField, Button, Typography, Box, Stack, Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CircularProgress from "@mui/material/CircularProgress";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import nxbLogo from "../../assets/images/nxblogo.svg";
+import circlesImg from "../../assets/images/circles.svg";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../utils/validations/";
 
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../redux/actions/auth-actions";
 import { authActions } from "../../redux/slice/auth-slice";
 
+import Navbar from "../../components/home/navbar/Navbar";
+import Footer from "../../components/home/footer/Footer";
 import Banner from "../../components/banner/Banner";
+import CustomCarousel from "../../components/carousel/CustomCarousel";
+
+import { CustomInputField } from "../../utils/UI/components";
+import { errorHandler } from "../../utils/error-handler";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm({
     defaultValues: {
       organizationName: "",
@@ -62,21 +68,48 @@ const Register = () => {
   return (
     <Box className="register">
       {/* { JSON.stringify(data)} */}
-      <Banner />
-      <Navbar />
-      <Box className="register-container">
-        <Box className="register-img">
-          <img src={registerImg} alt="brand" />
-        </Box>
-        <Box className="register-card">
-          <Paper className="paper">
-            {/* <Link to="/">
-              <img className="logo" src={logoImg} alt="company_logo" />
-            </Link> */}
+      {/* <Banner />
+      <Navbar /> */}
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Box className="register-block">
+            <Box className="circles-img">
+              <img height="250px" width="250px" src={circlesImg} alt="brand" />
+            </Box>
+
+            <Box className="register-text-box">
+              <Typography fontWeight="500" px={1} color="white" variant="h4">
+                Create Your Ideal Investor Experience In Minutes
+              </Typography>
+              <Box mt={2}>
+                <CustomCarousel />
+              </Box>
+
+              <Stack mt={1} direction="row" spacing={1}>
+                <IconButton sx={{ color: "white" }}>
+                  <FacebookIcon />
+                </IconButton>
+                <IconButton sx={{ color: "white" }}>
+                  <TwitterIcon />
+                </IconButton>
+                <IconButton sx={{ color: "white" }}>
+                  <LinkedInIcon />
+                </IconButton>
+              </Stack>
+              <Stack px={1} mt={8} direction="row" spacing={3}>
+                <Typography color="white">Privacy Policy</Typography>
+                <Typography color="white">Contact</Typography>
+                <Typography color="white">©nexbloc.com</Typography>
+              </Stack>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={6}>
+          <Box className="register-card">
             {isLoading ? (
               <div
                 style={{
-                  height: "200px",
+                  height: "100vh",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -86,68 +119,69 @@ const Register = () => {
               </div>
             ) : (
               <Box>
-                <Typography
-                  ml={1}
-                  mt={2}
-                  mb={3}
-                  component="h2"
-                  variant="h5"
-                  className="title"
-                >
-                  Create your account
-                </Typography>
+                <Box mt={3} className="register-top">
+                  <Box className="register-logo-box">
+                    <Link to="/">
+                      <img className="logo" src={nxbLogo} alt="company_logo" />
+                    </Link>
+                  </Box>
+
+                  <Typography my={1} align="center" component="h2" variant="h4">
+                    Create your account
+                  </Typography>
+                  <Typography
+                    color="textMute.main"
+                    align="center"
+                    component="h2"
+                    variant="body1"
+                  >
+                    Enter the fields below to get started
+                  </Typography>
+                </Box>
+
                 <Box
+                  mt={4}
                   component="form"
                   onSubmit={handleSubmit(handleRegister)}
                   className="registerDetails"
                 >
                   <Box>
-                    <TextField
+                    <CustomInputField
                       name="organizationName"
-                      {...register("organizationName")}
                       label="Organization Name *"
-                      variant="outlined"
+                      placeholder="Enter Company name"
+                      control={control}
                     />
-                    <Typography mt={1} variant="body2" color="textPrimary.main">
-                      {errors.organizationName?.message}
-                    </Typography>
+                    {errorHandler(errors, "organizationName")}
                   </Box>
 
                   <Box>
-                    <TextField
+                    <CustomInputField
                       name="firstName"
-                      {...register("firstName")}
                       label="First Name *"
-                      variant="outlined"
+                      control={control}
                     />
-                    <Typography mt={1} variant="body2" color="textPrimary.main">
-                      {errors.firstName?.message}
-                    </Typography>
+                    {errorHandler(errors, "firstName")}
                   </Box>
 
                   <Box>
-                    <TextField
+                    <CustomInputField
                       name="lastName"
-                      {...register("lastName")}
                       label="Last Name *"
-                      variant="outlined"
+                      control={control}
                     />
-                    <Typography mt={1} variant="body2" color="textPrimary.main">
-                      {errors.lastName?.message}
-                    </Typography>
+                    {errorHandler(errors, "lastName")}
                   </Box>
 
                   <Box>
-                    <TextField
+                    <CustomInputField
                       name="email"
-                      {...register("email")}
                       label="Email *"
                       type="email"
-                      variant="outlined"
+                      placeholder="Enter email"
+                      control={control}
                     />
-                    <Typography mt={1} variant="body2" color="textPrimary.main">
-                      {errors.email?.message}
-                    </Typography>
+                    {errorHandler(errors, "email")}
                   </Box>
 
                   <Box>
@@ -155,6 +189,7 @@ const Register = () => {
                       name="password"
                       {...register("password")}
                       label="Password *"
+                      size="small"
                       type={showPassword ? "text" : "password"}
                       variant="outlined"
                       InputProps={{
@@ -171,27 +206,27 @@ const Register = () => {
                         ),
                       }}
                     />
-                    <Typography mt={1} variant="body2" color="textPrimary.main">
-                      {errors.password?.message}
-                    </Typography>
+                    {errorHandler(errors, "password")}
                   </Box>
 
-                  <Button type="submit" variant="contained">
-                    Continue
+                  <Button my={4} type="submit" variant="contained">
+                    Create Account
                   </Button>
                 </Box>
-                <Box className="bottom">
+
+                <Typography my={2} align="center" component="div" variant="h8">
+                  Already have an account?
                   <Link to="/login">
-                    <Typography component="div" variant="h8">
-                      Already have an account? Login
+                    <Typography ml={1} component="span">
+                      Log In
                     </Typography>
                   </Link>
-                </Box>
+                </Typography>
               </Box>
             )}
-          </Paper>
-        </Box>
-      </Box>
+          </Box>
+        </Grid>
+      </Grid>
       <Footer />
     </Box>
   );

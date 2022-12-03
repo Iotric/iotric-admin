@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./profile.scss";
 
-import { TextField, Button, Typography, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Grid,
+  IconButton,
+} from "@mui/material";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,7 +20,9 @@ import { updateProfileData } from "../../../redux/actions/auth-actions";
 import { authActions } from "../../../redux/slice/auth-slice";
 
 import { MuiColorInput } from "mui-color-input";
-import { errorHandler } from "../error-handler";
+import { errorHandler } from "../../../utils/error-handler";
+import { ImagePreview } from "../../../assets/images/ImagePreview";
+import CustomMultilineInput from "../../../utils/UI/components/CustomMultilineInput";
 
 const Step1 = () => {
   const dispatch = useDispatch();
@@ -62,80 +71,64 @@ const Step1 = () => {
   return (
     <Box component="form" onSubmit={handleSubmit(handleFormNext)}>
       {/* {JSON.stringify(watch())} */}
-      <Box className="step1Details">
-        <Box>
-          <Controller
-            name="homepageH1Title"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <TextField
-                label="Home Page Title"
-                onChange={onChange}
-                value={value}
-                variant="outlined"
-                error={errors.homepageH1Title}
+      <Grid container>
+        <Grid item xs={6}>
+          <Box className="step1Details">
+            <Box>
+              <Controller
+                name="homepageH1Title"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <TextField
+                    label="Home Page Title"
+                    onChange={onChange}
+                    value={value}
+                    variant="outlined"
+                    error={errors.homepageH1Title}
+                  />
+                )}
               />
-            )}
-          />
-          {errorHandler(errors, "homepageH1Title")}
-        </Box>
+              {errorHandler(errors, "homepageH1Title")}
+            </Box>
 
-        <Box>
-          <Controller
-            name="brandText"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <TextField
-                label="Brand Text"
-                variant="outlined"
-                onChange={onChange}
-                value={value}
-                error={errors.brandText}
+            <Box>
+              <Controller
+                name="brandText"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <TextField
+                    label="Brand Text"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={errors.brandText}
+                  />
+                )}
               />
-            )}
-          />
-          {errorHandler(errors, "brandText")}
-        </Box>
+              {errorHandler(errors, "brandText")}
+            </Box>
 
-        <Box>
-          <Controller
-            name="themeColor"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <MuiColorInput
-                format="hex"
-                label="Theme Color"
-                onChange={onChange}
-                value={value}
-                error={errors.themeColor}
-              />
-            )}
-          />
-          {errorHandler(errors, "themeColor")}
-        </Box>
-
-        <Box display="flex" gap={5}>
-          <Box>
-            <Button size="small" variant="contained" component="label">
-              Upload favicon
-              <input
-                name="favicon"
-                {...register("favicon")}
-                hidden
-                accept="image/*"
-                type="file"
-              />
-            </Button>
-            <Typography variant="body2" color="primary">
-              {watchFavicon && watchFavicon.length > 0
-                ? watchFavicon[0].name
-                : null}
-            </Typography>
-            {errorHandler(errors, "favicon")}
+            <Box>
+              <CustomMultilineInput
+                name="description"
+                label="Description"
+                control={control}
+              >
+                Description
+              </CustomMultilineInput>
+            </Box>
           </Box>
-          <Box>
-            <Button size="small" variant="contained" component="label">
-              Upload Brand Logo
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="body2">Platform logo</Typography>
+          <Box p={3} className="logo-upload">
+            <Box p={2} className="logo-preview">
+              <IconButton>
+                <ImagePreview />
+              </IconButton>
+            </Box>
+            <Button variant="outlined" component="label">
+              Browse
               <input
                 name="brandLogo"
                 {...register("brandLogo")}
@@ -144,15 +137,81 @@ const Step1 = () => {
                 type="file"
               />
             </Button>
-            <Typography variant="body2" color="primary">
-              {watchBrandLogo && watchBrandLogo.length > 0
-                ? watchBrandLogo[0].name
-                : null}
-            </Typography>
-            {errorHandler(errors, "brandLogo")}
           </Box>
-        </Box>
-      </Box>
+          <Typography variant="body2" color="primary">
+            {watchBrandLogo && watchBrandLogo.length > 0
+              ? watchBrandLogo[0].name
+              : null}
+          </Typography>
+          {errorHandler(errors, "brandLogo")}
+          <Typography variant="body2">FAV Icon</Typography>
+
+          <Box p={3} className="logo-upload">
+            <Box p={2} className="logo-preview">
+              <IconButton>
+                <ImagePreview />
+              </IconButton>
+            </Box>
+            <Button variant="outlined" component="label">
+              Browse
+              <input
+                name="favicon"
+                {...register("favicon")}
+                hidden
+                accept="image/*"
+                type="file"
+              />
+            </Button>
+          </Box>
+          <Typography variant="body2" color="primary">
+            {watchFavicon && watchFavicon.length > 0
+              ? watchFavicon[0].name
+              : null}
+          </Typography>
+          {errorHandler(errors, "favicon")}
+        </Grid>
+      </Grid>
+      <Typography variant="body1">Brand Colors</Typography>
+
+      <Grid container>
+        <Grid item xs={6}>
+          <Box>
+            <Controller
+              name="themeColor"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <MuiColorInput
+                  format="hex"
+                  label="Theme Color"
+                  onChange={onChange}
+                  value={value}
+                  error={errors.themeColor}
+                />
+              )}
+            />
+            {errorHandler(errors, "themeColor")}
+          </Box>
+        </Grid>
+        <Grid item xs={6}>
+          <Box>
+            <Controller
+              name="themeColor"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <MuiColorInput
+                  format="hex"
+                  label="Secondary Color"
+                  onChange={onChange}
+                  value={value}
+                  error={errors.themeColor}
+                />
+              )}
+            />
+            {errorHandler(errors, "themeColor")}
+          </Box>
+        </Grid>
+      </Grid>
+
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Save & Proceed
@@ -162,6 +221,12 @@ const Step1 = () => {
           sx={{ mt: 1, ml: 1 }}
         >
           Skip
+        </Button>
+        <Button
+          onClick={() => dispatch(authActions.handleBack())}
+          sx={{ mt: 1, ml: 1 }}
+        >
+          Back
         </Button>
       </Box>
     </Box>

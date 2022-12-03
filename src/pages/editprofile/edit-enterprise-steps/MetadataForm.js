@@ -40,6 +40,12 @@ import {
   isEnterpriseMinted,
 } from "../../../redux/actions/auth-actions";
 
+import {
+  CustomCheckbox,
+  CustomMultipleInputField,
+  CustomInputField,
+} from "../../../utils/UI/components";
+
 const Icons = (name) => {
   switch (name) {
     case "Facebook":
@@ -237,7 +243,7 @@ const Step2 = () => {
         </Box>
 
         <Box>
-          <Controller
+          {/* <Controller
             name="domainLimit"
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -249,6 +255,12 @@ const Step2 = () => {
                 variant="outlined"
               />
             )}
+          /> */}
+          <CustomInputField
+            name="domainLimit"
+            control={control}
+            type="number"
+            label="Domain Limit"
           />
           {errorHandler(errors, "domainLimit")}
         </Box>
@@ -417,16 +429,21 @@ const Step2 = () => {
 
         <Box display="flex" gap={5}>
           <Box display="flex" alignItems="center">
-            <Controller
+            {/* <Controller
               name="restrictedSignup"
               control={control}
               render={({ field: { value, onChange } }) => (
-                <Checkbox
+                <CustomCheckbox
                   checked={value}
                   onChange={(e) => onChange(e.target.checked)}
-                />
+                >
+                  Restricted Signup
+                </CustomCheckbox>
               )}
-            />
+            /> */}
+            <CustomCheckbox name="restrictedSignup" control={control}>
+              Restricted Signup
+            </CustomCheckbox>
 
             <Typography component="p" variant="body1">
               Restricted Signup
@@ -437,7 +454,13 @@ const Step2 = () => {
 
         {WatchRestrictedSignup ? (
           <Box>
-            <Controller
+            <CustomMultipleInputField
+              name="allowedEmailType"
+              control={control}
+              helperText="e.g @iotric.com"
+              label="Allowed Email Type"
+            />
+            {/* <Controller
               name="allowedEmailType"
               control={control}
               render={({ field: { onChange, value } }) => (
@@ -467,7 +490,7 @@ const Step2 = () => {
                   )}
                 />
               )}
-            />
+            /> */}
             {errorHandler(errors, "allowedEmailType")}
           </Box>
         ) : null}

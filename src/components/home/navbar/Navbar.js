@@ -2,7 +2,7 @@ import React from "react";
 import "./navbar.module.scss";
 
 import companyLogo from "../../../assets/images/logo.png";
-import { AppBar, Toolbar, Button } from "@mui/material";
+import { AppBar, Toolbar, Button, ButtonGroup } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
@@ -65,7 +65,7 @@ const Navbar = () => {
             </Button>
           ) : (
             <Link style={{ textDecoration: "none" }} to="/login">
-              <Button variant="contained" sx={{ my: 1, mx: 1.5 }}>
+              <Button color="primary" variant="contained" sx={{ my: 1, mx: 1.5 }}>
                 Login
               </Button>
             </Link>

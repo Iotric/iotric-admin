@@ -8,6 +8,7 @@ import {
   Chip,
   Button,
   IconButton,
+  Grid,
 } from "@mui/material";
 import "./metadata.scss";
 
@@ -27,9 +28,15 @@ import AddIcon from "@mui/icons-material/Add";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
+// import InstagramIcon from "@mui/icons-material/Instagram";
 
-import { errorHandler } from "../error-handler";
+import SocialMedia from "../../../utils/UI/custom-components/SocialMedia";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { InstagramIcon } from "../../../assets/images/InstagramIcon.js";
+
+import { errorHandler } from "../../../utils/error-handler";
 
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
@@ -253,7 +260,7 @@ const Step2 = () => {
           {errorHandler(errors, "domainLimit")}
         </Box>
 
-        <Box>
+        {/* <Box>
           <Box display="flex" alignItems="center" gap={1}>
             <Controller
               name="addLinks"
@@ -312,8 +319,8 @@ const Step2 = () => {
             </Box>
             {errorHandler(errors, "socialMedia")}
           </Box>
-        </Box>
-        {/* 
+        </Box> */}
+        
         <Box>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography component="h4">Add Key</Typography>
@@ -413,7 +420,7 @@ const Step2 = () => {
               </Accordion>
             ))}
           </Box>
-        </Box> */}
+        </Box>
 
         <Box display="flex" gap={5}>
           <Box display="flex" alignItems="center">
@@ -471,6 +478,32 @@ const Step2 = () => {
             {errorHandler(errors, "allowedEmailType")}
           </Box>
         ) : null}
+
+        <Typography variant="body1">Add social media</Typography>
+
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <SocialMedia Icon={<TwitterIcon style={{ color: "#00ACEE" }} />}>
+              Connect to Twitter
+            </SocialMedia>
+          </Grid>
+          <Grid item xs={6}>
+            <SocialMedia Icon={<FacebookIcon style={{ color: "#3B5998" }} />}>
+              Connect to Facebook
+            </SocialMedia>
+          </Grid>
+          <Grid item xs={6}>
+            <SocialMedia Icon={<LinkedInIcon style={{ color: "#0077B5" }} />}>
+              Connect to LinkedIn
+            </SocialMedia>
+          </Grid>
+
+          <Grid item xs={6}>
+            <SocialMedia Icon={<InstagramIcon />}>
+              Connect to Instagram
+            </SocialMedia>
+          </Grid>
+        </Grid>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
@@ -485,9 +518,10 @@ const Step2 = () => {
         >
           Update
         </Button> */}
-        <Button sx={{ mt: 1, ml: 1 }} type="submit">
+        {/* <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit
-        </Button>
+        </Button> */}
+        <Button onClick={() => dispatch(authActions.handleNext())}>Next</Button>
       </Box>
     </Box>
   );

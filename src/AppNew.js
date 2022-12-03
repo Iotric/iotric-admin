@@ -8,6 +8,7 @@ import PublicRoute from "./utils/routes/PublicRoute";
 import PrivateRoute from "./utils/routes/PrivateRoute";
 
 import { ToastContainer } from "react-toastify";
+import UiTestingPage from "./utils/UI/test-ui/UiTestingPage";
 
 const Organization = React.lazy(() =>
   import("./pages/Organization/Organization")
@@ -65,6 +66,8 @@ function AppNew() {
           {/* </Route> */}
 
           <Route path="/contact-us" element={<Contactus />} />
+
+          <Route path="/test" element={<UiTestingPage />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

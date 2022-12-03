@@ -1,59 +1,53 @@
 .register {
-  .register-container {
-    min-height: 75vh;
-    display: flex;
-    padding: 40px;
-    background: rgb(88, 66, 247);
-    background: linear-gradient(
-      180deg,
-      rgba(88, 66, 247, 1) 0%,
-      rgba(9, 9, 121, 1) 100%
-    );
-    .register-img {
-      flex: 1;
-      margin-left: 50px;
-      margin-top: 30px;
-      & img {
-        height: 84%;
-        width: 90%;
-      }
-    }
-    .register-card {
-      flex: 1;
+  background-color: #f5f5f5;
+  .register-block {
+    height: 692px;
+    width: 620px;
+    background: #6300ff;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-left: 35px;
+    // padding: 20px;
+    .circles-img {
       display: flex;
       justify-content: flex-end;
-      align-items: center;
+      margin-right: 20px;
+      margin-bottom: 35px;
+    }
+    .register-text-box {
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+  }
+  .register-card {
+    height: 100vh;
+    width: 400px;
+    margin-left: 130px;
 
-      .paper {
-        width: 500px;
-        min-height: 250px;
-        padding: 25px;
-        border-radius: 16px;
-        .logo {
-          height: 70px;
-          width: 200px;
-        }
-        .title {
-          text-align: left;
-          font-weight: 500;
-          color: #100086;
-        }
-        .registerDetails {
-          display: flex;
-          flex-direction: column;
-          gap: 7px;
+    .register-logo-box {
+      display: flex;
+      justify-content: center;
+      .logo {
+        height: 40px;
+        width: 140px;
+      }
+    }
+
+    .title {
+      text-align: left;
+      font-weight: 500;
+      color: #100086;
+    }
+
+    .registerDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 33px;
+      width: 100%;
+      > div {
+        width: 100%;
+        > div {
           width: 100%;
-          > div {
-            width: 100%;
-            > div {
-              width: 100%;
-            }
-          }
-        }
-        .bottom {
-          margin-top: 20px;
-          margin-bottom: 15px;
-          text-align: center;
         }
       }
     }

@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./utils/extendtheme";
+import { theme } from "./utils/UI/extendtheme";
 import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
