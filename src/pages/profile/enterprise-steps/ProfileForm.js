@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./profile.scss";
 
 import {
@@ -24,7 +24,10 @@ import { authActions } from "../../../redux/slice/auth-slice";
 import { MuiColorInput } from "mui-color-input";
 import { errorHandler } from "../../../utils/error-handler";
 import { ImagePreview } from "../../../assets/images/ImagePreview";
-import CustomMultilineInput from "../../../utils/UI/components/CustomMultilineInput";
+import {
+  CustomArrowButton,
+  CustomMultilineInput,
+} from "../../../utils/UI/components";
 
 const Step1 = () => {
   const dispatch = useDispatch();
@@ -72,7 +75,7 @@ const Step1 = () => {
 
   return (
     <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
-      <Paper elevation={2} sx={{ my: { xs: 3, md: 6 }, p: { xs: 3, md: 3 } }}>
+      <Paper elevation={2} sx={{ my: { xs: 3, md: 4 }, p: { xs: 3, md: 3 } }}>
         <Typography mb={1} fontWeight="500" align="center" variant="h5">
           Basic Info
         </Typography>
@@ -239,20 +242,14 @@ const Step1 = () => {
             </Grid>
           </Grid>
 
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button sx={{ mt: 1, ml: 1 }} type="submit">
-              Save & Proceed
-            </Button>
-            <Button
+          <Box mt={2} display="flex" justifyContent="center">
+            <Button type="submit">Save & Proceed</Button>
+            <CustomArrowButton
               onClick={() => dispatch(authActions.handleNext())}
-              sx={{ mt: 1, ml: 1 }}
             >
-              Skip
-            </Button>
-            <Button
-              onClick={() => dispatch(authActions.handleBack())}
-              sx={{ mt: 1, ml: 1 }}
-            >
+              Next Step
+            </CustomArrowButton>
+            <Button onClick={() => dispatch(authActions.handleBack())}>
               Back
             </Button>
           </Box>

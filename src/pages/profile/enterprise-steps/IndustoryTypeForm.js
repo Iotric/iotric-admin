@@ -32,13 +32,13 @@ const IndustoryTypeForm = () => {
 
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-      <Paper elevation={2} sx={{ my: { xs: 3, md: 6 }, p: { xs: 3, md: 5 } }}>
+      <Paper elevation={2} sx={{ my: { xs: 3, md: 10 }, p: { xs: 3, md: 5 } }}>
         <Box component="form">
           {/* {JSON.stringify(watch())} */}
           <Typography fontWeight="500" align="center" variant="h5">
             What is your industry type?
           </Typography>
-          <Grid mt={2} mb={3} container xs={12} spacing={2}>
+          <Grid mt={3} mb={4} container xs={12} spacing={2}>
             <Grid item xs={6}>
               <CustomCheckbox name={`industryType.nfts`} control={control}>
                 Non-fungible tokens (NFTs)

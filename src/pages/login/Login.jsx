@@ -136,7 +136,7 @@ const Login = () => {
                 </div>
               ) : (
                 <Box>
-                  <Box mt={10} className="login-top">
+                  <Box mt={14} className="login-top">
                     <Box className="login-logo-box">
                       <Link to="/">
                         <img

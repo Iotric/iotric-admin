@@ -34,10 +34,10 @@ const Enable = () => {
   });
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-      <Paper elevation={2} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+      <Paper elevation={2} sx={{ my: { xs: 3, md: 2 }, p: { xs: 2, md: 3 } }}>
         <Box>
           <Box>
-            <Typography my={2} fontWeight="500" align="center" variant="h5">
+            <Typography my={1} fontWeight="500" align="center" variant="h5">
               Components to enable
             </Typography>
             <Grid container spacing={2}>
@@ -127,7 +127,7 @@ const Enable = () => {
             </Grid>
           </Box>
 
-          <Box my={2} display="flex" justifyContent="center">
+          <Box mt={4} display="flex" justifyContent="center">
             <Button onClick={() => dispatch(authActions.handleBack())}>
               back
             </Button>

@@ -4,12 +4,12 @@ import "./social-media.scss";
 
 const SocialMedia = ({ Icon, children }) => {
   return (
-    <Box p={2} className="social-media">
+    <Box p={1} className="social-media">
       <Box className="social-box">
         <Box className="icon-box">
           <IconButton >{Icon}</IconButton>
         </Box>
-        <Typography fontWeight="500" variant="body1">{children}</Typography>
+        <Typography className="icon-text" fontWeight="500" variant="body2">{children}</Typography>
       </Box>
     </Box>
   );

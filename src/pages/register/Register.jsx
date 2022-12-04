@@ -119,7 +119,7 @@ const Register = () => {
               </div>
             ) : (
               <Box>
-                <Box mt={3} className="register-top">
+                <Box mt={4} className="register-top">
                   <Box className="register-logo-box">
                     <Link to="/">
                       <img className="logo" src={nxbLogo} alt="company_logo" />

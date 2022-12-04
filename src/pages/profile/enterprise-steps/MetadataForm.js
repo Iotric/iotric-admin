@@ -49,6 +49,11 @@ import {
   isEnterpriseMinted,
 } from "../../../redux/actions/auth-actions";
 
+import {
+  CustomArrowButton,
+  CustomCheckbox,
+} from "../../../utils/UI/components";
+
 const Icons = (name) => {
   switch (name) {
     case "Facebook":
@@ -184,11 +189,22 @@ const Step2 = () => {
 
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-      <Paper elevation={2} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+      <Paper
+        elevation={2}
+        sx={{
+          my: { xs: 3, md: 1 },
+          py: { xs: 1, md: 2 },
+          px: { xs: 2, md: 20 },
+        }}
+      >
         <Typography fontWeight="500" align="center" variant="h5">
           Basic Info
         </Typography>
-        <Box component="form" onSubmit={handleSubmit(handleMetaFormNext)}>
+        <Box
+          className="metadata"
+          component="form"
+          onSubmit={handleSubmit(handleMetaFormNext)}
+        >
           <Box className="step2Details">
             {/* {JSON.stringify(watch())} */}
             <Box>
@@ -247,23 +263,10 @@ const Step2 = () => {
               {errorHandler(errors, "domainLimit")}
             </Box>
 
-            <Box display="flex" gap={5}>
-              <Box display="flex" alignItems="center">
-                <Controller
-                  name="restrictedSignup"
-                  control={control}
-                  render={({ field: { value, onChange } }) => (
-                    <Checkbox
-                      checked={value}
-                      onChange={(e) => onChange(e.target.checked)}
-                    />
-                  )}
-                />
-
-                <Typography component="p" variant="body1">
-                  Restricted Signup
-                </Typography>
-              </Box>
+            <Box sx={{ width: "50% !important" }} mt={1}>
+              <CustomCheckbox name="restrictedSignup" control={control}>
+                Restricted Signup
+              </CustomCheckbox>
               {errorHandler(errors, "restrictedSignup")}
             </Box>
 
@@ -295,6 +298,7 @@ const Step2 = () => {
                           helperText="e.g @iotric.com"
                           label="Allowed Email Type"
                           variant="outlined"
+                          size="small"
                         />
                       )}
                     />
@@ -317,7 +321,7 @@ const Step2 = () => {
                   <AddIcon />
                 </Fab>
               </Box>
-              <Box mt={2}>
+              <Box mt={1}>
                 {additionalInfoFields.map((item, item_index) => (
                   <Accordion
                     key={`KEY_${item_index}`}
@@ -437,13 +441,16 @@ const Step2 = () => {
               </Grid>
             </Grid>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              sx={{ mt: 1, ml: 1 }}
-              onClick={() => dispatch(authActions.handleBack())}
-            >
+
+          <Box mt={2} display="flex" justifyContent="center">
+            <Button onClick={() => dispatch(authActions.handleBack())}>
               Back
             </Button>
+            <CustomArrowButton
+              onClick={() => dispatch(authActions.handleNext())}
+            >
+              Next Step
+            </CustomArrowButton>
             {/* <Button
           sx={{ mt: 1, ml: 1 }}
           onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
@@ -453,9 +460,6 @@ const Step2 = () => {
             {/* <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit
         </Button> */}
-            <Button onClick={() => dispatch(authActions.handleNext())}>
-              Next
-            </Button>
           </Box>
         </Box>
       </Paper>

@@ -9,7 +9,7 @@ export const errorHandler = (errors, fieldName) => {
         <Typography
           key={`${fieldName}_ERROR_${index}`}
           mx={1}
-          my={1}
+          mt={2}
           variant="body2"
           color="textPrimary.main"
         >
@@ -19,7 +19,7 @@ export const errorHandler = (errors, fieldName) => {
         <Typography
           key={`${fieldName}_ERROR_${index}`}
           mx={1}
-          my={1}
+          mt={2}
           variant="body2"
           color="textPrimary.main"
         >
@@ -29,7 +29,7 @@ export const errorHandler = (errors, fieldName) => {
     );
   } else {
     return (
-      <Typography mx={1} my={1} variant="body2" color="textPrimary.main">
+      <Typography mx={1} mt={2} variant="body2" color="textPrimary.main">
         {errors[fieldName]?.message}
       </Typography>
     );
