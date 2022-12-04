@@ -13,6 +13,7 @@ import {
   Box,
   Grid,
   Stack,
+  Checkbox,
 } from "@mui/material";
 import loginImg from "../../assets/images/about1.png";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -207,13 +208,20 @@ const Login = () => {
                     </Box>
 
                     <Grid container spacing={1}>
-                      <Grid item xs={7}>
-                        <CustomCheckbox control={control}>
-                          Remember me
-                        </CustomCheckbox>
+                      <Grid display="flex" alignItems="center" item xs={7}>
+                        <Checkbox />
+                        <Typography>Remember me</Typography>
                       </Grid>
 
-                      <Grid sx={{ display: "flex", alignItems: "center", justifyContent: "center"}} item xs={5}>
+                      <Grid
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        item
+                        xs={5}
+                      >
                         <Typography>Forgot Password?</Typography>
                       </Grid>
                     </Grid>

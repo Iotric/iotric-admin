@@ -182,20 +182,26 @@ const Step1 = () => {
               {errorHandler(errors, "favicon")}
             </Grid>
           </Grid>
-          <Typography mt={1} px="20px" variant="body1">
+          <Typography px="20px" variant="body1">
             Brand Colors
           </Typography>
 
           <Grid container p="20px">
             <Grid item xs={6}>
-              <Box>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography>Primary Color</Typography>
                 <Controller
                   name="themeColor"
                   control={control}
                   render={({ field: { value, onChange } }) => (
                     <MuiColorInput
                       format="hex"
-                      label="Theme Color"
+                      label="Hex"
+                      size="small"
                       onChange={onChange}
                       value={value}
                       error={errors.themeColor}
@@ -206,14 +212,22 @@ const Step1 = () => {
               </Box>
             </Grid>
             <Grid item xs={6}>
-              <Box>
+              <Box
+                px="20px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography>Secondary Color</Typography>
+
                 <Controller
                   name="themeColor"
                   control={control}
                   render={({ field: { value, onChange } }) => (
                     <MuiColorInput
                       format="hex"
-                      label="Secondary Color"
+                      label="Hex"
+                      size="small"
                       onChange={onChange}
                       value={value}
                       error={errors.themeColor}

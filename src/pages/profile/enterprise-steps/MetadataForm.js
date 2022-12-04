@@ -182,26 +182,6 @@ const Step2 = () => {
     appendAdditionalInfo(newKey);
   };
 
-  const handleSocialMedia = (type) => {
-    let includes = false;
-    const socialMedia = getValues("socialMedia");
-
-    socialMedia.forEach((item) => {
-      if (item.type === type) {
-        includes = true;
-      }
-    });
-
-    if (!includes) {
-      const newKey = {
-        type,
-        value: "",
-      };
-
-      appendSocialMedia(newKey);
-    }
-  };
-
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
       <Paper elevation={2} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
@@ -266,67 +246,6 @@ const Step2 = () => {
               />
               {errorHandler(errors, "domainLimit")}
             </Box>
-
-            {/* <Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <Controller
-              name="addLinks"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <TextField
-                  size="small"
-                  select
-                  sx={{ width: "50%" }}
-                  label="Add Social Media Links"
-                  value={value}
-                  onChange={(e) => {
-                    onChange();
-                    handleSocialMedia(e.target.value);
-                  }}
-                >
-                  {socialMediaOptions.map((item, item_index) => (
-                    <MenuItem
-                      key={`SOCIALOPTIONS_${item_index}`}
-                      value={item.type}
-                    >
-                      {item.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
-            />
-          </Box>
-          <Box mt={3}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "25px" }}>
-              {socialMediaFields.map(({ type, value }, item_index) => (
-                <Box
-                  key={`SOCIALMEDIA_${item_index}`}
-                  sx={{ display: "flex", gap: "5px", alignItems: "center" }}
-                >
-                  {Icons(socialMediaMetaData[type].name)}
-                  <Controller
-                    name={`socialMedia.${item_index}.value`}
-                    control={control}
-                    render={({ field: { value, onChange } }) => (
-                      <TextField
-                        size="small"
-                        label={socialMediaMetaData[type].name}
-                        placeholder={socialMediaMetaData[type].placeholder}
-                        sx={{ width: "100%" }}
-                        onChange={onChange}
-                        value={value}
-                        variant="outlined"
-                        error={errors.label}
-                      />
-                    )}
-                  />
-                  <DeleteIcon onClick={() => removeSocialMedia(item_index)} />
-                </Box>
-              ))}
-            </Box>
-            {errorHandler(errors, "socialMedia")}
-          </Box>
-        </Box> */}
 
             <Box display="flex" gap={5}>
               <Box display="flex" alignItems="center">
