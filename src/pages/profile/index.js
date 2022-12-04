@@ -23,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 import { authActions } from "../../redux/slice/auth-slice.js";
 import { fetchEnterprise } from "../../redux/actions/auth-actions";
 
+import logoTitleImg from "../../assets/images/logo-title.svg";
+
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4"];
 
 function getStepContent(step) {
@@ -92,7 +94,7 @@ export default function Profile() {
       <Box className="profile-stepper-container">
         <AppBar
           position="absolute"
-          color="default"
+          color="primary"
           elevation={0}
           sx={{
             position: "relative",
@@ -100,55 +102,16 @@ export default function Profile() {
           }}
         >
           <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Complete your Profile
+            <Box sx={{ padding: "10px", flexGrow: 1 }}>
+              <img height="35px" src={logoTitleImg} alt="" />
+            </Box>
+            <Typography mr={3} variant="body1" color="inherit" noWrap>
+              Contact
             </Typography>
           </Toolbar>
         </AppBar>
-        <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-          <Paper
-            variant="outlined"
-            sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
-          >
-            <Typography component="h1" variant="h4" align="center">
-              Complete your Profile
-            </Typography>
 
-            <Box>
-              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 4 }}>
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-            </Box>
-
-            <React.Fragment>
-              {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Typography variant="h5" gutterBottom>
-                    🥳 Congratulations Your Profile is Complete
-                  </Typography>
-
-                  <Box display="flex" mt={3} gap={2}>
-                    <Button
-                      variant="outlined"
-                      onClick={() => dispatch(authActions.handleBack())}
-                    >
-                      back
-                    </Button>
-                    <Button onClick={handleClickDashboard} variant="contained">
-                      go to dashboard
-                    </Button>
-                  </Box>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
-              )}
-            </React.Fragment>
-          </Paper>
-        </Container>
+        <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
       </Box>
     </Box>
   );

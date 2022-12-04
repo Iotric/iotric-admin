@@ -9,6 +9,8 @@ import {
   Button,
   IconButton,
   Grid,
+  Container,
+  Paper,
 } from "@mui/material";
 import "./metadata.scss";
 
@@ -200,67 +202,72 @@ const Step2 = () => {
     }
   };
 
-  console.log(errors);
-
   return (
-    <Box component="form" onSubmit={handleSubmit(handleMetaFormNext)}>
-      <Box className="step2Details">
-        {/* {JSON.stringify(watch())} */}
-        <Box>
-          <Controller
-            name="tlds"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Autocomplete
-                freeSolo
-                multiple
-                options={[]}
-                value={value}
-                onChange={(event, values) => onChange(values)}
-                renderTags={(value, getTagProps) =>
-                  value.map((option, index) => (
-                    <Chip
-                      key={`TLDS_CHIP_${option}_${index}`}
-                      color="primary"
-                      variant="outlined"
-                      value={value}
-                      label={option}
-                      {...getTagProps({ index })}
-                    />
-                  ))
-                }
-                renderInput={(params) => (
+    <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+      <Paper elevation={2} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+        <Typography fontWeight="500" align="center" variant="h5">
+          Basic Info
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit(handleMetaFormNext)}>
+          <Box className="step2Details">
+            {/* {JSON.stringify(watch())} */}
+            <Box>
+              <Controller
+                name="tlds"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <Autocomplete
+                    freeSolo
+                    multiple
+                    options={[]}
+                    value={value}
+                    onChange={(event, values) => onChange(values)}
+                    renderTags={(value, getTagProps) =>
+                      value.map((option, index) => (
+                        <Chip
+                          key={`TLDS_CHIP_${option}_${index}`}
+                          color="primary"
+                          variant="outlined"
+                          value={value}
+                          label={option}
+                          {...getTagProps({ index })}
+                        />
+                      ))
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        helperText="e.g .btc"
+                        {...params}
+                        size="small"
+                        label="TLDS"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                )}
+              />
+              {errorHandler(errors, "tlds")}
+            </Box>
+
+            <Box>
+              <Controller
+                name="domainLimit"
+                control={control}
+                render={({ field: { value, onChange } }) => (
                   <TextField
-                    helperText="e.g .btc"
-                    {...params}
-                    label="tlds"
+                    value={value}
+                    onChange={onChange}
+                    type="number"
+                    size="small"
+                    label="Domain Limit"
                     variant="outlined"
                   />
                 )}
               />
-            )}
-          />
-          {errorHandler(errors, "tlds")}
-        </Box>
+              {errorHandler(errors, "domainLimit")}
+            </Box>
 
-        <Box>
-          <Controller
-            name="domainLimit"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <TextField
-                value={value}
-                onChange={onChange}
-                type="number"
-                label="Domain Limit"
-                variant="outlined"
-              />
-            )}
-          />
-          {errorHandler(errors, "domainLimit")}
-        </Box>
-
-        {/* <Box>
+            {/* <Box>
           <Box display="flex" alignItems="center" gap={1}>
             <Controller
               name="addLinks"
@@ -320,210 +327,220 @@ const Step2 = () => {
             {errorHandler(errors, "socialMedia")}
           </Box>
         </Box> */}
-        
-        <Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <Typography component="h4">Add Key</Typography>
-            <Fab
-              onClick={handleAddKey}
-              variant="extended"
-              size="small"
-              color="primary"
-              aria-label="add"
-            >
-              <AddIcon />
-            </Fab>
-          </Box>
-          <Box mt={2}>
-            {additionalInfoFields.map((item, item_index) => (
-              <Accordion
-                key={`KEY_${item_index}`}
-                expanded={expanded === `Key_${item_index}`}
-                onChange={handleChange(`Key_${item_index}`)}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1bh-content"
-                  id="panel1bh-header"
-                >
-                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    Key {item_index}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box>
-                    <Controller
-                      name={`additionalInfo.${item_index}.label`}
-                      control={control}
-                      render={({ field: { value, onChange } }) => (
-                        <TextField
-                          size="small"
-                          label="Label"
-                          sx={{ width: "100%" }}
-                          onChange={onChange}
-                          value={value}
-                          variant="outlined"
-                          error={errors.label}
-                        />
-                      )}
-                    />
-                  </Box>
 
-                  <Box my={2}>
-                    <Controller
-                      name={`additionalInfo.${item_index}.key`}
-                      control={control}
-                      render={({ field: { value, onChange } }) => (
-                        <TextField
-                          size="small"
-                          sx={{ width: "100%" }}
-                          label="key/symbol"
-                          onChange={onChange}
-                          value={value}
-                          variant="outlined"
-                          error={errors.label}
-                        />
-                      )}
-                    />
-                  </Box>
-
-                  <Box my={2}>
-                    <Controller
-                      name={`additionalInfo.${item_index}.type`}
-                      control={control}
-                      render={({ field: { value, onChange } }) => (
-                        <TextField
-                          size="small"
-                          select
-                          sx={{ width: "100%" }}
-                          value={value}
-                          label="Type"
-                          onChange={onChange}
-                        >
-                          <MenuItem value="url">URL</MenuItem>
-                          <MenuItem value="text">Text</MenuItem>
-                          <MenuItem value="address">Address</MenuItem>
-                          <MenuItem value="folder">Folder</MenuItem>
-                        </TextField>
-                      )}
-                    />
-                  </Box>
-                  <Box>
-                    <IconButton>
-                      <DeleteIcon
-                        onClick={() => removeAdditionalInfo(item_index)}
-                        sx={{ color: "#E63946" }}
-                      />
-                    </IconButton>
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Box>
-        </Box>
-
-        <Box display="flex" gap={5}>
-          <Box display="flex" alignItems="center">
-            <Controller
-              name="restrictedSignup"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <Checkbox
-                  checked={value}
-                  onChange={(e) => onChange(e.target.checked)}
-                />
-              )}
-            />
-
-            <Typography component="p" variant="body1">
-              Restricted Signup
-            </Typography>
-          </Box>
-          {errorHandler(errors, "restrictedSignup")}
-        </Box>
-
-        {WatchRestrictedSignup ? (
-          <Box>
-            <Controller
-              name="allowedEmailType"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Autocomplete
-                  freeSolo
-                  multiple
-                  options={[]}
-                  value={value}
-                  onChange={(event, values) => onChange(values)}
-                  renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                      <Chip
-                        key={`EMAILTYPE_CHIP_${option}_${index}`}
-                        variant="outlined"
-                        label={option}
-                        {...getTagProps({ index })}
-                      />
-                    ))
-                  }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      helperText="e.g @iotric.com"
-                      label="Allowed Email Type"
-                      variant="outlined"
+            <Box display="flex" gap={5}>
+              <Box display="flex" alignItems="center">
+                <Controller
+                  name="restrictedSignup"
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <Checkbox
+                      checked={value}
+                      onChange={(e) => onChange(e.target.checked)}
                     />
                   )}
                 />
-              )}
-            />
-            {errorHandler(errors, "allowedEmailType")}
+
+                <Typography component="p" variant="body1">
+                  Restricted Signup
+                </Typography>
+              </Box>
+              {errorHandler(errors, "restrictedSignup")}
+            </Box>
+
+            {WatchRestrictedSignup ? (
+              <Box>
+                <Controller
+                  name="allowedEmailType"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <Autocomplete
+                      freeSolo
+                      multiple
+                      options={[]}
+                      value={value}
+                      onChange={(event, values) => onChange(values)}
+                      renderTags={(value, getTagProps) =>
+                        value.map((option, index) => (
+                          <Chip
+                            key={`EMAILTYPE_CHIP_${option}_${index}`}
+                            variant="outlined"
+                            label={option}
+                            {...getTagProps({ index })}
+                          />
+                        ))
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          helperText="e.g @iotric.com"
+                          label="Allowed Email Type"
+                          variant="outlined"
+                        />
+                      )}
+                    />
+                  )}
+                />
+                {errorHandler(errors, "allowedEmailType")}
+              </Box>
+            ) : null}
+
+            <Box>
+              <Box display="flex" alignItems="center" gap={1}>
+                <Typography component="h4">Add Key</Typography>
+                <Fab
+                  onClick={handleAddKey}
+                  variant="extended"
+                  size="small"
+                  color="primary"
+                  aria-label="add"
+                >
+                  <AddIcon />
+                </Fab>
+              </Box>
+              <Box mt={2}>
+                {additionalInfoFields.map((item, item_index) => (
+                  <Accordion
+                    key={`KEY_${item_index}`}
+                    expanded={expanded === `Key_${item_index}`}
+                    onChange={handleChange(`Key_${item_index}`)}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id="panel1bh-header"
+                    >
+                      <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                        Key {item_index}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box>
+                        <Controller
+                          name={`additionalInfo.${item_index}.label`}
+                          control={control}
+                          render={({ field: { value, onChange } }) => (
+                            <TextField
+                              size="small"
+                              label="Label"
+                              sx={{ width: "100%" }}
+                              onChange={onChange}
+                              value={value}
+                              variant="outlined"
+                              error={errors.label}
+                            />
+                          )}
+                        />
+                      </Box>
+
+                      <Box my={4}>
+                        <Controller
+                          name={`additionalInfo.${item_index}.key`}
+                          control={control}
+                          render={({ field: { value, onChange } }) => (
+                            <TextField
+                              size="small"
+                              sx={{ width: "100%" }}
+                              label="key/symbol"
+                              onChange={onChange}
+                              value={value}
+                              variant="outlined"
+                              error={errors.label}
+                            />
+                          )}
+                        />
+                      </Box>
+
+                      <Box my={4}>
+                        <Controller
+                          name={`additionalInfo.${item_index}.type`}
+                          control={control}
+                          render={({ field: { value, onChange } }) => (
+                            <TextField
+                              size="small"
+                              select
+                              sx={{ width: "100%" }}
+                              value={value}
+                              label="Type"
+                              onChange={onChange}
+                            >
+                              <MenuItem value="url">URL</MenuItem>
+                              <MenuItem value="text">Text</MenuItem>
+                              <MenuItem value="address">Address</MenuItem>
+                              <MenuItem value="folder">Folder</MenuItem>
+                            </TextField>
+                          )}
+                        />
+                      </Box>
+                      <Box>
+                        <IconButton>
+                          <DeleteIcon
+                            onClick={() => removeAdditionalInfo(item_index)}
+                            sx={{ color: "#E63946" }}
+                          />
+                        </IconButton>
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
+                ))}
+              </Box>
+            </Box>
+
+            <Typography variant="body1">Add social media</Typography>
+
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <SocialMedia
+                  Icon={<TwitterIcon style={{ color: "#00ACEE" }} />}
+                >
+                  Connect to Twitter
+                </SocialMedia>
+              </Grid>
+              <Grid item xs={6}>
+                <SocialMedia
+                  Icon={<FacebookIcon style={{ color: "#3B5998" }} />}
+                >
+                  Connect to Facebook
+                </SocialMedia>
+              </Grid>
+              <Grid item xs={6}>
+                <SocialMedia
+                  Icon={<LinkedInIcon style={{ color: "#0077B5" }} />}
+                >
+                  Connect to LinkedIn
+                </SocialMedia>
+              </Grid>
+
+              <Grid item xs={6}>
+                <SocialMedia Icon={<InstagramIcon />}>
+                  Connect to Instagram
+                </SocialMedia>
+              </Grid>
+            </Grid>
           </Box>
-        ) : null}
-
-        <Typography variant="body1">Add social media</Typography>
-
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <SocialMedia Icon={<TwitterIcon style={{ color: "#00ACEE" }} />}>
-              Connect to Twitter
-            </SocialMedia>
-          </Grid>
-          <Grid item xs={6}>
-            <SocialMedia Icon={<FacebookIcon style={{ color: "#3B5998" }} />}>
-              Connect to Facebook
-            </SocialMedia>
-          </Grid>
-          <Grid item xs={6}>
-            <SocialMedia Icon={<LinkedInIcon style={{ color: "#0077B5" }} />}>
-              Connect to LinkedIn
-            </SocialMedia>
-          </Grid>
-
-          <Grid item xs={6}>
-            <SocialMedia Icon={<InstagramIcon />}>
-              Connect to Instagram
-            </SocialMedia>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          sx={{ mt: 1, ml: 1 }}
-          onClick={() => dispatch(authActions.handleBack())}
-        >
-          Back
-        </Button>
-        {/* <Button
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              sx={{ mt: 1, ml: 1 }}
+              onClick={() => dispatch(authActions.handleBack())}
+            >
+              Back
+            </Button>
+            {/* <Button
           sx={{ mt: 1, ml: 1 }}
           onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
         >
           Update
         </Button> */}
-        {/* <Button sx={{ mt: 1, ml: 1 }} type="submit">
+            {/* <Button sx={{ mt: 1, ml: 1 }} type="submit">
           Submit
         </Button> */}
-        <Button onClick={() => dispatch(authActions.handleNext())}>Next</Button>
-      </Box>
-    </Box>
+            <Button onClick={() => dispatch(authActions.handleNext())}>
+              Next
+            </Button>
+          </Box>
+        </Box>
+      </Paper>
+    </Container>
   );
 };
 
