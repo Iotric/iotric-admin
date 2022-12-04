@@ -1,18 +1,27 @@
-import { Box, Grid, Typography, Button, Paper, Container } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Paper,
+  Container,
+  RadioGroup,
+} from "@mui/material";
 import React from "react";
 import {
   CustomArrowButton,
   CustomCheckbox,
 } from "../../../utils/UI/components";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
+import CustomRadioButton from "../../../utils/UI/components/CustomRadioButton";
 
 const Enable = () => {
   const dispatch = useDispatch();
-  const { control } = useForm({
+  const { control, watch } = useForm({
     defaultValues: {
       componentsEnabled: {
         premiumDomain: false,
@@ -20,26 +29,32 @@ const Enable = () => {
         discountingModule: false,
         userAuthMfa: false,
       },
-      chainSupport: {
-        etherium: false,
-        xinfin: false,
-        polygon: false,
-        other: false,
-      },
+      chainSupport: "",
       landingPageTemplate: {
         domainSearch: false,
         premiumDomain: false,
       },
     },
   });
+
+  const watchChainSupport = watch("chainSupport");
+
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-      <Paper elevation={2} sx={{ my: { xs: 3, md: 2 }, p: { xs: 2, md: 3 } }}>
+      <Paper
+        elevation={2}
+        sx={{
+          my: { xs: 3, md: 2 },
+          px: { xs: 3, md: 10 },
+          py: { xs: 2, md: 3 },
+        }}
+      >
         <Box>
           <Box>
             <Typography my={1} fontWeight="500" align="center" variant="h5">
               Components to enable
             </Typography>
+            {/* {JSON.stringify(watch())} */}
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <CustomCheckbox
@@ -79,28 +94,52 @@ const Enable = () => {
             <Typography my={2} fontWeight="500" align="center" variant="h5">
               Chain support
             </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <CustomCheckbox name="chainSupport.etherium" control={control}>
-                  Etherium
-                </CustomCheckbox>
-              </Grid>
-              <Grid item xs={6}>
-                <CustomCheckbox name="chainSupport.xinfin" control={control}>
-                  Xinfin
-                </CustomCheckbox>
-              </Grid>
-              <Grid item xs={6}>
-                <CustomCheckbox name="chainSupport.polygon" control={control}>
-                  Polygon
-                </CustomCheckbox>
-              </Grid>
-              <Grid item xs={6}>
-                <CustomCheckbox name="chainSupport.other" control={control}>
-                  Other
-                </CustomCheckbox>
-              </Grid>
-            </Grid>
+            <Controller
+              control={control}
+              name="chainSupport"
+              render={({ field }) => (
+                <RadioGroup {...field}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <CustomRadioButton
+                        selectedItem={watchChainSupport}
+                        value="etherium"
+                        control={control}
+                      >
+                        Etherium
+                      </CustomRadioButton>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <CustomRadioButton
+                        selectedItem={watchChainSupport}
+                        value="xinfin"
+                        control={control}
+                      >
+                        Xinfin
+                      </CustomRadioButton>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <CustomRadioButton
+                        selectedItem={watchChainSupport}
+                        value="polygon"
+                        control={control}
+                      >
+                        Polygon
+                      </CustomRadioButton>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <CustomRadioButton
+                        selectedItem={watchChainSupport}
+                        value="other"
+                        control={control}
+                      >
+                        Other
+                      </CustomRadioButton>
+                    </Grid>
+                  </Grid>
+                </RadioGroup>
+              )}
+            />
           </Box>
 
           <Box>

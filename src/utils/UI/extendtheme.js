@@ -141,6 +141,7 @@ export const theme = createTheme({
     MuiCheckbox: {
       styleOverrides: {
         colorPrimary: {
+          color: "#1985a1",
           [`&.${checkboxClasses.checked}`]: {
             color: "#6300FF",
           },
@@ -150,7 +151,7 @@ export const theme = createTheme({
     MuiRadio: {
       styleOverrides: {
         root: {
-          // border: "1px solid blue",
+          color: "#1985a1",
           "&.Mui-checked": {
             color: "#6300FF",
           },
@@ -160,9 +161,9 @@ export const theme = createTheme({
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          marginTop: spacing(2)
-        }
-      }
-    }
+          marginTop: spacing(2),
+        },
+      },
+    },
   },
 });
