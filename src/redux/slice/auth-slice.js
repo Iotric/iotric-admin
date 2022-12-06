@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
+    industryType: {},
     firstName: "",
     lastName: "",
     role: "",
@@ -16,10 +17,11 @@ const authSlice = createSlice({
     brandLogo: "",
     brandText: "",
     favicon: "",
-    themeColor: "#000000",
+    themePrimaryColor: "#000000",
+    themeSecondaryColor: "#000000",
     homepageH1Title: "",
     tlds: [],
-    socialMedia: [],
+    socialMedia: {},
     domainLimit: 1000,
     restrictedSignup: false,
     allowedEmailType: [],
@@ -74,7 +76,7 @@ const authSlice = createSlice({
       localStorage.removeItem("user-token");
       localStorage.removeItem("enterpriseId");
       localStorage.removeItem("metadataId");
-      localStorage.clear()
+      localStorage.clear();
     },
     setLoadingTrue(state) {
       state.isLoading = true;
@@ -86,14 +88,19 @@ const authSlice = createSlice({
       state.completionIndicator = response.payload.completionIndicator;
       state.brandText = response.payload.brandText;
       state.homepageH1Title = response.payload.homepageH1Title;
-      state.themeColor = response.payload.themeColor;
+      state.themePrimaryColor = response.payload.themePrimaryColor;
+      state.themeSecondaryColor = response.payload.themeSecondaryColor;
       state.organizationName = response.payload.organizationName;
+    },
+    setIndustryType(state, response) {
+      state.industryType = response.payload.industryType;
     },
     setProfileData(state, response) {
       state.completionIndicator = response.payload.completionIndicator;
       state.brandText = response.payload.brandText;
       state.homepageH1Title = response.payload.homepageH1Title;
-      state.themeColor = response.payload.themeColor;
+      state.themePrimaryColor = response.payload.themePrimaryColor;
+      state.themeSecondaryColor = response.payload.themeSecondaryColor;
     },
     setMetaData(state, response) {
       state.tlds = response.payload.tlds;

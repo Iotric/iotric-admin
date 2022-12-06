@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.scss";
 
 import {
@@ -36,7 +36,8 @@ const Step1 = () => {
   const authState = useSelector((state) => state.auth);
   const brandText = authState.brandText;
   const homepageH1Title = authState.homepageH1Title;
-  const themeColor = authState.themeColor;
+  const themePrimaryColor = authState.themePrimaryColor;
+  const themeSecondaryColor = authState.themeSecondaryColor;
 
   const {
     register,
@@ -49,7 +50,8 @@ const Step1 = () => {
     defaultValues: {
       brandText: "",
       homepageH1Title: "",
-      themeColor: "#000000",
+      themePrimaryColor: "#000000",
+      themeSecondaryColor: "#000000",
       favicon: null,
       brandLogo: null,
     },
@@ -64,7 +66,8 @@ const Step1 = () => {
     reset({
       brandText,
       homepageH1Title,
-      themeColor,
+      themePrimaryColor,
+      themeSecondaryColor,
     });
   }, [authState]);
 
@@ -198,7 +201,7 @@ const Step1 = () => {
               >
                 <Typography>Primary Color</Typography>
                 <Controller
-                  name="themeColor"
+                  name="themePrimaryColor"
                   control={control}
                   render={({ field: { value, onChange } }) => (
                     <MuiColorInput
@@ -207,11 +210,11 @@ const Step1 = () => {
                       size="small"
                       onChange={onChange}
                       value={value}
-                      error={errors.themeColor}
+                      error={errors.themePrimaryColor}
                     />
                   )}
                 />
-                {errorHandler(errors, "themeColor")}
+                {errorHandler(errors, "themePrimaryColor")}
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -224,7 +227,7 @@ const Step1 = () => {
                 <Typography>Secondary Color</Typography>
 
                 <Controller
-                  name="themeColor"
+                  name="themeSecondaryColor"
                   control={control}
                   render={({ field: { value, onChange } }) => (
                     <MuiColorInput
@@ -233,11 +236,11 @@ const Step1 = () => {
                       size="small"
                       onChange={onChange}
                       value={value}
-                      error={errors.themeColor}
+                      error={errors.themeSecondaryColor}
                     />
                   )}
                 />
-                {errorHandler(errors, "themeColor")}
+                {errorHandler(errors, "themeSecondaryColor")}
               </Box>
             </Grid>
           </Grid>

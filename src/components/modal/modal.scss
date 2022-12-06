@@ -1,0 +1,24 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal-paper {
+    height: 200px;
+    width: 400px;
+    padding: 20px;
+    border-radius: 16px;
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-input {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+  }
+}

@@ -45,10 +45,20 @@ export const profileStep1Schema = yup.object().shape({
     .label("Brand Text"),
   // brandLogo: yup.string(),
   // favicon: yup.string(),
-  themeColor: yup.string().label("Theme Color").matches(THEMECOLOR_PATTERN, {
-    message: "Only HexCode color format is allowed",
-    excludeEmptyString: true,
-  }),
+  themePrimaryColor: yup
+    .string()
+    .label("Theme Primary Color")
+    .matches(THEMECOLOR_PATTERN, {
+      message: "Only HexCode color format is allowed",
+      excludeEmptyString: true,
+    }),
+  themeSecondaryColor: yup
+    .string()
+    .label("Theme Secondary Color")
+    .matches(THEMECOLOR_PATTERN, {
+      message: "Only HexCode color format is allowed",
+      excludeEmptyString: true,
+    }),
   primaryAdmin: yup.boolean(),
   homepageH1Title: yup
     .string()

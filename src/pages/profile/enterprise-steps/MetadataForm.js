@@ -53,17 +53,34 @@ import {
   CustomArrowButton,
   CustomCheckbox,
 } from "../../../utils/UI/components";
+import CustomModal from "../../../components/modal/CustomModal";
 
-const Icons = (name) => {
-  switch (name) {
+const Icons = (type) => {
+  switch (type) {
     case "Facebook":
-      return <FacebookIcon />;
+      return {
+        icon: <FacebookIcon style={{ color: "#3B5998" }} />,
+        name: "facebook",
+        placeholder: "https://facebook.com/yourusername",
+      };
     case "LinkedIn":
-      return <LinkedInIcon />;
+      return {
+        icon: <LinkedInIcon style={{ color: "#0077B5" }} />,
+        name: "linkedin",
+        placeholder: "https://linkedin.com/in/yourusername",
+      };
     case "Twitter":
-      return <TwitterIcon />;
+      return {
+        icon: <TwitterIcon style={{ color: "#00ACEE" }} />,
+        name: "twitter",
+        placeholder: "https://twitter.com/yourusername",
+      };
     case "Instagram":
-      return <InstagramIcon />;
+      return {
+        icon: <InstagramIcon />,
+        name: "instagram",
+        placeholder: "https://instagram.com/yourusername",
+      };
     default:
       return <FacebookIcon />;
   }
@@ -88,11 +105,9 @@ const Step2 = () => {
     control,
     watch,
     reset,
-    getValues,
-    setValue,
   } = useForm({
     defaultValues: {
-      socialMedia: [],
+      socialMedia: { facebook: "", twitter: "", instagram: "", linkedin: "" },
       tlds: [],
       restrictedSignup: false,
       allowedEmailType: [],
@@ -112,16 +127,18 @@ const Step2 = () => {
     name: "additionalInfo",
   });
 
-  const {
-    fields: socialMediaFields,
-    append: appendSocialMedia,
-    remove: removeSocialMedia,
-  } = useFieldArray({
-    control,
-    name: "socialMedia",
-  });
+  // const {
+  //   fields: socialMediaFields,
+  //   append: appendSocialMedia,
+  //   remove: removeSocialMedia,
+  // } = useFieldArray({
+  //   control,
+  //   name: "socialMedia",
+  // });
 
   const [expanded, setExpanded] = useState("key_-1");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [type, setType] = useState("");
 
   const WatchRestrictedSignup = watch("restrictedSignup");
 
@@ -140,32 +157,6 @@ const Step2 = () => {
       additionalInfo,
     });
   }, [authState]);
-
-  const socialMediaMetaData = {
-    facebook: {
-      name: "Facebook",
-      placeholder: "https://facebook.com/yourusername",
-    },
-    linkedin: {
-      name: "LinkedIn",
-      placeholder: "https://linkedin.com/in/yourusername",
-    },
-    twitter: {
-      name: "Twitter",
-      placeholder: "https://twitter.com/yourusername",
-    },
-    instagram: {
-      name: "Instagram",
-      placeholder: "https://instagram.com/yourusername",
-    },
-  };
-
-  const socialMediaOptions = [
-    { type: "facebook", name: "Facebook" },
-    { type: "linkedin", name: "LinkedIn" },
-    { type: "twitter", name: "Twitter" },
-    { type: "instagram", name: "Instagram" },
-  ];
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -187,8 +178,26 @@ const Step2 = () => {
     appendAdditionalInfo(newKey);
   };
 
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
+  const handleSocialIconClick = (type) => {
+    setType(type);
+    handleModalOpen();
+  };
+
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+      {/* {JSON.stringify(watch())} */}
+      <CustomModal
+        Icon={Icons(type).icon}
+        placeholder={Icons(type).placeholder}
+        openModal={modalOpen}
+        handleModalClose={handleModalClose}
+        control={control}
+        name={`socialMedia[${Icons(type).name}]`}
+      />
+
       <Paper
         elevation={2}
         sx={{
@@ -413,31 +422,51 @@ const Step2 = () => {
 
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <SocialMedia
-                  Icon={<TwitterIcon style={{ color: "#00ACEE" }} />}
+                <Box
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleSocialIconClick("Twitter")}
                 >
-                  Connect to Twitter
-                </SocialMedia>
+                  <SocialMedia
+                    Icon={<TwitterIcon style={{ color: "#00ACEE" }} />}
+                  >
+                    Connect to Twitter
+                  </SocialMedia>
+                </Box>
               </Grid>
               <Grid item xs={6}>
-                <SocialMedia
-                  Icon={<FacebookIcon style={{ color: "#3B5998" }} />}
+                <Box
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleSocialIconClick("Facebook")}
                 >
-                  Connect to Facebook
-                </SocialMedia>
+                  <SocialMedia
+                    Icon={<FacebookIcon style={{ color: "#3B5998" }} />}
+                  >
+                    Connect to Facebook
+                  </SocialMedia>
+                </Box>
               </Grid>
               <Grid item xs={6}>
-                <SocialMedia
-                  Icon={<LinkedInIcon style={{ color: "#0077B5" }} />}
+                <Box
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleSocialIconClick("LinkedIn")}
                 >
-                  Connect to LinkedIn
-                </SocialMedia>
+                  <SocialMedia
+                    Icon={<LinkedInIcon style={{ color: "#0077B5" }} />}
+                  >
+                    Connect to LinkedIn
+                  </SocialMedia>
+                </Box>
               </Grid>
 
               <Grid item xs={6}>
-                <SocialMedia Icon={<InstagramIcon />}>
-                  Connect to Instagram
-                </SocialMedia>
+                <Box
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleSocialIconClick("Instagram")}
+                >
+                  <SocialMedia Icon={<InstagramIcon />}>
+                    Connect to Instagram
+                  </SocialMedia>
+                </Box>
               </Grid>
             </Grid>
           </Box>

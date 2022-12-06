@@ -47,7 +47,7 @@ function AppNew() {
             <Route path="/reset" element={<Reset />} />
           </Route>
 
-          <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="/dashboard" >
             <Route index element={<Dashboard />} />
             <Route path="edit-profile" element={<EditProfileStepper />} />
             <Route path="organization" element={<Organization />} />

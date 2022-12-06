@@ -147,18 +147,9 @@ const Register = () => {
                 >
                   <Box>
                     <CustomInputField
-                      name="organizationName"
-                      label="Organization Name *"
-                      placeholder="Enter Company name"
-                      control={control}
-                    />
-                    {errorHandler(errors, "organizationName")}
-                  </Box>
-
-                  <Box>
-                    <CustomInputField
                       name="firstName"
                       label="First Name *"
+                      placeholder="Enter First name"
                       control={control}
                     />
                     {errorHandler(errors, "firstName")}
@@ -168,9 +159,20 @@ const Register = () => {
                     <CustomInputField
                       name="lastName"
                       label="Last Name *"
+                      placeholder="Enter Last name"
                       control={control}
                     />
                     {errorHandler(errors, "lastName")}
+                  </Box>
+
+                  <Box>
+                    <CustomInputField
+                      name="organizationName"
+                      label="Organization Name *"
+                      placeholder="Enter Company name"
+                      control={control}
+                    />
+                    {errorHandler(errors, "organizationName")}
                   </Box>
 
                   <Box>

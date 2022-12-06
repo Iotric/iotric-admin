@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./industry.scss";
 
 import { Box, Grid, Typography, Container, Paper } from "@mui/material";
@@ -9,13 +9,17 @@ import {
   CustomArrowButton,
 } from "../../../utils/UI/components";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
 
 const IndustoryTypeForm = () => {
   const dispatch = useDispatch();
 
-  const { control, watch } = useForm({
+  // authState
+  const authState = useSelector((store) => store.auth);
+  const industryType = authState.industryType;
+
+  const { control, watch, handleSubmit , reset} = useForm({
     defaultValues: {
       industryType: {
         nfts: false,
@@ -30,15 +34,27 @@ const IndustoryTypeForm = () => {
     },
   });
 
+  // On Created
+  useEffect(() => {
+    reset({
+      industryType
+    });
+  }, [authState]);
+
+  const handleFormNext = (data) => {
+    dispatch(authActions.setIndustryType(data));
+    dispatch(authActions.handleNext());
+  };
+
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
       <Paper elevation={2} sx={{ my: { xs: 3, md: 10 }, p: { xs: 3, md: 5 } }}>
-        <Box component="form">
+        <Box component="form" onSubmit={handleSubmit(handleFormNext)}>
           {/* {JSON.stringify(watch())} */}
           <Typography fontWeight="500" align="center" variant="h5">
             What is your industry type?
           </Typography>
-          <Grid mt={3} mb={4} container xs={12} spacing={2}>
+          <Grid mt={3} mb={4} container spacing={2}>
             <Grid item xs={6}>
               <CustomCheckbox name={`industryType.nfts`} control={control}>
                 Non-fungible tokens (NFTs)
@@ -96,11 +112,7 @@ const IndustoryTypeForm = () => {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="center" alignItems="center">
-            <CustomArrowButton
-              onClick={() => dispatch(authActions.handleNext())}
-            >
-              Next Step
-            </CustomArrowButton>
+            <CustomArrowButton type="submit">Next Step</CustomArrowButton>
           </Box>
         </Box>
       </Paper>

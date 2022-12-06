@@ -99,7 +99,9 @@ export const fetchEnterprise = () => {
 };
 
 export const updateProfileData = (data) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const store = getState();
+    const { industryType } = store.auth;
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
 
@@ -114,10 +116,12 @@ export const updateProfileData = (data) => {
       if (data.favicon && data.favicon.length > 0) {
         formData.append("favicon", data.favicon[0]);
       }
-      formData.append("themeColor", data.themeColor);
+      formData.append("themePrimaryColor", data.themePrimaryColor);
+      formData.append("themeSecondaryColor", data.themeSecondaryColor);
       if (data.homepageH1Title !== "") {
         formData.append("homepageH1Title", data.homepageH1Title);
       }
+      formData.append("industryType", JSON.stringify(industryType))
 
       const response = await axiosinstance.put(
         `enterprise/${id}/profile`,
@@ -150,7 +154,7 @@ export const createMetaData = (data) => {
     const token = localStorage.getItem("user-token");
 
     delete data.addLinks;
-    data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
+    // data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
 
     if (data.restrictedSignup && data.allowedEmailType.length === 0) {
       data.restrictedSignup = false;

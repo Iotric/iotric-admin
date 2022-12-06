@@ -15,12 +15,14 @@ import {
 
 import { Controller, useForm } from "react-hook-form";
 
+import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
 import CustomRadioButton from "../../../utils/UI/components/CustomRadioButton";
 
 const Enable = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { control, watch } = useForm({
     defaultValues: {
       componentsEnabled: {
@@ -38,6 +40,17 @@ const Enable = () => {
   });
 
   const watchChainSupport = watch("chainSupport");
+
+  const handleClickDashboard = () => {
+    dispatch(authActions.profileCompleteSuccess());
+    dispatch(authActions.setLoadingTrue());
+    setTimeout(() => {
+      navigate("/dashboard");
+      dispatch(authActions.handleReset());
+      dispatch(authActions.setLoadingFalse());
+    }, 1000);
+  };
+
 
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -170,7 +183,9 @@ const Enable = () => {
             <Button onClick={() => dispatch(authActions.handleBack())}>
               back
             </Button>
-            <CustomArrowButton>Continue to dashboard</CustomArrowButton>
+            <CustomArrowButton onClick={handleClickDashboard}>
+              Continue to dashboard
+            </CustomArrowButton>
           </Box>
         </Box>
       </Paper>

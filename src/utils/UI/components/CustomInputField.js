@@ -9,6 +9,7 @@ const CustomInputField = ({
   placeholder = "",
   type = "text",
   control,
+  ...rest
 }) => {
   return (
     <Controller
@@ -16,6 +17,7 @@ const CustomInputField = ({
       control={control}
       render={({ field: { value, onChange } }) => (
         <TextField
+          {...rest}
           value={value}
           onChange={onChange}
           type={type}
