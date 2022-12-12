@@ -111,7 +111,7 @@ const IndustoryTypeForm = () => {
               </CustomCheckbox>
             </Grid>
           </Grid>
-          <Box display="flex" justifyContent="center" alignItems="center">
+          <Box display="flex" justifyContent="flex-end" >
             <CustomArrowButton type="submit">Next Step</CustomArrowButton>
           </Box>
         </Box>

@@ -10,6 +10,7 @@ import {
   IconButton,
   Container,
   Paper,
+  Divider,
 } from "@mui/material";
 
 import { useForm, Controller } from "react-hook-form";
@@ -95,6 +96,7 @@ const Step1 = () => {
                       <TextField
                         label="Home Page Title"
                         size="small"
+                        placeholder="Enter platform name"
                         onChange={onChange}
                         value={value}
                         variant="outlined"
@@ -112,6 +114,7 @@ const Step1 = () => {
                     render={({ field: { value, onChange } }) => (
                       <TextField
                         label="Brand Text"
+                        placeholder="Enter Tagline"
                         size="small"
                         variant="outlined"
                         onChange={onChange}
@@ -127,6 +130,7 @@ const Step1 = () => {
                   <CustomMultilineInput
                     name="description"
                     label="Description"
+                    placeholder="Briefly describe about your organization"
                     control={control}
                   >
                     Description
@@ -188,25 +192,18 @@ const Step1 = () => {
               {errorHandler(errors, "favicon")}
             </Grid>
           </Grid>
-          <Typography px="20px" variant="body1">
-            Brand Colors
-          </Typography>
 
-          <Grid container p="20px">
-            <Grid item xs={6}>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography>Primary Color</Typography>
+          <Box className="brand-colors">
+            <Typography variant="body1">Brand Colors</Typography>
+            <Box className="brand-colors-box">
+              <Box display="flex" gap="12px" alignItems="center" ml={3}>
+                <Typography mt="20px">Primary Color</Typography>
                 <Controller
                   name="themePrimaryColor"
                   control={control}
                   render={({ field: { value, onChange } }) => (
                     <MuiColorInput
                       format="hex"
-                      label="Hex"
                       size="small"
                       onChange={onChange}
                       value={value}
@@ -216,15 +213,15 @@ const Step1 = () => {
                 />
                 {errorHandler(errors, "themePrimaryColor")}
               </Box>
-            </Grid>
-            <Grid item xs={6}>
-              <Box
-                px="20px"
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography>Secondary Color</Typography>
+
+              <Divider
+                className="divider"
+                orientation="vertical"
+                flexItem
+              ></Divider>
+
+              <Box px="20px" gap="12px" display="flex" alignItems="center">
+                <Typography mt="20px">Secondary Color</Typography>
 
                 <Controller
                   name="themeSecondaryColor"
@@ -232,7 +229,6 @@ const Step1 = () => {
                   render={({ field: { value, onChange } }) => (
                     <MuiColorInput
                       format="hex"
-                      label="Hex"
                       size="small"
                       onChange={onChange}
                       value={value}
@@ -242,10 +238,10 @@ const Step1 = () => {
                 />
                 {errorHandler(errors, "themeSecondaryColor")}
               </Box>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
-          <Box mt={2} display="flex" justifyContent="center">
+          <Box pt={2} mt={2} display="flex" justifyContent="flex-end">
             <Button type="submit">Save & Proceed</Button>
             <CustomArrowButton
               onClick={() => dispatch(authActions.handleNext())}

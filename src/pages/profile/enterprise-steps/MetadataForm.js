@@ -471,7 +471,7 @@ const Step2 = () => {
             </Grid>
           </Box>
 
-          <Box mt={2} display="flex" justifyContent="center">
+          <Box mt={2} display="flex" justifyContent="flex-end">
             <Button onClick={() => dispatch(authActions.handleBack())}>
               Back
             </Button>

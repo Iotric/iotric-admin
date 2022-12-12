@@ -179,7 +179,7 @@ const Enable = () => {
             </Grid>
           </Box>
 
-          <Box mt={4} display="flex" justifyContent="center">
+          <Box mt={4} display="flex" justifyContent="flex-end">
             <Button onClick={() => dispatch(authActions.handleBack())}>
               back
             </Button>
