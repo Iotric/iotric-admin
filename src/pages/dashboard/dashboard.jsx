@@ -5,6 +5,8 @@ import "./dashboard.scss";
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Table from "../../components/table/Table";
+
+import HotDomainsTable from "../../components/table/hot-domains/Table";
 import SameDataComposedChart from "../../components/chart/SameDataComposedChart";
 import CustomDrawer from "../../components/Drawer/CustomDrawer";
 
@@ -16,24 +18,31 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard">
-      <Sidebar />
-      <div className="dashboardContainer">
-        <Navbar />
-        <CustomDrawer />
-        <div className="widgets">
-          <Widget type="user" />
-          <Widget type="domain" />
-          <Widget type="total-api-request" />
-          <Widget type="premium" />
-        </div>
-        <div className="charts">
-          <Featured />
-          <SameDataComposedChart title="API Statistics" aspect={2 / 1} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Orders</div>
-          <Table />
+    <div>
+      <Navbar />
+
+      <div className="dashboard">
+        <Sidebar />
+        <div className="dashboardContainer">
+          <CustomDrawer />
+          <div className="widgets">
+            <Widget type="user" />
+            <Widget type="domain" />
+            <Widget type="total-api-request" />
+            <Widget type="premium" />
+          </div>
+          {/* <div className="charts">
+            <Featured />
+            <SameDataComposedChart title="API Statistics" aspect={2 / 1} />
+          </div> */}
+          <div className="listContainer">
+            <div className="listTitle">Hot selling domains</div>
+            <HotDomainsTable />
+          </div>
+          <div className="listContainer">
+            <div className="listTitle">Latest Orders</div>
+            <Table />
+          </div>
         </div>
       </div>
     </div>

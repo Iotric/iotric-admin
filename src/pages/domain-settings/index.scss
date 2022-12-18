@@ -1,0 +1,12 @@
+.domainSettings {
+  display: flex;
+  background-color: #eeeefe;
+  .domainSettingsContainer {
+    flex: 11;
+    .wrapper {
+      background-color: white;
+      margin: 30px;
+      height: 80vh;
+    }
+  }
+}

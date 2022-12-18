@@ -1,8 +1,9 @@
 .dashboard {
   display: flex;
+  background-color: #EEEEFE;
 
   .dashboardContainer {
-    flex: 6;
+    flex: 11;
 
     .widgets,
     .charts {
@@ -20,10 +21,11 @@
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
       padding: 20px;
       margin: 20px;
+      background-color: white;
 
       .listTitle {
-        font-weight: 500;
-        color: gray;
+        font-weight: 700;
+        color: black;
         margin-bottom: 15px;
       }
     }

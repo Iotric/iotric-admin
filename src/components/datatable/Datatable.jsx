@@ -41,9 +41,9 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New Admin
+        19 Contacts
         <Link to="/dashboard/admins/new" className="link">
-          Add New
+          Invite Contact
         </Link>
       </div>
       <DataGrid

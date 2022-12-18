@@ -21,6 +21,12 @@ const Reset = React.lazy(() => import("./pages/resetpassword/Reset"));
 const Contactus = React.lazy(() => import("./pages/contactus/Contactus"));
 
 const Dashboard = React.lazy(() => import("./pages/dashboard/dashboard"));
+const PremiumDomain = React.lazy(() => import("./pages/premium-domain"))
+const DomainSettings = React.lazy(() => import("./pages/domain-settings"))
+const Settings = React.lazy(() => import("./pages/settings"))
+
+
+
 const ProfileStepper = React.lazy(() => import("./pages/profile/"));
 const EditProfileStepper = React.lazy(() => import("./pages/editprofile/"));
 const Credentials = React.lazy(() => import("./pages/credentials/Credentials"));
@@ -47,8 +53,12 @@ function AppNew() {
             <Route path="/reset" element={<Reset />} />
           </Route>
 
-          <Route path="/dashboard" >
+          <Route path="/dashboard">
             <Route index element={<Dashboard />} />
+            <Route path="premium-domain" element={<PremiumDomain />} />
+            <Route path="domain-settings" element={<DomainSettings />} />
+            <Route path="settings" element={<Settings />} />
+
             <Route path="edit-profile" element={<EditProfileStepper />} />
             <Route path="organization" element={<Organization />} />
             <Route path="credentials" element={<Credentials />} />

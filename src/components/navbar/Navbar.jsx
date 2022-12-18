@@ -5,9 +5,11 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
-import { IconButton } from "@mui/material";
+import { IconButton, Box, Typography, Divider } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { dashboardActions } from "../../redux/slice/dashboard-slice";
+
+import brandLogo from "../../assets/images/brandLogo.svg";
 
 const Navbar = () => {
   // const { dispatch } = useContext(DarkModeContext);
@@ -16,7 +18,19 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="wrapper">
+      <Box className="navbar-welcome">
+        <Box py={2} pl={3} className="brand-logo">
+          <img src={brandLogo} alt="brand" />
+        </Box>
+        <Box className="brand-texts">
+          <Typography variant="h6" fontWeight="700">Good Morning David</Typography>
+          <Typography variant="body1">It's great to see you again</Typography>
+        </Box>
+      </Box>
+
+      <Divider />
+
+      <Box className="wrapper">
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
@@ -44,7 +58,7 @@ const Navbar = () => {
             </IconButton>
           </div>
         </div>
-      </div>
+      </Box>
     </div>
   );
 };

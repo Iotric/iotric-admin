@@ -1,13 +1,30 @@
 .navbar {
   height: 70px;
-  border-bottom: 0.5px solid rgb(231, 228, 228);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   font-size: 14px;
   color: #555;
+  background-color: #eeeefe;
+
+  .navbar-welcome {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    .brand-logo {
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    }
+
+    .brand-text {
+      color: black;
+    }
+  }
 
   .wrapper {
-    width: 100%;
     padding: 20px;
     display: flex;
     align-items: center;

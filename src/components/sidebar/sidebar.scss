@@ -1,8 +1,10 @@
 .sidebar {
-  flex: 1;
+  flex: 1.1;
   border-right: 0.5px solid rgb(230, 227, 227);
-  min-height: 100vh;
-  background-color: white;
+  min-height: 90vh;
+  background-color: #8324DB;
+  border-radius: 8px;
+  margin-left: 5px;
 
   .top {
     height: 38px;
@@ -23,7 +25,6 @@
   }
 
   .center {
-    padding-left: 10px;
 
     ul {
       list-style: none;
@@ -40,24 +41,26 @@
 
       li {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        padding: 5px;
+        justify-content: center;
+        padding: 15px;
         cursor: pointer;
 
         &:hover {
-          background-color: #ece8ff;
+          background-color: black;
         }
 
         .icon {
-          font-size: 18px;
-          color: #7451f8;
+          font-size: 30px;
+          color: white;
         }
 
         span{
             font-size: 13px;
             font-weight: 600;
-            color: #888;
-            margin-left: 10px;
+            color: white;
+            // margin-left: 10px;
         }
       }
     }

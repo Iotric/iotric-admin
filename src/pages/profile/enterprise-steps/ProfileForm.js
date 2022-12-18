@@ -242,15 +242,11 @@ const Step1 = () => {
           </Box>
 
           <Box pt={2} mt={2} display="flex" justifyContent="flex-end">
-            <Button type="submit">Save & Proceed</Button>
-            <CustomArrowButton
-              onClick={() => dispatch(authActions.handleNext())}
-            >
-              Next Step
-            </CustomArrowButton>
+            {/* <Button>Save & Proceed</Button> */}
             <Button onClick={() => dispatch(authActions.handleBack())}>
               Back
             </Button>
+            <CustomArrowButton type="submit">Next Step</CustomArrowButton>
           </Box>
         </Box>
       </Paper>

@@ -104,14 +104,15 @@ const authSlice = createSlice({
     },
     setMetaData(state, response) {
       state.tlds = response.payload.tlds;
-      state.socialMedia = response.payload.socialMedia.map((item) => {
-        const newObj = {
-          type: item.type,
-          value: item.value,
-        };
+      // state.socialMedia = response.payload.socialMedia.map((item) => {
+      //   const newObj = {
+      //     type: item.type,
+      //     value: item.value,
+      //   };
 
-        return newObj;
-      });
+      //   return newObj;
+      // });
+      state.socialMedia = response.payload.socialMedia;
       state.domainLimit = response.payload.domainLimit;
       state.restrictedSignup = response.payload.restrictedSignup;
       state.allowedEmailType = response.payload.allowedEmailType;

@@ -38,6 +38,34 @@ export const adminColumns = [
   },
 ];
 
+export const invitationColumns = [
+  { field: "id", headerName: "ID", width: 70 },
+  {
+    field: "contactName",
+    headerName: "Contact Name",
+    width: 230,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params.row.img} alt="avatar" />
+          {params.row.username}
+        </div>
+      );
+    },
+  },
+  {
+    field: "invitationStatus",
+    headerName: "Invitation Status",
+    width: 230,
+  },
+
+  {
+    field: "signupStatus",
+    headerName: "Signup Status",
+    width: 230,
+  },
+];
+
 //temporary data
 export const adminRows = [
   {

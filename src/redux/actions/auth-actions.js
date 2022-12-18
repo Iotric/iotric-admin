@@ -122,6 +122,7 @@ export const updateProfileData = (data) => {
         formData.append("homepageH1Title", data.homepageH1Title);
       }
       formData.append("industryType", JSON.stringify(industryType))
+      formData.append("description", data.description)
 
       const response = await axiosinstance.put(
         `enterprise/${id}/profile`,

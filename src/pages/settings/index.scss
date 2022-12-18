@@ -1,0 +1,12 @@
+.settings {
+  display: flex;
+  background-color: #eeeefe;
+  .settingsContainer {
+    flex: 11;
+    .wrapper {
+      background-color: white;
+      margin: 30px;
+      height: 80vh;
+    }
+  }
+}
