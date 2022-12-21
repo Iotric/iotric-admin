@@ -4,9 +4,21 @@
   .domainSettingsContainer {
     flex: 11;
     .wrapper {
+      .bold {
+        font-weight: 700;
+      }
       background-color: white;
       margin: 30px;
       height: 80vh;
+      padding-top: 20px;
+      padding-bottom: 30px;
+      padding-right: 25px;
+      padding-left: 25px;
+      .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
 }

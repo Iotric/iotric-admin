@@ -15,7 +15,7 @@ const PremiumDomain = () => {
             <Box className="search-bar">
               <Box className="search">
                 <TextField
-                  placeholder="type here domain"
+                  placeholder="Type to search domains"
                   size="small"
                   vairant="outline"
                 />
@@ -39,42 +39,60 @@ const PremiumDomain = () => {
               </Box>
             </Box>
 
-            <Grid className="grid-wrapper" mt={4} container>
-              <Grid item xs={6} className="domain-status-box">
-                <Box>
-                  <Typography>
-                    teacher<span className="bold">.com</span>
-                  </Typography>
-                </Box>
-                <Box className="domain-metadata">
-                  <Typography>$15.00</Typography>
-                  <Button variant="outlined">Reserve</Button>
-                </Box>
-              </Grid>
-              <Grid item xs={6} className="domain-status-box">
-                <Box>
-                  <Typography>
-                    teacher<span className="bold">.com</span>
-                  </Typography>
-                </Box>
-                <Box className="domain-metadata">
-                  <Typography>$15.00</Typography>
-                  <Button variant="outlined">Reserve</Button>
+            <Grid mt={4} container spacing={1}>
+              <Grid item xs={6}>
+                <Box className="domain-status-box">
+                  <Box>
+                    <Typography>
+                      teacher<span className="bold">.com</span>
+                    </Typography>
+                  </Box>
+                  <Box className="domain-metadata">
+                    <Typography>$15.00</Typography>
+                    <Button variant="outlined">Reserve</Button>
+                  </Box>
                 </Box>
               </Grid>
-              <Grid item xs={6} className="domain-status-box">
-                <Box>
-                  <Typography>
-                    teacher<span className="bold">.com</span>
-                  </Typography>
-                </Box>
-                <Box className="domain-metadata">
-                  <Typography>$15.00</Typography>
-                  <Button disabled variant="outlined">
-                    Unavailable
-                  </Button>
+              <Grid item xs={6}>
+                <Box className="domain-status-box">
+                  <Box>
+                    <Typography>
+                      teacher<span className="bold">.com</span>
+                    </Typography>
+                  </Box>
+                  <Box className="domain-metadata">
+                    <Typography>$15.00</Typography>
+                    <Button variant="outlined">Reserve</Button>
+                  </Box>
                 </Box>
               </Grid>
+              <Grid item xs={6}>
+                <Box className="domain-status-box">
+                  <Box>
+                    <Typography>
+                      iotric<span className="bold">.com</span>
+                    </Typography>
+                  </Box>
+                  <Box className="domain-metadata">
+                    <Typography>$15.00</Typography>
+                    <Button disabled variant="outlined">Unavailable</Button>
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="domain-status-box">
+                  <Box>
+                    <Typography>
+                      iotric<span className="bold">.com</span>
+                    </Typography>
+                  </Box>
+                  <Box className="domain-metadata">
+                    <Typography>$15.00</Typography>
+                    <Button disabled variant="outlined">Unavailable</Button>
+                  </Box>
+                </Box>
+              </Grid>
+              
             </Grid>
           </Box>
         </Box>

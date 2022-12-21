@@ -7,6 +7,47 @@
       background-color: white;
       margin: 30px;
       height: 80vh;
+      .brand-logo-wrapper {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
     }
+  }
+}
+
+.save-button {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.brand-colors {
+  padding-left: 20px;
+  padding-right: 20px;
+  .brand-colors-box {
+    display: flex;
+    border-radius: 7px;
+    border: 1px solid #cbcbcb;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    width: 900px;
+  }
+}
+
+hr.divider {
+  margin-top: 20px;
+}
+
+.logo-upload {
+  width: 400px;
+  border: 1px solid #cbcbcb;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-radius: 7px;
+  .logo-preview {
+    border-radius: 8px;
+    background-color: rgba(99, 0, 255, 0.1);
+    width: max-content;
   }
 }
