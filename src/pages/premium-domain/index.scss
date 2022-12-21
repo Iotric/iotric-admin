@@ -4,9 +4,61 @@
   .premiumDomainContainer {
     flex: 11;
     .wrapper {
+      .bold {
+        font-weight: 700;
+      }
       background-color: white;
       margin: 30px;
       height: 80vh;
+      padding-top: 20px;
+      padding-bottom: 30px;
+      padding-right: 70px;
+      padding-left: 70px;
+      .search-bar {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        justify-content: space-between;
+        button {
+          margin-top: 22px;
+        }
+        .search {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          input {
+            width: 700px;
+          }
+        }
+      }
+      .buttons-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .buttons-left,
+        .buttons-right {
+          display: flex;
+          gap: 10px;
+        }
+      }
+      // .grid-wrapper {
+      //   display: block;
+      // }
+      .domain-status-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 30px;
+        padding-left: 30px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        .domain-metadata {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+      }
     }
   }
 }
