@@ -48,7 +48,7 @@ const IndustoryTypeForm = () => {
 
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-      <Paper elevation={2} sx={{ my: { xs: 3, md: 10 }, p: { xs: 3, md: 5 } }}>
+      <Paper elevation={2} sx={{ my: { xs: 3, md: 7 }, p: { xs: 3, md: 5 } }}>
         <Box component="form" onSubmit={handleSubmit(handleFormNext)}>
           {/* {JSON.stringify(watch())} */}
           <Typography fontWeight="500" align="center" variant="h5">

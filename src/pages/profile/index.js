@@ -111,7 +111,20 @@ export default function Profile() {
           </Toolbar>
         </AppBar>
 
-        <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
+        <React.Fragment>
+          <Box className="stepper-box">
+            <Box className="stepper">
+              <Stepper activeStep={activeStep} sx={{ pt: 3 }}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Box>
+          </Box>
+          {getStepContent(activeStep)}
+        </React.Fragment>
       </Box>
     </Box>
   );

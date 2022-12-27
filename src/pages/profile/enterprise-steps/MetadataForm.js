@@ -168,7 +168,7 @@ const Step2 = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+    <Container component="main" maxWidth="md" sx={{ mt: 3,mb: 4 }}>
       {/* {JSON.stringify(watch())} */}
       <CustomModal
         Icon={Icons(type).icon}

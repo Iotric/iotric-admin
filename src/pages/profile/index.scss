@@ -2,5 +2,13 @@
   display: flex;
   .profile-stepper-container {
     flex: 6;
+    .stepper-box {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .stepper {
+        width: 600px;
+      }
+    }
   }
 }
