@@ -86,7 +86,7 @@ export const fetchEnterprise = () => {
           authorization: `Bearer ${token}`,
         },
       });
-      await dispatch(authActions.setEnterprise(response.data.result));
+      await dispatch(authActions.setProfileData(response.data.result));
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error);
@@ -121,8 +121,10 @@ export const updateProfileData = (data) => {
       if (data.homepageH1Title !== "") {
         formData.append("homepageH1Title", data.homepageH1Title);
       }
-      formData.append("industryType", JSON.stringify(industryType))
-      formData.append("description", data.description)
+      formData.append("industryType", JSON.stringify(industryType));
+      if (data.description !== "") {
+        formData.append("description", data.description);
+      }
 
       const response = await axiosinstance.put(
         `enterprise/${id}/profile`,
@@ -135,7 +137,7 @@ export const updateProfileData = (data) => {
       );
 
       dispatch(authActions.setProfileData(response.data.result));
-      toast.success("Profile Updated !!!");
+      // toast.success("Profile Updated !!!");
     } catch (err) {
       if (err.response?.data.error) {
         toast.error(err.response.data.error);
@@ -150,21 +152,44 @@ export const updateProfileData = (data) => {
 // Meta-Data
 
 export const createMetaData = (data) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const store = getState();
+    let {
+      tlds,
+      socialMedia,
+      restrictedSignup,
+      allowedEmailType,
+      domainLimit,
+      additionalInfo,
+    } = store.auth;
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
 
-    delete data.addLinks;
-    // data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
+    // cleaning empty strings from social media object
+    const socialMediaAsArray = Object.entries(socialMedia)
+    const socialMediaFiltered = socialMediaAsArray.filter(([key, value]) => value !== "")
+    socialMedia = Object.fromEntries(socialMediaFiltered)
 
-    if (data.restrictedSignup && data.allowedEmailType.length === 0) {
-      data.restrictedSignup = false;
+    if (restrictedSignup && allowedEmailType.length === 0) {
+      restrictedSignup = false;
     }
+
+    const newMetadata = {
+      tlds,
+      socialMedia,
+      restrictedSignup,
+      allowedEmailType,
+      domainLimit,
+      additionalInfo,
+      componentsEnabled: data.componentsEnabled,
+      chainSupport: data.chainSupport,
+      landingPageTemplate: data.landingPageTemplate,
+    };
 
     try {
       const response = await axiosinstance.post(
         `enterprise/${id}/meta-data`,
-        { ...data },
+        { ...newMetadata },
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -196,6 +221,7 @@ export const fetchMetaData = () => {
         },
       });
       await localStorage.setItem("metadataId", response.data.result._id);
+      console.log(response.data.result)
       dispatch(authActions.setMetaData(response.data.result));
     } catch (err) {
       // if (err.response.data.error) {
@@ -213,8 +239,10 @@ export const updateMetaData = (data) => {
     const id = localStorage.getItem("enterpriseId");
     const token = localStorage.getItem("user-token");
 
-    delete data.addLinks;
-    data.socialMedia = data.socialMedia.filter((item) => item.value !== "");
+   // cleaning empty strings from social media object
+    const socialMediaAsArray = Object.entries(data.socialMedia)
+    const socialMediaFiltered = socialMediaAsArray.filter(([key, value]) => value !== "")
+    data.socialMedia = Object.fromEntries(socialMediaFiltered)
 
     if (data.restrictedSignup && data.allowedEmailType.length === 0) {
       data.restrictedSignup = false;

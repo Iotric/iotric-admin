@@ -23,7 +23,7 @@ const IndustoryTypeForm = () => {
     defaultValues: {
       industryType: {
         nfts: false,
-        moneyTransfer: true,
+        moneyTransfer: false,
         smartContracts: false,
         iot: false,
         personalIdentitySecurity: false,

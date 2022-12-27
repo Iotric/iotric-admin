@@ -9,6 +9,7 @@ const authSlice = createSlice({
     role: "",
     email: "",
     organizationName: "",
+    description: "",
     isLoggedIn: false,
     isLoading: false,
     isProfileComplete: false,
@@ -21,7 +22,12 @@ const authSlice = createSlice({
     themeSecondaryColor: "#000000",
     homepageH1Title: "",
     tlds: [],
-    socialMedia: {},
+    socialMedia: {
+      linkedin: "",
+      facebook: "",
+      twitter: "",
+      instagram: "",
+    },
     domainLimit: 1000,
     restrictedSignup: false,
     allowedEmailType: [],
@@ -31,6 +37,17 @@ const authSlice = createSlice({
       profileForm: false,
       metaInfoForm: false,
       isMinted: false,
+    },
+    componentsEnabled: {
+      premiumDomain: false,
+      domainTransfer: false,
+      discountingModule: false,
+      userAuthMfa: false,
+    },
+    chainSupport: "",
+    landingPageTemplate: {
+      domainSearch: false,
+      premiumDomain: false,
     },
   },
   reducers: {
@@ -84,14 +101,6 @@ const authSlice = createSlice({
     setLoadingFalse(state) {
       state.isLoading = false;
     },
-    setEnterprise(state, response) {
-      state.completionIndicator = response.payload.completionIndicator;
-      state.brandText = response.payload.brandText;
-      state.homepageH1Title = response.payload.homepageH1Title;
-      state.themePrimaryColor = response.payload.themePrimaryColor;
-      state.themeSecondaryColor = response.payload.themeSecondaryColor;
-      state.organizationName = response.payload.organizationName;
-    },
     setIndustryType(state, response) {
       state.industryType = response.payload.industryType;
     },
@@ -101,22 +110,28 @@ const authSlice = createSlice({
       state.homepageH1Title = response.payload.homepageH1Title;
       state.themePrimaryColor = response.payload.themePrimaryColor;
       state.themeSecondaryColor = response.payload.themeSecondaryColor;
+      state.organizationName = response.payload.organizationName;
+      state.description = response.payload.description;
+      state.industryType = response.payload.industryType;
     },
-    setMetaData(state, response) {
+    setPreMetaData(state, response) {
       state.tlds = response.payload.tlds;
-      // state.socialMedia = response.payload.socialMedia.map((item) => {
-      //   const newObj = {
-      //     type: item.type,
-      //     value: item.value,
-      //   };
-
-      //   return newObj;
-      // });
       state.socialMedia = response.payload.socialMedia;
       state.domainLimit = response.payload.domainLimit;
       state.restrictedSignup = response.payload.restrictedSignup;
       state.allowedEmailType = response.payload.allowedEmailType;
       state.additionalInfo = response.payload.additionalInfo;
+    },
+    setMetaData(state, response) {
+      state.tlds = response.payload.tlds;
+      state.socialMedia = response.payload.socialMedia;
+      state.domainLimit = response.payload.domainLimit;
+      state.restrictedSignup = response.payload.restrictedSignup;
+      state.allowedEmailType = response.payload.allowedEmailType;
+      state.additionalInfo = response.payload.additionalInfo;
+      state.componentsEnabled = response.payload.componentsEnabled;
+      state.chainSupport = response.payload.chainSupport;
+      state.landingPageTemplate = response.payload.landingPageTemplate;
     },
     setActiveStep(state, step) {
       state.activeStep = step.payload;

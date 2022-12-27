@@ -5,7 +5,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
@@ -27,58 +27,77 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      {/* <Box p={2} className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <img className="logo" src={nexBlocLogo} alt="company_logo" />
-        </Link>
-      </Box>
-      <hr /> */}
       <div className="center">
         <ul>
           {/* <p className="title">MAIN</p> */}
-          <Link to="/dashboard" style={{ textDecoration: "none" }}>
-            <li>
+          <li>
+            <NavLink
+              to="/dashboard"
+              style={({ isActive }) =>
+                isActive ? { borderLeft: "5px solid white" } : undefined
+              }
+              end={true}
+            >
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
-            </li>
-          </Link>
+            </NavLink>
+          </li>
           {/* <p className="title">LISTS</p> */}
-          <Link to="/dashboard/credentials" style={{ textDecoration: "none" }}>
-            <li>
+          <li>
+            <NavLink
+              to="/dashboard/credentials"
+              style={({ isActive }) =>
+                isActive ? { borderLeft: "5px solid white" } : undefined
+              }
+            >
               <KeyIcon className="icon" />
               <span>Api Keys</span>
-            </li>
-          </Link>
-          <Link to="/dashboard/admins" style={{ textDecoration: "none" }}>
-            <li>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/admins"
+              style={({ isActive }) =>
+                isActive ? { borderLeft: "5px solid white" } : undefined
+              }
+            >
               <PeopleIcon className="icon" />
               <span>Admins</span>
-            </li>
-          </Link>
-          <Link
-            to="/dashboard/premium-domain"
-            style={{ textDecoration: "none" }}
-          >
-            <li>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/premium-domain"
+              style={({ isActive }) =>
+                isActive ? { borderLeft: "5px solid white" } : undefined
+              }
+            >
               <DiamondIcon className="icon" />
               <span>Premium Domain</span>
-            </li>
-          </Link>
-          <Link
-            to="/dashboard/domain-settings"
-            style={{ textDecoration: "none" }}
-          >
-            <li>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/domain-settings"
+              style={({ isActive }) =>
+                isActive ? { borderLeft: "5px solid white" } : undefined
+              }
+            >
               <PublicIcon className="icon" />
               <span>Domain Settings</span>
-            </li>
-          </Link>
-          <Link to="/dashboard/settings" style={{ textDecoration: "none" }}>
-            <li>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/settings"
+              style={({ isActive }) =>
+                isActive ? { borderLeft: "5px solid white" } : undefined
+              }
+            >
               <SettingsApplicationsIcon className="icon" />
               <span>Settings</span>
-            </li>
-          </Link>
+            </NavLink>
+          </li>
           {/* <p className="title">USER</p>
 
           <li>
@@ -86,6 +105,12 @@ const Sidebar = () => {
             <span>Profile</span>
           </li> */}
         </ul>
+        {/* <Box p={2} className="top">
+          <NavLink to="/" style={{ textDecoration: "none" }}>
+            <img className="logo" src={nexBlocLogo} alt="company_logo" />
+          </NavLink>
+        </Box>
+        <hr /> */}
       </div>
     </div>
   );

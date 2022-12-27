@@ -1,8 +1,13 @@
+.active {
+  border: "5px solid black"
+}
+
+
 .sidebar {
   flex: 1.1;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 90vh;
-  background-color: #8324DB;
+  background-color: #8324db;
   border-radius: 8px;
   margin-left: 5px;
 
@@ -25,7 +30,6 @@
   }
 
   .center {
-
     ul {
       list-style: none;
       margin: 0;
@@ -40,15 +44,18 @@
       }
 
       li {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 15px;
-        cursor: pointer;
+        a {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 15px;
+          cursor: pointer;
+          text-decoration: none;
+        }
 
         &:hover {
-          background-color: black;
+          background-color: #3904f8ad;
         }
 
         .icon {
@@ -56,11 +63,11 @@
           color: white;
         }
 
-        span{
-            font-size: 13px;
-            font-weight: 600;
-            color: white;
-            // margin-left: 10px;
+        span {
+          font-size: 13px;
+          font-weight: 600;
+          color: white;
+          // margin-left: 10px;
         }
       }
     }

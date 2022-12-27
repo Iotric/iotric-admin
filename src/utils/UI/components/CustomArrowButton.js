@@ -2,9 +2,10 @@ import React from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Button } from "@mui/material";
 
-const CustomArrowButton = ({ children, onClick, type = "submit" }) => {
+const CustomArrowButton = ({ children, onClick, type = "submit", ...rest }) => {
   return (
     <Button
+    {...rest}
       onClick={onClick}
       variant="contained"
       endIcon={<ChevronRightIcon />}

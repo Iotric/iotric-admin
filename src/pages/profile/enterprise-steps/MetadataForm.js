@@ -21,33 +21,23 @@ import { profileStep2Schema } from "../../../utils/validations";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MenuItem from "@mui/material/MenuItem";
-import DeleteIcon from "@mui/icons-material/Delete";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
-// import InstagramIcon from "@mui/icons-material/Instagram";
-
 import SocialMedia from "../../../utils/UI/custom-components/SocialMedia";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { InstagramIcon } from "../../../assets/images/InstagramIcon.js";
 
 import { errorHandler } from "../../../utils/error-handler";
 
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
-import {
-  fetchMetaData,
-  createMetaData,
-  updateMetaData,
-  isEnterpriseMinted,
-} from "../../../redux/actions/auth-actions";
+import { fetchMetaData } from "../../../redux/actions/auth-actions";
 
 import {
   CustomArrowButton,
@@ -127,15 +117,6 @@ const Step2 = () => {
     name: "additionalInfo",
   });
 
-  // const {
-  //   fields: socialMediaFields,
-  //   append: appendSocialMedia,
-  //   remove: removeSocialMedia,
-  // } = useFieldArray({
-  //   control,
-  //   name: "socialMedia",
-  // });
-
   const [expanded, setExpanded] = useState("key_-1");
   const [modalOpen, setModalOpen] = useState(false);
   const [type, setType] = useState("");
@@ -162,12 +143,6 @@ const Step2 = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleMetaFormNext = (data) => {
-    dispatch(createMetaData(data));
-    dispatch(authActions.handleNext());
-    // dispatch(isEnterpriseMinted());
-  };
-
   const handleAddKey = () => {
     const newKey = {
       label: "",
@@ -186,9 +161,15 @@ const Step2 = () => {
     handleModalOpen();
   };
 
+  const handleMetaFormNext = (data) => {
+    dispatch(authActions.setPreMetaData(data));
+    dispatch(authActions.handleNext());
+    // dispatch(isEnterpriseMinted());
+  };
+
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-      {JSON.stringify(watch())}
+      {/* {JSON.stringify(watch())} */}
       <CustomModal
         Icon={Icons(type).icon}
         placeholder={Icons(type).placeholder}
@@ -475,20 +456,7 @@ const Step2 = () => {
             <Button onClick={() => dispatch(authActions.handleBack())}>
               Back
             </Button>
-            <CustomArrowButton
-              onClick={() => dispatch(authActions.handleNext())}
-            >
-              Next Step
-            </CustomArrowButton>
-            {/* <Button
-          sx={{ mt: 1, ml: 1 }}
-          onClick={handleSubmit((data) => dispatch(updateMetaData(data)))}
-        >
-          Update
-        </Button> */}
-            {/* <Button sx={{ mt: 1, ml: 1 }} type="submit">
-          Submit
-        </Button> */}
+            <CustomArrowButton type="submit">Next Step</CustomArrowButton>
           </Box>
         </Box>
       </Paper>

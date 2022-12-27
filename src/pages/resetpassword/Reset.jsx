@@ -7,14 +7,20 @@ const Reset = () => {
   return (
     <Box className="reset">
       <Paper className="paper">
-        <Link to="/">
+        {/* <Link to="/">
           <img className="logo" src={logoImg} alt="company_logo" />
-        </Link>
-        <Typography ml={1} mt={1} mb={3} component="h2" variant="h5" className="title">
+        </Link> */}
+        <Typography mt={1} mb={4} component="h2" variant="h5" className="title">
           Forgot Password
         </Typography>
         <Box className="signDetails">
-          <TextField required label="Email" variant="outlined" />
+          <TextField
+            size="small"
+            placeholder="Enter your email"
+            required
+            label="Email"
+            variant="outlined"
+          />
         </Box>
         <Box className="bottom">
           <Link to="/login">

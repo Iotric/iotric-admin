@@ -229,7 +229,7 @@ const Register = () => {
           </Box>
         </Grid>
       </Grid>
-      <Footer />
+      {/* <Footer /> */}
     </Box>
   );
 };

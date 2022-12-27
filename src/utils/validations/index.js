@@ -67,11 +67,11 @@ export const profileStep1Schema = yup.object().shape({
 });
 
 export const profileStep2Schema = yup.object().shape({
-  socialMedia: yup.array().of(
-    yup.object().shape({
-      value: yup.string().url("URL is invalid!"),
-    })
-  ),
+  // socialMedia: yup.array().of(
+  //   yup.object().shape({
+  //     value: yup.string().url("URL is invalid!"),
+  //   })
+  // ),
   tlds: yup
     .array()
     .of(

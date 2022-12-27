@@ -39,6 +39,7 @@ const Step1 = () => {
   const homepageH1Title = authState.homepageH1Title;
   const themePrimaryColor = authState.themePrimaryColor;
   const themeSecondaryColor = authState.themeSecondaryColor;
+  const description = authState.description
 
   const {
     register,
@@ -55,6 +56,7 @@ const Step1 = () => {
       themeSecondaryColor: "#000000",
       favicon: null,
       brandLogo: null,
+      description: "",
     },
     resolver: yupResolver(profileStep1Schema),
   });
@@ -69,6 +71,7 @@ const Step1 = () => {
       homepageH1Title,
       themePrimaryColor,
       themeSecondaryColor,
+      description,
     });
   }, [authState]);
 
@@ -78,7 +81,7 @@ const Step1 = () => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
+    <Container component="main" maxWidth="lg" >
       <Paper elevation={2} sx={{ my: { xs: 3, md: 4 }, p: { xs: 3, md: 3 } }}>
         <Typography mb={1} fontWeight="500" align="center" variant="h5">
           Basic Info

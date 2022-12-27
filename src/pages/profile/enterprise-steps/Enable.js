@@ -7,7 +7,7 @@ import {
   Container,
   RadioGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CustomArrowButton,
   CustomCheckbox,
@@ -15,15 +15,24 @@ import {
 
 import { Controller, useForm } from "react-hook-form";
 
-import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../../redux/slice/auth-slice";
 import CustomRadioButton from "../../../utils/UI/components/CustomRadioButton";
 
+import { createMetaData } from "../../../redux/actions/auth-actions";
+
 const Enable = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { control, watch } = useForm({
+  const navigate = useNavigate();
+
+  // authState
+  const authState = useSelector((store) => store.auth);
+  const componentsEnabled = authState.componentsEnabled;
+  const chainSupport = authState.chainSupport;
+  const landingPageTemplate = authState.landingPageTemplate;
+
+  const { control, watch, reset, handleSubmit } = useForm({
     defaultValues: {
       componentsEnabled: {
         premiumDomain: false,
@@ -39,18 +48,28 @@ const Enable = () => {
     },
   });
 
+  // On Created
+  useEffect(() => {
+    reset({
+      componentsEnabled,
+      chainSupport,
+      landingPageTemplate,
+    });
+  }, [authState]);
+
   const watchChainSupport = watch("chainSupport");
 
-  const handleClickDashboard = () => {
+  const handleClickDashboard = (data) => {
     dispatch(authActions.profileCompleteSuccess());
     dispatch(authActions.setLoadingTrue());
+    dispatch(createMetaData(data));
+
     setTimeout(() => {
       navigate("/dashboard");
       dispatch(authActions.handleReset());
       dispatch(authActions.setLoadingFalse());
     }, 1000);
   };
-
 
   return (
     <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -62,7 +81,7 @@ const Enable = () => {
           py: { xs: 2, md: 3 },
         }}
       >
-        <Box>
+        <Box component="form" onSubmit={handleSubmit(handleClickDashboard)}>
           <Box>
             <Typography my={1} fontWeight="500" align="center" variant="h5">
               Components to enable
@@ -183,7 +202,7 @@ const Enable = () => {
             <Button onClick={() => dispatch(authActions.handleBack())}>
               back
             </Button>
-            <CustomArrowButton onClick={handleClickDashboard}>
+            <CustomArrowButton type="submit">
               Continue to dashboard
             </CustomArrowButton>
           </Box>

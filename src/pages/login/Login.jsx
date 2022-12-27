@@ -222,7 +222,9 @@ const Login = () => {
                         item
                         xs={5}
                       >
-                        <Typography>Forgot Password?</Typography>
+                        <Link to="/reset">
+                          <Typography>Forgot Password?</Typography>
+                        </Link>
                       </Grid>
                     </Grid>
 
@@ -249,7 +251,7 @@ const Login = () => {
             </Box>
           </Grid>
         </Grid>
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </>
   );
