@@ -71,7 +71,7 @@ const List = () => {
             <TableRow key={row.id}>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
+                  {/* <img src={row.img} alt="" className="image" /> */}
                   {row.country}
                 </div>
               </TableCell>

@@ -23,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 import { authActions } from "../../redux/slice/auth-slice.js";
 import { fetchEnterprise } from "../../redux/actions/auth-actions";
 
+import { Link } from "react-router-dom"
+
 import logoTitleImg from "../../assets/images/logo-title.svg";
 
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4"];
@@ -103,7 +105,9 @@ export default function Profile() {
         >
           <Toolbar>
             <Box sx={{ padding: "10px", flexGrow: 1 }}>
-              <img height="35px" src={logoTitleImg} alt="" />
+              <Link to="/">
+                <img height="35px" src={logoTitleImg} alt="" />
+              </Link>
             </Box>
             <Typography mr={3} variant="body1" color="inherit" noWrap>
               Contact
