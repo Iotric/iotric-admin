@@ -168,8 +168,9 @@ const Step2 = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{ mt: 3,mb: 4 }}>
+    <Container component="main" maxWidth="md" sx={{ mt: 3, mb: 4 }}>
       {/* {JSON.stringify(watch())} */}
+      {/* {JSON.stringify(errors)} */}
       <CustomModal
         Icon={Icons(type).icon}
         placeholder={Icons(type).placeholder}
@@ -301,6 +302,7 @@ const Step2 = () => {
             <Box>
               <Box display="flex" alignItems="center" gap={1}>
                 <Typography component="h4">Add Key</Typography>
+
                 <Fab
                   onClick={handleAddKey}
                   variant="extended"
@@ -386,16 +388,30 @@ const Step2 = () => {
                         />
                       </Box>
                       <Box>
-                        <IconButton>
-                          <DeleteIcon
-                            onClick={() => removeAdditionalInfo(item_index)}
-                            sx={{ color: "#E63946" }}
-                          />
+                        <IconButton
+                          onClick={() => removeAdditionalInfo(item_index)}
+                        >
+                          <DeleteIcon sx={{ color: "#E63946" }} />
                         </IconButton>
                       </Box>
                     </AccordionDetails>
                   </Accordion>
                 ))}
+                {Array.isArray(errors.additionalInfo) &&
+                  errors.additionalInfo.map((message, index) =>
+                    message && (message.key || message.label) ? (
+                      <Typography
+                        key={`$additionalInfo_ERROR_${index}`}
+                        mx={1}
+                        mt={2}
+                        variant="body2"
+                        color="textPrimary.main"
+                      >
+                        In Key {index + 1}, {message?.label?.message},{" "}
+                        {message?.key?.message}
+                      </Typography>
+                    ) : null
+                  )}
               </Box>
             </Box>
 

@@ -186,6 +186,11 @@ export const createMetaData = (data) => {
       landingPageTemplate: data.landingPageTemplate,
     };
 
+
+    if(newMetadata.chainSupport === ""){
+      delete newMetadata.chainSupport
+    }
+
     try {
       const response = await axiosinstance.post(
         `enterprise/${id}/meta-data`,

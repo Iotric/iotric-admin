@@ -113,7 +113,6 @@ const KeysTable = () => {
                         onClick={generateAndRegenerateKeys}
                         variant="contained"
                         size="small"
-                        color="success"
                       >
                         Generate Test Key
                       </Button>
@@ -141,7 +140,6 @@ const KeysTable = () => {
                       onClick={generateAndRegenerateKeys}
                       variant="contained"
                       size="small"
-                      color="success"
                     >
                       Generate Live Key
                     </Button>

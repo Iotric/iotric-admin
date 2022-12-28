@@ -64,6 +64,7 @@ export const profileStep1Schema = yup.object().shape({
     .string()
     .max(30, "Must be 30 character or less")
     .label("Home Page Title"),
+  description: yup.string(),
 });
 
 export const profileStep2Schema = yup.object().shape({
@@ -98,4 +99,10 @@ export const profileStep2Schema = yup.object().shape({
     .positive()
     .integer()
     .label("Domain Limit"),
+  additionalInfo: yup.array().of(
+    yup.object().shape({
+      label: yup.string().min(1, "label cannot be empty !"),
+      key: yup.string().min(1, "Key cannot be empty !"),
+    })
+  ),
 });
