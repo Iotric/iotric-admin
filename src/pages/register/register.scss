@@ -1,7 +1,7 @@
 .register {
   background-color: #f5f5f5;
   .register-block {
-    height: 692px;
+    min-height: 692px;
     width: 620px;
     background: #6300ff;
     border-radius: 12px;
@@ -20,7 +20,7 @@
     }
   }
   .register-card {
-    height: 70vh;
+    min-height: 70vh;
     width: 400px;
     margin-left: 130px;
 

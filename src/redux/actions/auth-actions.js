@@ -37,7 +37,8 @@ export const registerAction = (data) => {
       });
       toast.success("Registration Successfull !!!", {
         delay: 0,
-        autoClose: 3000,
+        autoClose: 2000,
+        hideProgressBar: true,
         pauseOnFocusLoss: false,
       });
     } catch (err) {

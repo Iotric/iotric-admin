@@ -6,7 +6,7 @@ import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
 import { IconButton, Box, Typography, Divider } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dashboardActions } from "../../redux/slice/dashboard-slice";
 
 import brandLogo from "../../assets/images/brandLogo.svg";
@@ -16,6 +16,11 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
+  // authState
+  const authState = useSelector((store) => store.auth);
+  const firstName = authState.firstName;
+  const lastName = authState.lastName;
+
   return (
     <div className="navbar">
       <Box className="navbar-welcome">
@@ -23,7 +28,9 @@ const Navbar = () => {
           <img src={brandLogo} alt="brand" />
         </Box>
         <Box className="brand-texts">
-          <Typography variant="h6" fontWeight="700">Good Morning David</Typography>
+          <Typography variant="h6" fontWeight="700">
+            Good Morning {firstName} {lastName}
+          </Typography>
           <Typography variant="body1">It's great to see you again</Typography>
         </Box>
       </Box>
